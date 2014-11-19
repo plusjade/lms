@@ -109,50 +109,50 @@ var Feedback = React.createClass({
                 ,
                 {
                     name: 'comprehension',
-                    question: 'How would you rate your understanding of this week\'s content?',
+                    question: 'How well did you understand this lesson\'s content?',
                     data : [
-                          'Not engaged at all.'
-                        , 'Mostly tuned out but there were a few interesting parts.'
-                        , 'Neutral. I was engaged but it had more to do with my effort than the actual lesson.'
-                        , 'Mostly engaged but I did tune out -- it\'s hard to pay attention for so long!'
-                        , 'I was engaged the entire time.'
+                          'This lesson might as well have been in another language.'
+                        , 'This lesson was pretty hard and I understood very little.'
+                        , 'I think I got it...'
+                        , 'I understood almost everything.'
+                        , 'I fully understood everything!'
                     ]
                 }
                 ,
                 {
                     name: 'pace',
-                    question: 'How would you rate the lesson\'s pacing?',
+                    question: 'How slow/fast did this lesson\'s pace feel to you?',
                     data : [
-                          'Not engaged at all.'
-                        , 'Mostly tuned out but there were a few interesting parts.'
-                        , 'Neutral. I was engaged but it had more to do with my effort than the actual lesson.'
-                        , 'Mostly engaged but I did tune out -- it\'s hard to pay attention for so long!'
-                        , 'I was engaged the entire time.'
+                          'The lesson was way too slow! I got bored.'
+                        , 'The lesson could have been a little faster.'
+                        , 'The lesson was the perfect pace for me.'
+                        , 'The lesson could have been a little slower.'
+                        , 'The lesson was way too fast! I was not able to keep up.'
                     ]
                 }
                 ,
                 {
                     name: 'quality',
-                    question: 'How good was the lesson overall?',
+                    question: 'What did you think of lesson overall?',
                     data : [
-                          'Not engaged at all.'
-                        , 'Mostly tuned out but there were a few interesting parts.'
-                        , 'Neutral. I was engaged but it had more to do with my effort than the actual lesson.'
-                        , 'Mostly engaged but I did tune out -- it\'s hard to pay attention for so long!'
-                        , 'I was engaged the entire time.'
+                          'This lesson provided no value to me.'
+                        , 'This lesson could have been a lot better.'
+                        , 'This lesson was ok.'
+                        , 'This lesson was good -- It provided a lot of value to me.'
+                        , 'This lesson was fantastic! Let me buy you a beer.'
                     ]
                 }
             ]
             ,
             textareas : [
                 {
-                    name: 'learned',
-                    question: '3+ Things I learned (separate by blank lines please)'
+                    name: 'comments',
+                    question: 'Any comments you would like to add?'
                 }
                 ,
                 {
-                    name: 'comments',
-                    question: 'Any comments you would like to add?'
+                    name: 'learned',
+                    question: '3+ things you learned (separate by blank lines please)'
                 }
                 ,
                 {
