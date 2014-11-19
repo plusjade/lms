@@ -123,11 +123,11 @@ var Feedback = React.createClass({
                     name: 'pace',
                     question: 'How slow/fast did this lesson\'s pace feel to you?',
                     data : [
-                          'The lesson was way too slow! I got bored.'
-                        , 'The lesson could have been a little faster.'
-                        , 'The lesson was the perfect pace for me.'
-                        , 'The lesson could have been a little slower.'
-                        , 'The lesson was way too fast! I was not able to keep up.'
+                          'This lesson was way too slow! I got bored.'
+                        , 'This lesson could have been a little faster.'
+                        , 'This lesson was the perfect pace for me.'
+                        , 'This lesson could have been a little slower.'
+                        , 'This lesson was way too fast! I was not able to keep up.'
                     ]
                 }
                 ,
