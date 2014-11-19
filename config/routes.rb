@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :lessons
+
   resources :feedbacks
   resources :students do
     resources :lessons do
