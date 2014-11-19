@@ -32,3 +32,5 @@ gem 'haml-rails'
 gem 'quiet_assets'
 gem 'mongoid', '~> 4', github: 'mongoid/mongoid'
 gem 'bson_ext'
+
+gem 'cancancan', '~> 1.9'
