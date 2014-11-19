@@ -80,6 +80,15 @@ ul, ol {
       padding: 0;
     }
   }
+  .user {
+    position: absolute;
+    bottom: 0;
+    background-color: #222;
+    width: 100%;
+    div {
+      padding: 20px;
+    }
+  }
 }
 #main {
   position: relative;

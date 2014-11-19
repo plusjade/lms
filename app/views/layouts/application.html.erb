@@ -18,14 +18,18 @@
 <body>
   <div id="panel">
     <div class="course-name">
-        <h3>FEWD 24</h3>
+      <h3><a href="/">FEWD 24</a></h3>
     </div>
     <div class="inner">
       <ul>
         <li><a href="/lessons">Lessons</a></li>
       </ul>
     </div>
-
+  <% if current_user %>
+    <div class="user">
+      <div><%= current_user.name %></div>
+    </div>
+    <% end %>
   </div><div id="main">
     <%= yield %>
   </div>
