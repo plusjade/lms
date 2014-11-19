@@ -12,6 +12,9 @@ class Feedback
   field :comments, type: String
   field :questions, type: String
 
+  validates_presence_of :student
+  validates_presence_of :lesson
+
   def to_api
     {
       id: _id.to_s,
