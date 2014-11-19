@@ -1,0 +1,97 @@
+.questions-wrap {
+  .question {
+    margin-bottom: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #BDBDBD;
+    &:last-child {
+      border-bottom: 0;
+    }
+    h4 {
+      margin: 0;
+      padding: 0 0 10px 0;
+    }
+    textarea {
+      width: 100%;
+      height: 140px;
+      font-size: 18px;
+    }
+
+    .multiple-choice {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li {
+        list-style: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        &.active {
+          div.num {
+            background-color: #558B2F;
+            border-color: #33691E;
+            color: #FFF;
+          }
+        }
+        &:hover {
+          div.num {
+            border-color: #33691E;
+          }
+        }
+        div {
+          display: inline-block;
+          &.num {
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+            text-align: center;
+            margin-right: 10px;
+            border-radius: 30px;
+            border:1px solid #E0E0E0;
+          }
+        }
+      }
+    }
+
+    .autosave {
+      $color: #33691E;
+      display: inline-block;
+      margin-left: 10px; 
+      color: $color;
+      opacity: 0;
+      -webkit-animation: fade 5s;
+      -moz-animation:    fade 5s;
+      -o-animation:      fade 5s;
+      animation:         fade 5s;
+      &.error {
+        color: #B71C1C;
+        svg {
+          fill: #B71C1C;
+        }
+      }
+      svg {
+        margin-right: 5px;
+        height: 16px;
+        width: 16px;
+        position: relative;
+        top: 3px;
+        fill: $color;
+      }
+    }
+  }
+}
+
+@-webkit-keyframes fade {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+@-moz-keyframes fade {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+@-o-keyframes fade {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes fade {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}

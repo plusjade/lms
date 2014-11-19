@@ -1,3 +1,25 @@
 <div class="heading">
   <h2>Lesson <%= @lesson.lesson.to_i %> &rarr; <%= @lesson.date_human %></h2>
 </div>
+<div id="NavTabs"></div>
+<script>
+  window.LESSON_ID = '<%= @lesson ? @lesson.id.to_s : '' %>';
+  window.STUDENT_ID = '<%= current_user ? current_user.id.to_s : null %>';
+  window.CSRFTOKEN = '<%= form_authenticity_token %>';
+  window.Nav = React.render(NavTabs({
+          data: [
+              { name: 'Materials', content : null }
+              ,
+              {
+                  name: 'My Feedback',
+                  content : Feedback,
+                  async : function() {
+                      return $.ajax({
+                          url: '/students/' + STUDENT_ID + '/lessons/' + LESSON_ID + '/feedback',
+                          dataType: "JSON"
+                      })
+                  }
+              }
+          ]
+      }), document.getElementById('NavTabs'));
+</script>

@@ -11,3 +11,4 @@
 // about supported directives.
 //
 //= require_tree ./lib
+//= require app
