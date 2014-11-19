@@ -3,12 +3,24 @@
 <head>
   <title>Lms</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <link href='http://fonts.googleapis.com/css?family=News+Cycle:400,700' rel='stylesheet' type='text/css'>
+
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div id="panel">
+    <div class="course-name">
+        <h3>FEWD 24</h3>
+    </div>
+    <div class="inner">
+      <ul>
+        <li><a href="/lessons">Lessons</a></li>
+      </ul>
+    </div>
 
-<%= yield %>
-
+  </div><div id="main">
+    <%= yield %>
+  </div>
 </body>
 </html>

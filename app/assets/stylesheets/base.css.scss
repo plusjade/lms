@@ -1,0 +1,131 @@
+// http://www.google.com/design/spec/style/color.html#color-color-palette
+$text-color: #555;
+$text-color-light: #ccc;
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: $text-color;
+  font-family: 'News Cycle', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+p, ul, div {
+  font-size: 16px;
+  font-weight: 400;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'News Cycle', sans-serif;
+  line-height: 24px;
+  font-weight: 400;
+  font-style: normal;
+  font-variant: normal;
+}
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+}
+h2 {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 23px;
+}
+h3 {
+  font-size: 26px;
+  font-weight: 700;
+}
+h4 {
+  font-size: 24px;
+  font-weight: 700;
+}
+textarea {
+  font-size: inherit;
+  color: inherit;
+}
+
+blockquote {
+  font-size: 17px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 23px;
+}
+pre {
+  font-size: 11px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 23px;
+}
+ul, ol {
+  margin: 0;
+}
+
+#panel {
+  width: 18%;
+  position: fixed;
+  height: 100%;
+  vertical-align: top;
+  background-color: #333;
+  color: $text-color-light;
+  a {
+    color: inherit;
+  }
+  .course-name {
+    background-color: #222;
+    padding: 20px;
+    h3 {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+#main {
+  position: relative;
+  left: 18%;
+  width: 82%;
+  background-color: #eee;
+  .heading {
+    padding: 20px;
+    h2 {
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .tabs-content {
+    background-color: #FFF;
+    .tab {
+      display: none;
+      &.active {
+        display: block !important;
+      }
+    }
+  }
+}
+
+.inner {
+  padding: 20px;
+}
+
+.nav.nav-tabs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #CCC;
+  li {
+    display:inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    position: relative;
+    top: 1px;
+    &:hover {
+      color: #333;
+    }
+    &.active {
+      border: 1px solid #ccc;
+      border-bottom: 1px solid #FFF;
+      background-color: #FFF;
+    }
+  }
+}
