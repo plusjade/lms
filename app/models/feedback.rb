@@ -12,6 +12,19 @@ class Feedback
   field :comments, type: String
   field :questions, type: String
 
+  def to_api
+    {
+      id: _id.to_s,
+      comments: comments,
+      comprehension: comprehension,
+      learned: learned,
+      pace: pace,
+      quality: quality,
+      engagement: engagement,
+      questions: questions
+    }
+  end
+
   def self.populate
     student_first = Student.first
     student_last = Student.last
