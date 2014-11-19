@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :lessons
+  resources :lessons do
+    member do
+      get 'attendances' => 'attendances#attendances'
+    end
+  end
+  resources :attendances
 
   resources :feedbacks
   resources :students do
