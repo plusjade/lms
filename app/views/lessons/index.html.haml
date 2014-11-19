@@ -2,7 +2,7 @@
   %h2 Lessons
 
 %ul
-  - Lesson.all.each do |klass|
+  - @lessons.each do |klass|
     %li
       %a{ href: "lessons/#{ klass.lesson.to_i }" }
         Lesson #{ klass.lesson.to_i }
