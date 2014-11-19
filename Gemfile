@@ -34,3 +34,6 @@ gem 'mongoid', '~> 4', github: 'mongoid/mongoid'
 gem 'bson_ext'
 
 gem 'cancancan', '~> 1.9'
+gem 'dropbox-sdk', require: 'dropbox_sdk'
+gem "omniauth"
+gem 'omniauth-dropbox-oauth2'
