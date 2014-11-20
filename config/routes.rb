@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root "home#index"
 
+  get 'logout' => "sessions#destroy"
+
   resources :lessons do
     member do
       get 'attendances' => 'attendances#attendances'
