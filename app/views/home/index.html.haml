@@ -1,4 +1,6 @@
 - if current_user
-  %strong Hi #{ current_user.name }, #{ current_user.email }
+  .heading
+    %h2 Hi #{ current_user.name }
 - else
-  Not logged in
+  .heading
+    %h2 Nothing to see here...
