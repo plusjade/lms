@@ -138,3 +138,18 @@ ul, ol {
     }
   }
 }
+
+#new_student {
+  font-size: 30px;
+  input, button {
+    font-size: inherit;
+    line-height: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  button {
+    border: 1px solid #33691E;
+    background-color: #558B2F;
+    color: #FFF;
+  }
+}
