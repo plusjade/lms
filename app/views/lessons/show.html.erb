@@ -9,20 +9,21 @@
     CSRFTOKEN : '<%= form_authenticity_token %>'
   };
 
-  MK.Nav = React.render(NavTabs({
-          data: [
-              { name: 'Materials', content : null }
-              ,
-              {
-                  name: 'My Feedback',
-                  content : Feedback,
-                  async : function() {
-                      return $.ajax({
-                          url: '/students/' + MK.USER.id + '/lessons/' + MK.LESSON_ID + '/feedback',
-                          dataType: "JSON"
-                      })
-                  }
-              }
-          ]
-      }), document.getElementById('NavTabs'));
+  var tabs = [];
+  tabs.push({ name: 'Materials', content : null });
+
+  if(MK.USER.type === 'Student') {
+    tabs.push({
+        name: 'My Feedback',
+        content : Feedback,
+        async : function() {
+            return $.ajax({
+                url: '/students/' + MK.USER.id + '/lessons/' + MK.LESSON_ID + '/feedback',
+                dataType: "JSON"
+            })
+        }
+    })
+  };
+
+  MK.Nav = React.render(NavTabs({ data: tabs }), document.getElementById('NavTabs'));
 </script>
