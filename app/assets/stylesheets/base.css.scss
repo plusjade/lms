@@ -1,6 +1,7 @@
 // http://www.google.com/design/spec/style/color.html#color-color-palette
 $text-color: #555;
 $text-color-light: #ccc;
+$fill-color: #efeeeb;
 
 html, body {
   height: 100%;
@@ -63,27 +64,32 @@ ul, ol {
 }
 
 #panel {
-  width: 18%;
+  width: 15%;
   position: fixed;
   height: 100%;
   vertical-align: top;
-  background-color: #333;
-  color: $text-color-light;
+  background-color: $fill-color;
+  border-right: 1px solid #ccc;
+  z-index: 4;
   a {
     color: inherit;
   }
   .course-name {
-    background-color: #222;
-    padding: 20px;
-    h3 {
-      margin: 0;
-      padding: 0;
+    background-color: inherit;
+    a {
+      display: block;
+      font-size: 24px;
+      padding: 0 20px;
+      line-height: 65px;
+      text-decoration: none;
+      &:hover {
+        color: #9E9E9E;
+      }
     }
   }
   .user {
     position: absolute;
     bottom: 0;
-    background-color: #222;
     width: 100%;
     div {
       padding: 20px;
@@ -92,11 +98,13 @@ ul, ol {
 }
 #main {
   position: relative;
-  left: 18%;
-  width: 82%;
-  background-color: #eee;
+  left: 15%;
+  width: 85%;
+  background-color: $fill-color;
   .heading {
     padding: 20px;
+    background-color: #efeeeb;
+    z-index: 4;
     h2 {
       margin: 0;
       padding: 0;
