@@ -12,17 +12,31 @@
   var tabs = [];
   tabs.push({ name: 'Materials', content : null });
 
-  if(MK.USER.type === 'Student') {
-    tabs.push({
-        name: 'My Feedback',
-        content : Feedback,
-        async : function() {
-            return $.ajax({
-                url: '/students/' + MK.USER.id + '/lessons/' + MK.LESSON_ID + '/feedback',
-                dataType: "JSON"
-            })
-        }
-    })
+  switch(MK.USER.type) {
+      case 'Student':
+          tabs.push({
+              name: 'My Feedback',
+              content : Feedback,
+              async : function() {
+                  return $.ajax({
+                      url: '/students/' + MK.USER.id + '/lessons/' + MK.LESSON_ID + '/feedback',
+                      dataType: "JSON"
+                  })
+              }
+          });
+          break;
+      case 'Teacher':
+          tabs.push({
+              name: 'Feedback Data',
+              content : FeedbackData,
+              async : function() {
+                  return $.ajax({
+                      url: '/lessons/' + MK.LESSON_ID + '/feedbacks',
+                      dataType: "JSON"
+                  })
+              }
+          });
+          break;
   };
 
   MK.Nav = React.render(NavTabs({ data: tabs }), document.getElementById('NavTabs'));

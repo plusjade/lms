@@ -11,4 +11,5 @@
 // about supported directives.
 //
 //= require_tree ./lib
+//= require_tree ./react
 //= require app

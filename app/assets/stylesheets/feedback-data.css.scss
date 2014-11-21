@@ -1,0 +1,42 @@
+#feedback-data {
+  width: 100%;
+  border-collapse: collapse;
+  th, td {
+    padding: 8px;
+  }
+  th {
+    text-align: left;
+    font-weight: normal;
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover {
+      color: #FF3D00;
+    }
+  }
+  tbody {
+    tr {
+      &.main {
+        td {
+          border: 1px solid #ccc;
+          background: #eaeaea;
+          width: 100px;
+        }
+      }
+      &.essays {
+        td {
+          border-right: 1px solid #ccc;
+          &.name {
+            text-align: right;
+            color: #757575;
+          }
+          &:last-child {
+            border-right: 0;
+          }
+        }
+      }
+      td {
+        min-width: 100px;
+      }
+    }
+  }
+}
