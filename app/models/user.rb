@@ -11,6 +11,16 @@ class User
 
   validates_presence_of :name
 
+  def to_api
+    {
+      id: _id.to_s,
+      type: _type,
+      name: name,
+      email: email,
+      avatar: avatar
+    }
+  end
+
   def self.find_or_create_from_omniauth(auth)
     where({
         provider: auth['provider'],

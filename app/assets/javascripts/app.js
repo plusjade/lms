@@ -224,8 +224,8 @@ var Feedback = React.createClass({
     // Update feedback data on the server and notify parent component.
     update : function(name, value) {
         this.props.feedback[name] = value;
-        window.Nav.setState({ feedback: this.props.feedback });
-        var data = { authenticity_token: CSRFTOKEN, feedback: {} };
+        MK.Nav.setState({ feedback: this.props.feedback });
+        var data = { authenticity_token: MK.CSRFTOKEN, feedback: {} };
         data.feedback[name] = this.props.feedback[name];
 
         var autosave = {};
@@ -237,11 +237,11 @@ var Feedback = React.createClass({
         })
         .done(function(rsp) {
             autosave[name] = 'ok';
-            window.Nav.setState({ autosave: autosave });
+            MK.Nav.setState({ autosave: autosave });
         })
         .error(function(rsp) {
             autosave[name] = 'error';
-            window.Nav.setState({ autosave: autosave });
+            MK.Nav.setState({ autosave: autosave });
         })
     }
 });

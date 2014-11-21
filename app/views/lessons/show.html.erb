@@ -3,10 +3,13 @@
 </div>
 <div id="NavTabs"></div>
 <script>
-  window.LESSON_ID = '<%= @lesson.id.to_s %>';
-  window.STUDENT_ID = '<%= current_user.id.to_s %>';
-  window.CSRFTOKEN = '<%= form_authenticity_token %>';
-  window.Nav = React.render(NavTabs({
+  window.MK = {
+    LESSON_ID : '<%= @lesson.id.to_s %>',
+    USER : <%= current_user.to_api.to_json.html_safe %>,
+    CSRFTOKEN : '<%= form_authenticity_token %>'
+  };
+
+  MK.Nav = React.render(NavTabs({
           data: [
               { name: 'Materials', content : null }
               ,
@@ -15,7 +18,7 @@
                   content : Feedback,
                   async : function() {
                       return $.ajax({
-                          url: '/students/' + STUDENT_ID + '/lessons/' + LESSON_ID + '/feedback',
+                          url: '/students/' + MK.USER.id + '/lessons/' + MK.LESSON_ID + '/feedback',
                           dataType: "JSON"
                       })
                   }
