@@ -24,7 +24,8 @@ class Feedback
       pace: pace,
       quality: quality,
       engagement: engagement,
-      questions: questions
+      questions: questions,
+      student_id: student_id.to_s
     }
   end
 

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'logout' => "sessions#destroy"
 
   resources :lessons do
+    resources :feedbacks
     member do
       get 'attendances' => 'attendances#attendances'
     end
