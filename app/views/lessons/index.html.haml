@@ -1,10 +1,11 @@
 .heading
   %h2 Lessons
 
-%ul
-  - @lessons.each do |klass|
-    %li
-      %a{ href: "lessons/#{ klass.lesson.to_i }" }
-        Lesson #{ klass.lesson.to_i }
-        \-
-        = klass.date_human
+#lessons-wrap.inner
+  %ul
+    - @lessons.each do |klass|
+      %li
+        %a{ href: "lessons/#{ klass.lesson.to_i }" }
+          Lesson #{ klass.lesson.to_i }
+          \-
+          = klass.date_human
