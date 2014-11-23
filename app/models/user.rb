@@ -8,8 +8,9 @@ class User
 
   field :uid, type: String
   field :provider, type: String
+  field :token, type: String
 
-  validates_presence_of :name
+  validates_uniqueness_of :uid
 
   def to_api
     {
@@ -24,18 +25,18 @@ class User
   def self.find_or_create_from_omniauth(auth)
     where({
         provider: auth['provider'],
-        uid: auth['uid'].to_s,
-        token: auth.credentials.token
-    }).first || create_with_omniauth(auth)
+        uid: auth['uid'].to_s
+    }).first || create_from_omniauth(auth)
   end
 
   def self.create_from_omniauth(auth)
-    create! do |s|
-      s.provider = auth['provider']
-      s.uid = auth['uid']
+    create! do |u|
+      u.provider = auth['provider']
+      u.uid = auth['uid']
+      u.token = auth.credentials.token
       if auth['info']
-         user.name = auth['info']['name'] || ""
-         user.email = auth['info']['email'] || ""
+         u.name = auth['info']['name'] || ""
+         u.email = auth['info']['email'] || ""
       end
     end
   end
