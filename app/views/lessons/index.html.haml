@@ -5,7 +5,7 @@
   %ul
     - @lessons.each do |klass|
       %li
-        %a{ href: "lessons/#{ klass.lesson.to_i }" }
+        %a{ href: "/lessons/#{ klass.lesson.to_i }" }
           Lesson #{ klass.lesson.to_i }
           \-
           = klass.date_human

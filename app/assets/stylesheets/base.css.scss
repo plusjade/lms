@@ -1,7 +1,4 @@
-// http://www.google.com/design/spec/style/color.html#color-color-palette
-$text-color: #555;
-$text-color-light: #ccc;
-$fill-color: #efeeeb;
+@import "variables";
 
 html, body {
   height: 100%;
@@ -11,6 +8,7 @@ html, body {
   font-family: 'News Cycle', sans-serif;
   font-size: 16px;
   font-weight: 400;
+  background-color: $fill-color;
 }
 p, ul, div {
   font-size: 16px;
@@ -64,6 +62,7 @@ ul, ol {
 }
 
 #panel {
+  display: none;
   width: 15%;
   position: fixed;
   height: 100%;
@@ -98,53 +97,37 @@ ul, ol {
 }
 #main {
   position: relative;
-  left: 15%;
-  width: 85%;
+  width: 100%;
   background-color: $fill-color;
-  .heading {
-    padding: 20px;
-    background-color: #efeeeb;
-    z-index: 4;
-    h2 {
-      margin: 0;
-      padding: 0;
-    }
+}
+
+#heading {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-color: #efeeeb;
+  h2 {
+    line-height: 70px;
+    margin: 0;
+    padding: 0 20px;
   }
-  .tabs-content {
-    background-color: #FFF;
-    .tab {
-      display: none;
-      &.active {
-        display: block !important;
-      }
-    }
-  }
+}
+#hd-border {
+  height: 0;
+  position: fixed;
+  top: 70px;
+  left: 12%;
+  right: 0;
+  z-index: 5;
+  border-bottom: 1px solid $border-color;
+
 }
 
 .inner {
   padding: 20px;
-}
-
-.nav.nav-tabs {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-bottom: 1px solid #CCC;
-  li {
-    display:inline-block;
-    padding: 10px 20px;
-    cursor: pointer;
-    position: relative;
-    top: 1px;
-    &:hover {
-      color: #333;
-    }
-    &.active {
-      border: 1px solid #ccc;
-      border-bottom: 1px solid #FFF;
-      background-color: #FFF;
-    }
-  }
 }
 
 #new_student {
@@ -177,3 +160,49 @@ ul, ol {
   }
 }
 
+#NavTabs {
+  height: 100%;
+  > div {
+    height: 100%;
+  }
+  .nav.nav-tabs {
+    width: 12%;
+    position: fixed;
+    margin-top: 70px;
+    padding: 0;
+    list-style: none;
+    z-index: 10;
+
+    li {
+      padding: 15px 20px;
+      cursor: pointer;
+      text-align: right;
+      &:hover {
+        color: #FF3D00;
+      }
+      &.active {
+        background-color: #FFF;
+        position: relative;
+        left: 1px;
+        border-top: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
+        font-weight: 700;
+      }
+    }
+  }
+}
+.tabs-content {
+  position: absolute;
+  width: 88%;
+  left: 12%;
+  min-height: 100%;
+  background-color: #FFF;
+  border-left: 1px solid $border-color;
+  .tab {
+    display: none;
+    margin-top: 70px;
+    &.active {
+      display: block !important;
+    }
+  }
+}
