@@ -210,3 +210,33 @@ ul, ol {
     }
   }
 }
+
+
+#login-screen {
+  position: relative;
+  top: 100px;
+  h1 {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  .dropbox-login {
+    display: block;
+    width: 500px;
+    margin: 50px auto 0 auto;
+    text-align: center;
+    text-decoration: none;
+    color: #007ee5;
+    font-size: 26px;
+    font-weight: 700;
+    background-color: #FFF;
+    border: 1px solid $border-color;
+
+    &:hover {
+      border: 1px solid #007ee5;
+    }
+    img {
+      vertical-align: middle;
+    }
+  }
+}

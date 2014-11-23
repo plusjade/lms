@@ -1,0 +1,10 @@
+<% if current_user %>
+  Logged in!
+<% else %>
+<div id="login-screen">
+  <h1>Makeist</h1>
+  <a href="/auth/dropbox_oauth2" class="dropbox-login">
+    Login with <img src="//s3.amazonaws.com/makeist.com/app/dropbox-logo.png" alt= "Dropbox">
+  </a>
+</div>
+<% end %>
