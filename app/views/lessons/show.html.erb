@@ -18,24 +18,14 @@
           tabs.push({
               name: 'My Feedback',
               content : Feedback,
-              async : function() {
-                  return $.ajax({
-                      url: '/students/' + MK.USER.id + '/lessons/' + MK.LESSON_ID + '/feedback',
-                      dataType: "JSON"
-                  })
-              }
+              async : '/students/' + MK.USER.id + '/lessons/' + MK.LESSON_ID + '/feedback'
           });
           break;
       case 'Teacher':
           tabs.push({
               name: 'Feedback Data',
               content : FeedbackData,
-              async : function() {
-                  return $.ajax({
-                      url: '/lessons/' + MK.LESSON_ID + '/feedbacks',
-                      dataType: "JSON"
-                  })
-              }
+              async : '/lessons/' + MK.LESSON_ID + '/feedbacks'
           });
           break;
   };

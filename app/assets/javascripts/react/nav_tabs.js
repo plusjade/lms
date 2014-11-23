@@ -40,12 +40,14 @@ var NavTabs = React.createClass({
     ,
     toggle : function(i) {
         if(this.props.data[i].async) {
-            var self = this;
-            this.props.data[i].async()
-                .done(function(rsp) {
-                    rsp.active = i;
-                    self.setState(rsp);
-                })
+            $.ajax({
+                url: this.props.data[i].async,
+                dataType: "JSON"
+            })
+            .done(function(rsp) {
+                rsp.active = i;
+                MK.Nav.setState(rsp);
+            });
         }
         else {
             this.setState({ active : i });
