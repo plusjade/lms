@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :attendances
 
   resources :feedbacks
-  resources :students do
+  resources :students, only: [:index] do
     resources :lessons do
       member do
         get 'feedback' => 'feedbacks#show'
