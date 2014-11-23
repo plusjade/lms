@@ -8,6 +8,16 @@ class Lesson
   field :lesson, type: Float
   field :week, type: Integer
 
+  def to_api
+    {
+      id: _id.to_s,
+      title: title,
+      lesson: lesson,
+      date: date,
+      date_human: date_human
+    }
+  end
+
   def date_human
     date ?
       date.strftime("%A, %B %d, %Y") :
