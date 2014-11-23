@@ -1,5 +1,34 @@
 <% if current_user %>
-  Logged in!
+<div id="heading">
+  <h2><a href="/">FEWD 24</a></h2>
+</div>
+<div id="hd-border"></div>
+<div id="NavTabs"></div>
+<script>
+  window.MK = {
+    USER : <%= current_user.to_api.to_json.html_safe %>,
+    CSRFTOKEN : '<%= form_authenticity_token %>'
+  };
+
+  var tabs = [];
+  tabs.push({
+      name: 'Lessons',
+      content : Lessons,
+      async : '/lessons'
+  });
+  MK.Nav = React.render(NavTabs(), document.getElementById('NavTabs'));
+
+  // Hack to autoload the first tab.
+  $.ajax({
+      url: '/lessons',
+      dataType: "JSON"
+  })
+  .done(function(rsp) {
+      rsp.tabs = tabs;
+      rsp.active = 0;
+      MK.Nav.setState(rsp);
+  });
+</script>
 <% else %>
 <div id="login-screen">
   <h1>Makeist</h1>
