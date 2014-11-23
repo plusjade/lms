@@ -11,10 +11,9 @@
   };
 
   var tabs = [];
-  tabs.push({ name: 'Materials', content : null });
-
   switch(MK.USER.type) {
       case 'Student':
+          tabs.push({ name: 'Materials', content : null });
           tabs.push({
               name: 'My Feedback',
               content : Feedback,
@@ -30,5 +29,6 @@
           break;
   };
 
-  MK.Nav = React.render(NavTabs({ data: tabs }), document.getElementById('NavTabs'));
+  MK.Nav = React.render(NavTabs(), document.getElementById('NavTabs'));
+  MK.Nav.setState({ tabs : tabs });
 </script>

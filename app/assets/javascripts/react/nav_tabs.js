@@ -2,7 +2,7 @@ var NavTabs = React.createClass({
     displayName: 'NavTabs'
     ,
     getInitialState: function() {
-        return { active : 0 };
+        return { active : 0, tabs: [] };
     }
     ,
     render: function() {
@@ -10,7 +10,7 @@ var NavTabs = React.createClass({
             containers = []
         ;
 
-        this.props.data.forEach(function(d, i) {
+        this.state.tabs.forEach(function(d, i) {
             tabs.push(React.DOM.li(
                         {
                             key: d.name,
@@ -39,9 +39,9 @@ var NavTabs = React.createClass({
     }
     ,
     toggle : function(i) {
-        if(this.props.data[i].async) {
+        if(this.state.tabs[i].async) {
             $.ajax({
-                url: this.props.data[i].async,
+                url: this.state.tabs[i].async,
                 dataType: "JSON"
             })
             .done(function(rsp) {
