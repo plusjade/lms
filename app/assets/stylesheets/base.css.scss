@@ -109,10 +109,12 @@ ul, ol {
   width: 100%;
   height: 70px;
   background-color: #efeeeb;
+  overflow: hidden;
   h2 {
     line-height: 70px;
     margin: 0;
     padding: 0 20px;
+    white-space: nowrap;
     a {
       text-decoration: none;
       color: inherit;
@@ -211,7 +213,7 @@ ul, ol {
   left: 12%;
   min-height: 100%;
   background-color: #FFF;
-  border-left: 1px solid $border-color;
+  //border-left: 1px solid $border-color;
   .tab {
     display: none;
     margin-top: 70px;
@@ -247,6 +249,52 @@ ul, ol {
     }
     img {
       vertical-align: middle;
+    }
+  }
+}
+
+
+@media all and (max-width: 600px) {
+  body {
+    background-color: #FFF;
+  }
+  #heading {
+    position: relative;
+  }
+  #hd-border {
+    display: none;
+  }
+  #NavTabs {
+    height: auto;
+    > div {
+      height: auto;
+    }
+    .nav.nav-tabs {
+      width: 100%;
+      margin-top: 0;
+      position: relative;
+      background-color: $fill-color;
+      border-bottom: 1px solid $border-color;
+      li {
+        text-align: left;
+        text-decoration: underline;
+        &.active {
+          position: relative;
+          left: 0;
+          border: 0;
+          background-color: inherit;
+        }
+      }
+    }
+  }
+
+  .tabs-content {
+    width: 100%;
+    left: 0;
+    position: relative;
+    min-height: auto;
+    .tab {
+      margin-top: 0;
     }
   }
 }
