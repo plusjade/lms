@@ -25,7 +25,9 @@ $row-fill-color: #FAFAFA;
         td {
           border: 1px solid $border-color;
           background: $row-fill-color;
-          width: 100px;
+          &:first-child {
+            width: 150px;
+          }
         }
       }
       &.essays {
@@ -33,10 +35,15 @@ $row-fill-color: #FAFAFA;
           border-right: 1px solid $border-color;
           &.name {
             text-align: right;
+            vertical-align: top;
             color: #757575;
           }
           &:last-child {
             border-right: 0;
+          }
+          pre {
+            font-family: inherit;
+            font-size: inherit;
           }
         }
       }

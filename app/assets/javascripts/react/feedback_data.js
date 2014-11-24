@@ -48,15 +48,21 @@ var FeedbackData = React.createClass({
                    )
                     , React.DOM.tr({ className: 'essays' }
                         , React.DOM.td({ className: 'name' }, 'comments')
-                        , React.DOM.td({ colSpan: 4}, a.comments)
+                        , React.DOM.td({ colSpan: 4}
+                            , React.DOM.pre(null, a.comments)
+                        )
                     )
                     , React.DOM.tr({ className: 'essays' }
                         , React.DOM.td({ className: 'name' }, 'learned')
-                        , React.DOM.td({ colSpan: 4}, a.learned)
+                        , React.DOM.td({ colSpan: 4}
+                            , React.DOM.pre(null, a.learned)
+                        )
                     )
                     , React.DOM.tr({ className: 'essays' }
                         , React.DOM.td({ className: 'name' }, 'questions')
-                        , React.DOM.td({ colSpan: 4}, a.questions)
+                        , React.DOM.td({ colSpan: 4}
+                            , React.DOM.pre(null, a.questions)
+                        )
                     )
                 ];
         }, this);
