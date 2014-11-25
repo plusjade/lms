@@ -113,11 +113,15 @@ ul, ol {
   h2 {
     line-height: 70px;
     margin: 0;
-    padding: 0 20px;
     white-space: nowrap;
     a {
-      text-decoration: none;
+      display: inline-block;
       color: inherit;
+      margin-right: 20px;
+      padding: 0 20px;
+      &:hover {
+        background-color: #E0E0E0;
+      }
     }
   }
 }
