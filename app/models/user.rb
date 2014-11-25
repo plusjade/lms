@@ -22,6 +22,10 @@ class User
     }
   end
 
+  def dropbox
+    @dropbox ||= DropboxClient.new(token)
+  end
+
   def self.find_or_create_from_omniauth(auth)
     where({
         provider: auth['provider'],

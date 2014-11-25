@@ -11,9 +11,11 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :lessons
+    resources :materials, only: [:show], constraints: { id: /.+/ }
   end
 
   resources :lessons do
+    resources :materials, only: [:index]
     resources :feedbacks
     member do
       get 'attendances' => 'attendances#attendances'
