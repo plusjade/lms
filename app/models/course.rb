@@ -4,6 +4,7 @@ class Course
   has_many :lessons
   has_and_belongs_to_many :teachers
   has_and_belongs_to_many :students
+  belongs_to :lead_teacher, class_name: "Teacher", inverse_of: :lead_courses
 
   field :name, type: String
   field :slug, type: String, default: -> { normalize_slug }
