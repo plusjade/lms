@@ -14,9 +14,14 @@
   };
 
   var tabs = [];
+  tabs.push({
+      name: 'Materials',
+      content : Materials,
+      async : '/lessons/' + MK.LESSON_ID + '/materials'
+  });
+
   switch(MK.USER.type) {
       case 'Student':
-          tabs.push({ name: 'Materials', content : null });
           tabs.push({
               name: 'My Feedback',
               content : Feedback,

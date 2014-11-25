@@ -1,0 +1,46 @@
+@import "variables";
+
+.materials-wrap {
+  h4 {
+    position: relative;
+    margin: 0 0 20px 0;
+    padding: 0;
+
+    a {
+      position: absolute;
+      right: 20px;
+    }
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      position: relative;
+      list-style: none;
+      line-height: 52px;
+      &:nth-child(even) {
+        background-color: $row-fill-color;
+      }
+      img {
+        vertical-align: middle;
+        width: 48px;
+        height: 48px;
+        margin: 0 20px 0 20px;
+      }
+      span {
+        &:last-child {
+          color: #757575;
+        }
+      }
+      i {
+        margin-left: 10px;
+        font-size: 0.9em;
+      }
+      a {
+        position: absolute;
+        right: 20px;
+      }
+    }
+  }
+}
