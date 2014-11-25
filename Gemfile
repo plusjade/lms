@@ -37,3 +37,4 @@ gem 'cancancan', '~> 1.9'
 gem 'dropbox-sdk', require: 'dropbox_sdk'
 gem "omniauth"
 gem 'omniauth-dropbox-oauth2'
+gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"

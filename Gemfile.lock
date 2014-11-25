@@ -8,6 +8,13 @@ GIT
       origin (~> 2.1)
       tzinfo (>= 0.3.37)
 
+GIT
+  remote: https://github.com/getsentry/raven-ruby.git
+  revision: 2b188bd9db1583565086625c7b43817df1cc57d7
+  specs:
+    sentry-raven (0.12.1)
+      faraday (>= 0.7.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -154,5 +161,6 @@ DEPENDENCIES
   quiet_assets
   rails (= 4.1.7)
   sass-rails (~> 4.0.3)
+  sentry-raven!
   spring
   uglifier (>= 1.3.0)
