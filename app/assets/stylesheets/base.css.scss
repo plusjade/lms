@@ -151,10 +151,17 @@ ul, ol {
   }
 }
 
-
-#lessons-wrap {
+.courses-wrap {
   list-style: none;
   margin: 0;
+  padding: 0;
+  h4 {
+    margin: 0 0 20px 0;
+  }
+}
+.lessons-wrap {
+  list-style: none;
+  margin-left: 20px;
   padding: 0;
   li {
     a {

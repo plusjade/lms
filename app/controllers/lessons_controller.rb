@@ -15,10 +15,12 @@ class LessonsController < ApplicationController
   end
 
   def show
-    @lesson = Lesson.where(lesson: params[:id].to_f ).first
+    @lesson = Lesson.find(params[:id])
     authorize! :read, @lesson
 
-  rescue CanCan::AccessDenied, Mongoid::Errors::DocumentNotFound.new(StandardError, {})
-    render text: "Not Found", status: :not_found
+  rescue CanCan::AccessDenied
+    render text: 'Unauthorized' , status: :unauthorized
+  rescue Mongoid::Errors::DocumentNotFound
+    render text: 'Not Found', status: :not_found
   end
 end

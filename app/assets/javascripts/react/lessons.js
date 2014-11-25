@@ -11,14 +11,14 @@ var Lessons = React.createClass({
                         {
                             key: a.id
                         }
-                        , React.DOM.a({ href: '/lessons/' + parseInt(a.lesson) }
+                        , React.DOM.a({ href: '/lessons/' + a.id }
                                 , React.DOM.span(null, 'Lesson ' + a.lesson)
                                 , React.DOM.span(null, a.date_human)
                             )
                    );
         }, this);
 
-        return React.DOM.ul({ id: 'lessons-wrap' }, nodes);
+        return React.DOM.ul({ className: 'lessons-wrap' }, nodes);
     }
 });
 Lessons = React.createFactory(Lessons);

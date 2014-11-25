@@ -10,17 +10,31 @@
     CSRFTOKEN : '<%= form_authenticity_token %>'
   };
 
-  var tabs = [];
-  tabs.push({
-      name: 'Lessons',
-      content : Lessons,
-      async : '/lessons'
-  });
+  var tabs = [], async;
+  switch(MK.USER.type) {
+      case 'Student':
+          async = '/students/' + MK.USER.id + '/courses';
+          tabs.push({
+              name: 'Courses',
+              content : Courses,
+              async : async
+          });
+          break;
+      case 'Teacher':
+          async = '/teachers/' + MK.USER.id + '/courses';
+          tabs.push({
+              name: 'Courses',
+              content : Courses,
+              async : async
+          });
+          break;
+  };
+
   MK.Nav = React.render(NavTabs(), document.getElementById('NavTabs'));
 
   // Hack to autoload the first tab.
   $.ajax({
-      url: '/lessons',
+      url: async,
       dataType: "JSON"
   })
   .done(function(rsp) {
