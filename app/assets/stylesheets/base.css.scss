@@ -10,6 +10,20 @@ html, body {
   font-weight: 400;
   background-color: $fill-color;
 }
+
+a:link {
+  color: $link-color;
+}
+a:visited {
+  color: #01579B;
+}
+a:hover {
+  color: $link-hover-color;
+}
+a:active {
+  color: $link-color;
+}
+
 p, ul, div {
   font-size: 16px;
   font-weight: 400;
@@ -59,6 +73,16 @@ pre {
 }
 ul, ol {
   margin: 0;
+}
+a.button {
+  padding: 0 20px;
+  border: 1px solid $link-color;
+  text-decoration: none;
+  &:hover {
+    border: 1px solid #FFF;
+    color: #FFF;
+    background-color: $link-color;
+  }
 }
 
 #panel {
@@ -205,7 +229,7 @@ ul, ol {
       cursor: pointer;
       text-align: right;
       &:hover {
-        color: #FF3D00;
+        color: $link-hover-color;
       }
       &.active {
         background-color: #FFF;
@@ -263,7 +287,6 @@ ul, ol {
     }
   }
 }
-
 
 @media all and (max-width: 600px) {
   body {
