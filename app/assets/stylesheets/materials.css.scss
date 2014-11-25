@@ -5,10 +5,12 @@
     position: relative;
     margin: 0 0 20px 0;
     padding: 0;
-
+    line-height: 40px;
     a {
       position: absolute;
       right: 20px;
+      padding: 0 20px;
+      font-size: 16px;
     }
   }
   ul {
@@ -18,7 +20,7 @@
     li {
       position: relative;
       list-style: none;
-      line-height: 52px;
+      line-height: 48px;
       &:nth-child(even) {
         background-color: $row-fill-color;
       }

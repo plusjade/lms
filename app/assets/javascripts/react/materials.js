@@ -27,7 +27,7 @@ var Materials = React.createClass({
         }
 
         dlAll = this.props.materials.dl
-                    ? React.DOM.a({ href: this.props.materials.dl, target: '_blank' }, 'download all' )
+                    ? React.DOM.a({ href: this.props.materials.dl, target: '_blank', className: 'button' }, 'download all' )
                     : null
         ;
 
