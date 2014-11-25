@@ -9,6 +9,8 @@ class Course
   field :name, type: String
   field :slug, type: String, default: -> { normalize_slug }
 
+  validates_presence_of :lead_teacher
+
   def to_api
     {
       id: _id.to_s,
