@@ -1,3 +1,4 @@
+require 'securerandom'
 class Course
   include Mongoid::Document
 
@@ -9,7 +10,11 @@ class Course
   field :name, type: String
   field :slug, type: String, default: -> { normalize_slug }
 
+  field :access_code, type: String, default: -> { generate_access_code }
+
   validates_presence_of :lead_teacher
+  validates_length_of :access_code, minimum: 10
+  validates_uniqueness_of :access_code, case_sensitive: true
 
   def to_api
     {
@@ -21,5 +26,9 @@ class Course
 
   def normalize_slug
     name.to_s.downcase.strip.gsub(/\s+/, '-')
+  end
+
+  def generate_access_code
+    SecureRandom.urlsafe_base64(10)
   end
 end
