@@ -1,13 +1,16 @@
 class LessonsController < ApplicationController
   def index
-    lessons = Lesson.all
-    authorize! :read, Lesson
+    course = Course.find(params[:course_id].to_s)
 
-    lessons = lessons.map{ |a| a.to_api }
+    authorize! :read, course
+
+    lessons = course.lessons.map{ |a| a.to_api }
 
     render json: { lessons: lessons }
 
-  rescue CanCan::AccessDenied, Mongoid::Errors::DocumentNotFound.new(StandardError, {})
+  rescue CanCan::AccessDenied
+    render json: { lessons: [] }, status: :unauthorized
+  rescue Mongoid::Errors::DocumentNotFound
     render json: { lessons: [] }, status: :not_found
   end
 

@@ -4,6 +4,15 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
   get 'logout' => "sessions#destroy"
 
+
+  resources :teachers do
+    resources :courses
+  end
+
+  resources :courses do
+    resources :lessons
+  end
+
   resources :lessons do
     resources :feedbacks
     member do
@@ -14,6 +23,7 @@ Rails.application.routes.draw do
 
   resources :feedbacks
   resources :students, only: [:index] do
+    resources :courses
     resources :lessons do
       member do
         get 'feedback' => 'feedbacks#show'
