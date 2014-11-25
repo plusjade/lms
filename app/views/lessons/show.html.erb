@@ -38,5 +38,13 @@
   };
 
   MK.Nav = React.render(NavTabs(), document.getElementById('NavTabs'));
-  MK.Nav.setState({ tabs : tabs });
+  $.ajax({
+      url: tabs[0].async,
+      dataType: "JSON"
+  })
+  .done(function(rsp) {
+      rsp.tabs = tabs;
+      rsp.active = 0;
+      MK.Nav.setState(rsp);
+  });
 </script>
