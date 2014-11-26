@@ -9,6 +9,13 @@ GIT
       tzinfo (>= 0.3.37)
 
 GIT
+  remote: git@github.com:plusjade/dropbox-sdk-ruby.git
+  revision: 4c0a831612e99effbf18107cdc51d3a7b7377520
+  specs:
+    dropbox-sdk (1.6.4)
+      json
+
+GIT
   remote: https://github.com/getsentry/raven-ruby.git
   revision: 2b188bd9db1583565086625c7b43817df1cc57d7
   specs:
@@ -50,8 +57,6 @@ GEM
     builder (3.2.2)
     cancancan (1.9.2)
     connection_pool (2.0.0)
-    dropbox-sdk (1.6.4)
-      json
     erubis (2.7.0)
     execjs (2.2.2)
     faraday (0.9.0)
@@ -152,7 +157,7 @@ PLATFORMS
 DEPENDENCIES
   bson_ext
   cancancan (~> 1.9)
-  dropbox-sdk
+  dropbox-sdk (~> 1.6.4)!
   haml-rails
   jbuilder (~> 2.0)
   mongoid (~> 4)!

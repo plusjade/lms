@@ -34,7 +34,7 @@ gem 'mongoid', '~> 4', github: 'mongoid/mongoid'
 gem 'bson_ext'
 
 gem 'cancancan', '~> 1.9'
-gem 'dropbox-sdk', require: 'dropbox_sdk'
+gem 'dropbox-sdk', '~> 1.6.4', require: 'dropbox_sdk', git: 'git@github.com:plusjade/dropbox-sdk-ruby.git'
 gem "omniauth"
 gem 'omniauth-dropbox-oauth2'
 gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"

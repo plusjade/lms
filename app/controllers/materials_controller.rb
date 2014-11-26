@@ -46,7 +46,7 @@ class MaterialsController < ApplicationController
 
     dropbox = course.lead_teacher.dropbox
 
-    meta = dropbox.shares("/#{ course.slug }/#{ params[:id] }")
+    meta = dropbox.shares("/#{ course.slug }/#{ params[:id] }", false)
     url = meta["url"].split('?').first
     url += '?dl=1'
 
