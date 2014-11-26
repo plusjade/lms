@@ -3,7 +3,16 @@ class SessionsController < ApplicationController
     reset_session
     client = DropboxClient.new(auth_hash.credentials.token)
 
-    user = Student.find_or_create_from_omniauth(auth_hash)
+    user = User.find_from_omniauth(auth_hash).first
+
+    if user
+      # update the token
+      user.set(token: auth_hash.credentials.token)
+    else
+      # ensure everyone starts as a student.
+      user = Student.create_from_omniauth!(auth_hash)
+    end
+
     session[:user_id] = user.id.to_s
 
     redirect_to root_url

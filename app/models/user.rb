@@ -26,14 +26,14 @@ class User
     @dropbox ||= DropboxClient.new(token)
   end
 
-  def self.find_or_create_from_omniauth(auth)
+  def self.find_from_omniauth(auth)
     where({
         provider: auth['provider'],
         uid: auth['uid'].to_s
-    }).first || create_from_omniauth(auth)
+    })
   end
 
-  def self.create_from_omniauth(auth)
+  def self.create_from_omniauth!(auth)
     create! do |u|
       u.provider = auth['provider']
       u.uid = auth['uid']
