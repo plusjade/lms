@@ -15,8 +15,14 @@ class LessonsController < ApplicationController
   end
 
   def show
-    @lesson = Lesson.find(params[:id])
-    authorize! :read, @lesson
+    lesson = Lesson.find(params[:id])
+    course = lesson.course
+
+    @lesson_api = lesson.to_api
+    @lesson_api[:course_name] = course.name
+    @lesson_api[:course_id] = course.id.to_s
+
+    authorize! :read, lesson
 
   rescue CanCan::AccessDenied
     render text: 'Unauthorized' , status: :unauthorized
