@@ -7,7 +7,7 @@ class MaterialsController < ApplicationController
     render nothing: true, status: :not_found
   end
   rescue_from DropboxError do |exception|
-    # TODO LOG the exceptions!
+    Raven.capture_exception(exception)
     render nothing: true, status: :not_found
   end
 
@@ -34,7 +34,7 @@ class MaterialsController < ApplicationController
 
     render json: { materials: materials }
   rescue DropboxError => exception
-    # TODO LOG the exceptions!
+    Raven.capture_exception(exception)
     render json: { materials: { path: scoped_path } }
   end
 
