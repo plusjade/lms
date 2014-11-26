@@ -13,6 +13,9 @@ class Ability
       can :manage, Feedback, student: user
       can :manage, Student, id: user.id
       can :join, Course
+      can :read, Course do |course|
+        user.course_ids.include?(course.id)
+      end
     end
   end
 end
