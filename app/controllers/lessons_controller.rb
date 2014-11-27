@@ -15,15 +15,12 @@ class LessonsController < ApplicationController
   end
 
   def show
-    lesson = Lesson.find(params[:id])
-    course = lesson.course
+    @lesson = Lesson.find(params[:id])
+    @course = @lesson.course
 
-    @lesson_api = lesson.to_api
-    @lesson_api[:course_name] = course.name
-    @lesson_api[:course_id] = course.id.to_s
+    authorize! :read, @lesson
 
-    authorize! :read, lesson
-
+    render template: "courses/show"
   rescue CanCan::AccessDenied
     render text: 'Unauthorized' , status: :unauthorized
   rescue Mongoid::Errors::DocumentNotFound

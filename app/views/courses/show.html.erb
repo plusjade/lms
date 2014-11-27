@@ -7,7 +7,11 @@
         CSRFTOKEN : '<%= form_authenticity_token %>'
     };
 
-    var tabs = [];
+    var lesson, tabs = [];
+  <% if @lesson %>
+    lesson = <%= @lesson.to_api.to_json.html_safe %>
+  <% end %>
+
     tabs.push({
         name: 'Lessons',
         namespace : 'lessons',
@@ -21,7 +25,7 @@
         tabs: tabs,
         lessons: {
             lessons: MK.COURSE.lessons,
-            lesson: MK.COURSE.lessons[0]
+            lesson: lesson || MK.COURSE.lessons[0]
         }
     });
 </script>
