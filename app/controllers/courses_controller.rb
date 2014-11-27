@@ -25,6 +25,16 @@ class CoursesController < ApplicationController
     render json: { courses: [] }, status: :not_found
   end
 
+  def show
+    @course = Course.find(params[:id])
+    authorize! :read, @course
+
+  rescue CanCan::AccessDenied
+    render text: 'Unauthorized' , status: :unauthorized
+  rescue Mongoid::Errors::DocumentNotFound
+    render text: 'Not Found', status: :not_found
+  end
+
   def grant_access
     course = Course.find(params[:id])
 

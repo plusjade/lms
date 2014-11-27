@@ -15,7 +15,7 @@ var NavTabs = React.createClass({
                         {
                             key: d.name,
                             className: (this.state.active === i ? 'active' : null),
-                            onClick : this.toggle.bind(this, i)
+                            onClick : this.setTab.bind(this, i)
                         }
                         , d.name
                    ));
@@ -28,7 +28,7 @@ var NavTabs = React.createClass({
                             key: d.name + 'cont',
                             className : classes.join(' ')
                         }
-                        , (d.content ? d.content(this.state) : d.name)
+                        , (d.content ? d.content(this.state[d.namespace]) : d.name)
                    ));
         }, this);
 
@@ -38,15 +38,22 @@ var NavTabs = React.createClass({
             );
     }
     ,
-    toggle : function(i) {
+    // Set viewable Tab
+    // @param [Integer] i - The tab's index
+    setTab : function(i) {
         if(this.state.tabs[i].async) {
+            var self = this;
+            var namespace = this.state.tabs[i].namespace;
+
             $.ajax({
                 url: this.state.tabs[i].async,
                 dataType: "JSON"
             })
             .done(function(rsp) {
-                rsp.active = i;
-                MK.Nav.setState(rsp);
+                var state = {};
+                state[namespace] = rsp;
+                state.active = i;
+                self.setState(state);
             });
         }
         else {

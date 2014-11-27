@@ -130,7 +130,7 @@ a.button {
   z-index: 5;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 12%;
   height: 70px;
   background-color: #efeeeb;
   overflow: hidden;
@@ -187,6 +187,14 @@ a.button {
     margin: 0 0 20px 0;
   }
 }
+select.lessons {
+  float: right;
+
+  option {
+    font-size: 40px;
+  }
+}
+
 .lessons-wrap {
   list-style: none;
   margin-left: 20px;
@@ -194,7 +202,8 @@ a.button {
   li {
     a {
       display: block;
-      font-size: 18px;
+      font-size: 22px;
+      font-weight: 700;
       line-height: 1.6em;
       span {
         display: inline-block;
@@ -251,13 +260,46 @@ a.button {
   //border-left: 1px solid $border-color;
   .tab {
     display: none;
-    margin-top: 70px;
     &.active {
       display: block !important;
     }
   }
 }
 
+.sub-tabs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid $border-color;
+  li {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    list-style: none;
+    padding: 10px 20px;
+    margin-right: 20px;
+    color: $link-color;
+    border-bottom: 1px solid $link-color;
+    cursor: pointer;
+    &:hover {
+      color: $link-hover-color;
+    }
+    &.active {
+      color: #FF3D00;
+      border-bottom: 1px solid #FF3D00;
+    }
+  }
+}
+.sub-tabs-content {
+  min-height: 100%;
+  background-color: #FFF;
+  .tab {
+    //display: none;
+    &.active {
+      display: block !important;
+    }
+  }
+}
 
 #login-screen {
   position: relative;
