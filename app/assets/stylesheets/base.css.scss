@@ -134,20 +134,19 @@ a.button {
   height: 70px;
   background-color: #efeeeb;
   overflow: hidden;
-  h2 {
-    line-height: 70px;
-    margin: 0;
-    white-space: nowrap;
-    a {
-      display: inline-block;
-      color: inherit;
-      margin-right: 20px;
-      padding: 0 20px;
-      &:hover {
-        background-color: #E0E0E0;
-      }
+  line-height: 70px;
+  margin: 0;
+  white-space: nowrap;
+  a {
+    display: inline-block;
+    color: inherit;
+    margin-right: 20px;
+    padding: 0 20px;
+    &:hover {
+      background-color: #E0E0E0;
     }
   }
+
 }
 #hd-border {
   height: 0;

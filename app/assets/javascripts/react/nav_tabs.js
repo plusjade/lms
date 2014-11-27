@@ -33,6 +33,9 @@ var NavTabs = React.createClass({
         }, this);
 
         return React.DOM.div(null
+                , React.DOM.h2({ id: 'heading' }
+                        , React.DOM.a({ href: '/' }, this.state.courseName)
+                )
                 , React.DOM.ul({ className: 'nav nav-tabs' }, tabs)
                 , React.DOM.div({ className: 'tabs-content' }, containers)
             );

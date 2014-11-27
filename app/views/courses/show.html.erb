@@ -18,11 +18,10 @@
         content: Lessons
     });
 
-    React.render(Heading({ course_name: MK.COURSE.name }), document.getElementById('heading'));
-
     MK.Nav = React.render(NavTabs(), document.getElementById('NavTabs'));
     MK.Nav.setState({
         tabs: tabs,
+        courseName: MK.COURSE.name,
         lessons: {
             lessons: MK.COURSE.lessons,
             lesson: lesson || MK.COURSE.lessons[0]
