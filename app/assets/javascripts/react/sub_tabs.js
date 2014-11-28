@@ -42,7 +42,7 @@ var SubTabs = React.createClass({
                         , d.name
                    ));
 
-            var classes = [d.name.replace(' ', '-').toLowerCase(), 'tab', 'inner'];
+            var classes = [d.name.replace(' ', '-').toLowerCase(), 'tab'];
             if(this.props.activeTab === i) classes.push('active');
 
             containers.push(React.DOM.div(

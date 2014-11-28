@@ -34,6 +34,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
   font-style: normal;
   font-variant: normal;
+  margin-top: 0;
 }
 h1 {
   font-size: 32px;
@@ -85,52 +86,12 @@ a.button {
   }
 }
 
-#panel {
-  display: none;
-  width: 15%;
-  position: fixed;
-  height: 100%;
-  vertical-align: top;
-  background-color: $fill-color;
-  border-right: 1px solid #ccc;
-  z-index: 4;
-  a {
-    color: inherit;
-  }
-  .course-name {
-    background-color: inherit;
-    a {
-      display: block;
-      font-size: 24px;
-      padding: 0 20px;
-      line-height: 65px;
-      text-decoration: none;
-      &:hover {
-        color: #9E9E9E;
-      }
-    }
-  }
-  .user {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    div {
-      padding: 20px;
-    }
-  }
-}
-#main {
-  position: relative;
-  width: 100%;
-  background-color: $fill-color;
-}
-
 #heading {
   position: fixed;
   z-index: 5;
   top: 0;
   left: 0;
-  width: 12%;
+  width: 15%;
   height: 70px;
   background-color: #efeeeb;
   overflow: hidden;
@@ -149,18 +110,17 @@ a.button {
 
 }
 #hd-border {
-  height: 0;
+  height: 100%;
   position: fixed;
-  top: 70px;
-  left: 12%;
-  right: 0;
+  top: 0;
+  bottom: 0;
+  left: 15%;
   z-index: 5;
-  border-bottom: 1px solid $border-color;
-
+  border-left: 1px solid $border-color;
 }
 
 .inner {
-  padding: 20px;
+  padding: $default-padding;
 }
 
 #new_student {
@@ -225,7 +185,7 @@ select.lessons {
     height: 100%;
   }
   .nav.nav-tabs {
-    width: 12%;
+    width: 15%;
     position: fixed;
     margin-top: 70px;
     padding: 0;
@@ -233,9 +193,9 @@ select.lessons {
     z-index: 10;
 
     li {
-      padding: 15px 20px;
+      padding: 20px;
       cursor: pointer;
-      text-align: right;
+      text-align: left;
       &:hover {
         color: $link-hover-color;
       }
@@ -252,8 +212,8 @@ select.lessons {
 }
 .tabs-content {
   position: absolute;
-  width: 88%;
-  left: 12%;
+  width: 85%;
+  left: 15%;
   min-height: 100%;
   background-color: #FFF;
   //border-left: 1px solid $border-color;
@@ -267,7 +227,7 @@ select.lessons {
 
 .sub-tabs {
   list-style: none;
-  margin: 0;
+  margin: 0 0 $default-padding 0;
   padding: 0;
   border-bottom: 1px solid $border-color;
   li {
@@ -275,17 +235,16 @@ select.lessons {
     top: 1px;
     display: inline-block;
     list-style: none;
-    padding: 10px 20px;
-    margin-right: 20px;
+    padding: 15px 0;
+    margin-right: 40px;
     color: $link-color;
-    border-bottom: 1px solid $link-color;
     cursor: pointer;
     &:hover {
       color: $link-hover-color;
+      border-bottom: 1px solid $link-hover-color;
     }
     &.active {
-      color: #FF3D00;
-      border-bottom: 1px solid #FF3D00;
+      border-bottom: 1px solid $link-color;
     }
   }
 }
@@ -312,6 +271,8 @@ select.lessons {
     display: block;
     width: 500px;
     margin: 50px auto 0 auto;
+    line-height: 125px;
+    min-height: 125px;
     text-align: center;
     text-decoration: none;
     color: #007ee5;
@@ -330,11 +291,10 @@ select.lessons {
 }
 
 @media all and (max-width: 600px) {
-  body {
-    background-color: #FFF;
-  }
   #heading {
     position: relative;
+    width: 100%;
+    font-size: 16px;
   }
   #hd-border {
     display: none;
@@ -370,6 +330,23 @@ select.lessons {
     min-height: auto;
     .tab {
       margin-top: 0;
+    }
+  }
+
+  #login-screen {
+    top: 50px;
+    .dropbox-login {
+      width: 100%;
+      border: 0;
+      &:hover {
+        border-left: 0;
+        border-right: 0;
+      }
+      img {
+        display: block;
+        margin: auto;
+        height: auto;
+      }
     }
   }
 }
