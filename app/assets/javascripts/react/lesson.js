@@ -12,7 +12,6 @@ var Lesson = React.createClass({
         tabs.push({
             name: 'Materials',
             content : function() { return Materials },
-            namespace: 'materials',
             async : function(props) {
                 return '/lessons/' + props.lesson.id + '/materials'
             }
@@ -22,7 +21,6 @@ var Lesson = React.createClass({
             case 'Student':
                 tabs.push({
                     name: 'My Feedback',
-                    namespace: 'feedback',
                     content : function() { return Feedback },
                     async : function(props) {
                         return '/students/' + MK.USER.id + '/lessons/' + props.lesson.id + '/feedback'
@@ -32,7 +30,6 @@ var Lesson = React.createClass({
             case 'Teacher':
                 tabs.push({
                     name: 'Feedback Data',
-                    namespace: 'feedbacks',
                     content : function() { return FeedbackData },
                     async : function(props) {
                         return '/lessons/' + props.lesson.id + '/feedbacks'

@@ -14,15 +14,20 @@
 
     tabs.push({
         name: 'Lessons',
-        namespace : 'lessons',
-        content: Lessons
+        content: Lessons,
+        async : function() {
+            return {
+                lessons: MK.COURSE.lessons,
+                lesson: lesson || MK.COURSE.lessons[0]
+            }
+        }
     });
 
     MK.Nav = React.render(NavTabs(), document.getElementById('NavTabs'));
     MK.Nav.setState({
         tabs: tabs,
         courseName: MK.COURSE.name,
-        lessons: {
+        content: {
             lessons: MK.COURSE.lessons,
             lesson: lesson || MK.COURSE.lessons[0]
         }

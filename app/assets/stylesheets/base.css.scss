@@ -184,7 +184,7 @@ select.lessons {
   > div {
     height: 100%;
   }
-  .nav.nav-tabs {
+  .nav-tabs {
     width: 15%;
     position: fixed;
     margin-top: 70px;
@@ -210,22 +210,15 @@ select.lessons {
     }
   }
 }
-.tabs-content {
+.primary-content {
   position: absolute;
   width: 85%;
   left: 15%;
   min-height: 100%;
   background-color: #FFF;
-  //border-left: 1px solid $border-color;
-  .tab {
-    display: none;
-    &.active {
-      display: block !important;
-    }
-  }
 }
 
-.sub-tabs {
+.tabs {
   list-style: none;
   margin: 0 0 $default-padding 0;
   padding: 0;
@@ -248,11 +241,11 @@ select.lessons {
     }
   }
 }
-.sub-tabs-content {
+.tabs-content {
   min-height: 100%;
   background-color: #FFF;
   .tab {
-    //display: none;
+    display: none;
     &.active {
       display: block !important;
     }
@@ -304,7 +297,7 @@ select.lessons {
     > div {
       height: auto;
     }
-    .nav.nav-tabs {
+    .nav-tabs {
       width: 100%;
       margin-top: 0;
       position: relative;
@@ -323,7 +316,7 @@ select.lessons {
     }
   }
 
-  .tabs-content {
+  .primary-content {
     width: 100%;
     left: 0;
     position: relative;

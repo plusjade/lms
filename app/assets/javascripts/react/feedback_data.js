@@ -77,7 +77,7 @@ var FeedbackData = React.createClass({
     sort : function(event) {
         event.preventDefault();
 
-        this.props.updateTabContent({
+        this.props.updatePrimaryContent({
             feedbacksSort: event.target.innerHTML,
             feedbacksSortDirection: !this.props.feedbacksSortDirection
         });

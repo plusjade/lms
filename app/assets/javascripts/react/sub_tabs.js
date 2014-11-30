@@ -55,15 +55,15 @@ var SubTabs = React.createClass({
         }, this);
 
         return React.DOM.div(null
-                , React.DOM.ul({ className: 'sub-tabs' }, tabs)
-                , React.DOM.div({ className: 'sub-tabs-content' }, containers)
+                , React.DOM.ul({ className: 'tabs' }, tabs)
+                , React.DOM.div({ className: 'tabs-content' }, containers)
             );
     }
     ,
     // Set viewable Tab
     // @param [Integer] i - The tab's index
     setTab : function(i) {
-        var updateTabContent = this.props.updateTabContent;
+        var updatePrimaryContent = this.props.updatePrimaryContent;
 
         if(this.props.tabs[i].async) {
             $.ajax({
@@ -72,11 +72,11 @@ var SubTabs = React.createClass({
             })
             .done(function(rsp) {
                 rsp.activeTab = i;
-                updateTabContent(rsp);
+                updatePrimaryContent(rsp);
             });
         }
         else {
-            updateTabContent({ activeTab : i })
+            updatePrimaryContent({ activeTab : i })
         }
     }
 });

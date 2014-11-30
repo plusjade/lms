@@ -169,7 +169,7 @@ var Feedback = React.createClass({
     update : function(name, value) {
         this.props.feedback[name] = value;
 
-        this.props.updateTabContent({ feedback: this.props.feedback });
+        this.props.updatePrimaryContent({ feedback: this.props.feedback });
         var data = { authenticity_token: MK.CSRFTOKEN, feedback: {} };
         data.feedback[name] = this.props.feedback[name];
 
@@ -182,11 +182,11 @@ var Feedback = React.createClass({
         })
         .done(function(rsp) {
             autosave[name] = 'ok';
-            self.props.updateTabContent({ autosave: autosave });
+            self.props.updatePrimaryContent({ autosave: autosave });
         })
         .error(function(rsp) {
             autosave[name] = 'error';
-            self.props.updateTabContent({ autosave: autosave });
+            self.props.updatePrimaryContent({ autosave: autosave });
         })
     }
 });

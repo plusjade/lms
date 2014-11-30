@@ -49,7 +49,7 @@ var Lessons = React.createClass({
             lessonView = Lesson(
                                 _.extend({
                                     _key : this.props.lesson.id,
-                                    updateTabContent: this.updateTabContent
+                                    updatePrimaryContent: this.updatePrimaryContent
                                 }, this.props)
                         );
         }
@@ -66,7 +66,7 @@ var Lessons = React.createClass({
     ,
     loadLesson: function(index) {
         if(this.props.lessons[index]) {
-            this.updateTabContent({
+            this.updatePrimaryContent({
                 lesson : this.props.lessons[index],
                 dropdown: false
             });
@@ -75,15 +75,12 @@ var Lessons = React.createClass({
     ,
     toggle : function() {
         this.props.dropdown = !this.props.dropdown;
-        this.updateTabContent(this.props);
+        this.updatePrimaryContent(this.props);
 
     }
     ,
-    // This top-level tab is responsible for all changes to its children.
-    // All tab children including sub-tabs should provide changes to this callback.
-    // Note we scope the data payload to the Tab namespace.
-    updateTabContent : function(data) {
-        MK.Nav.setState({ lessons : _.extend({}, this.props, data) });
+    updatePrimaryContent : function(data) {
+        MK.Nav.setState({ content : _.extend({}, this.props, data) });
     }
 });
 Lessons = React.createFactory(Lessons);
