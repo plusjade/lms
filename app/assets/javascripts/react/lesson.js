@@ -42,7 +42,6 @@ var Lesson = React.createClass({
         };
 
         return React.DOM.div(null
-                        , React.DOM.h3(null, 'Lesson ' + this.props.lesson.lesson + ' ' + this.props.lesson.date_human )
                         , SubTabs(_.extend({ tabs: tabs }, this.props))
                 );
     }
