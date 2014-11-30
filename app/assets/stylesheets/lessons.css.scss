@@ -42,9 +42,13 @@
         padding: 10px 20px;
         cursor: pointer;
         color: $link-color;
+        text-decoration: underline;
         &:hover {
-          color: $link-hover-color;
-          text-decoration: underline;
+          background-color: $link-hover-color;
+          color: #FFF;
+          svg {
+            fill: #FFF;
+          }
         }
         svg {
           height: 18px;
@@ -59,6 +63,9 @@
     .lessons-list-wrap {
       height: 500px;
       border: 1px solid $link-color;
+      -webkit-transition: height 250ms;
+      -moz-transition: height 250ms;
+      -o-transition: height 250ms;
       transition: height 250ms;
     }
   }

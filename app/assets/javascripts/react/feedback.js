@@ -168,11 +168,12 @@ var Feedback = React.createClass({
     // Update feedback data on the server and notify parent component.
     update : function(name, value) {
         this.props.feedback[name] = value;
-        MK.Nav.setState({ feedback: this.props.feedback });
+
+        this.props.updateTabContent({ feedback: this.props.feedback });
         var data = { authenticity_token: MK.CSRFTOKEN, feedback: {} };
         data.feedback[name] = this.props.feedback[name];
 
-        var autosave = {};
+        var autosave = {}, self=this;
         $.ajax({
             type : "PUT",
             url: '/feedbacks/' + this.props.feedback.id,
@@ -181,11 +182,11 @@ var Feedback = React.createClass({
         })
         .done(function(rsp) {
             autosave[name] = 'ok';
-            MK.Nav.setState({ autosave: autosave });
+            self.props.updateTabContent({ autosave: autosave });
         })
         .error(function(rsp) {
             autosave[name] = 'error';
-            MK.Nav.setState({ autosave: autosave });
+            self.props.updateTabContent({ autosave: autosave });
         })
     }
 });
