@@ -4,12 +4,13 @@ var FeedbackData = React.createClass({
     getDefaultProps: function() {
         return {
             feedbacks: [],
+            missing: [],
             feedbacksSortDirection: true
         };
     }
     ,
     render: function() {
-        var feedbacks, thead, rows;
+        var feedbacks, thead, rows, missing;
 
         thead = React.DOM.thead(null
                     , React.DOM.tr(null
@@ -67,10 +68,22 @@ var FeedbackData = React.createClass({
                 ];
         }, this);
 
-        return React.DOM.table({ id: 'feedback-data' }
-                        , thead
-                        , React.DOM.tbody(null, rows)
+        if(this.props.missing.length > 0) {
+            missing = React.DOM.p(null
+                        , this.props.missing.length + ' missing: ' + this.props.missing.join(', ')
                     );
+        }
+
+        return React.DOM.div(null
+            , React.DOM.p(null
+                , (this.props.feedbacks.length + ' of ' + this.props.total_members + ' total. ')
+            )
+            , missing
+            , React.DOM.table({ id: 'feedback-data' }
+                    , thead
+                    , React.DOM.tbody(null, rows)
+            )
+        );
     }
     ,
     // Sort rows by a given attribute

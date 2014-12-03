@@ -4,13 +4,17 @@ class FeedbacksController < ApplicationController
   def index
     lesson = Lesson.find(params[:lesson_id])
     authorize! :manage, lesson
-    feedbacks = Feedback.where(lesson: lesson).entries
 
-    student_ids = feedbacks.map { |a| a.student_id }
+    # Get this course's students as a dictionary.
+    students = lesson.course.students
     students_dict = {}
-    Student.where(id: { "$in" => student_ids }).each do |student|
+    students.each do |student|
       students_dict[student.id.to_s] = student
     end
+    total_members = students.count
+
+    feedbacks = Feedback.where(lesson: lesson).entries
+    student_ids = feedbacks.map { |a| a.student_id }
 
     feedbacks = feedbacks.map do |a|
       a.to_api.merge({
@@ -20,7 +24,18 @@ class FeedbacksController < ApplicationController
       })
     end
 
-    render json: { feedbacks: feedbacks }
+    # Get student's who haven't given feedback.
+    missing = []
+    if students.count > feedbacks.count
+      students.delete_if{ |a| student_ids.include?(a.id) }
+      missing = students.map{|a| a.name }
+    end
+
+    render json: {
+                   feedbacks: feedbacks,
+                   total_members: total_members,
+                   missing: missing
+                 }
   end
 
   def show
