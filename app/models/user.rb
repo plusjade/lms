@@ -1,10 +1,11 @@
+require 'digest'
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
   field :name, type: String
   field :email, type: String
-  field :avatar, type: String
+  field :avatar, type: String, default: -> { default_avatar }
 
   field :uid, type: String
   field :provider, type: String
@@ -24,6 +25,14 @@ class User
 
   def dropbox
     @dropbox ||= DropboxClient.new(token)
+  end
+
+
+  def default_avatar
+    return nil unless email
+
+    hash = Digest::MD5.hexdigest(email.to_s.strip.downcase)
+    "https://secure.gravatar.com/avatar/#{ hash }.jpg?s=200"
   end
 
   def self.find_from_omniauth(auth)
