@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   rescue_from Mongoid::Errors::DocumentNotFound do |exception|
     respond_to do |format|
       format.html do
-        render text: "The resource could not be found.", status: :not_found
+        render template: "home/not_found", layout: false, status: :not_found
       end
       format.json do
         render json: { error: "not_found" }, status: :not_found
