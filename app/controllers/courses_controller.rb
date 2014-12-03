@@ -27,6 +27,8 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
+    @lesson = @course.lessons.gte(date: Date.today).first
+
     authorize! :read, @course
 
   rescue CanCan::AccessDenied
