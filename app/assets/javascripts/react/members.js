@@ -7,17 +7,18 @@ var Members = React.createClass({
     ,
     render: function() {
         var nodes = this.props.students.map(function(a, i) {
-            return React.DOM.li(
+            return React.DOM.div(
                         {
                             key: a.id
                         }
-                        , a.name
+                        , React.DOM.img({ src: a.avatar })
+                        , React.DOM.input({ value: a.name })
                    );
         }, this);
 
         return React.DOM.div(null
             , React.DOM.h3(null, this.props.students.length + ' Total Members')
-            , React.DOM.ol({ className: 'members-wrap' }, nodes)
+            , React.DOM.div({ className: 'members-wrap' }, nodes)
         );
     }
 });

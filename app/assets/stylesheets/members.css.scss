@@ -1,0 +1,23 @@
+.members-wrap {
+  div {
+    display: inline-block;
+    text-align: center;
+    width: 140px;
+    overflow: hidden;
+    margin: 10px;
+    img {
+      display: block;
+      width: 120px;
+      height: 120px;
+      margin: 10px auto;
+      border-radius: 120px;
+    }
+    input {
+      border: 0;
+      width: 100%;
+      text-align: center;
+      font-size: inherit;
+      color: inherit;
+    }
+  }
+}
