@@ -283,6 +283,13 @@ select.lessons {
   }
 }
 
+#notice-wrap {
+  margin-top: 50px;
+  font-size: 26px;
+  text-align: center;
+  color: #DD2C00;
+}
+
 @media all and (max-width: 600px) {
   #heading {
     position: relative;
