@@ -1,13 +1,5 @@
 class FeedbacksController < ApplicationController
-  respond_to :json
-
-  rescue_from CanCan::AccessDenied do |exception|
-    render json: { feedback: {} }, status: :unauthorized
-  end
-
-  rescue_from Mongoid::Errors::DocumentNotFound do |exception|
-    render json: { feedback: {} }, status: :not_found
-  end
+  respond_to :json, :html
 
   def index
     lesson = Lesson.find(params[:lesson_id])

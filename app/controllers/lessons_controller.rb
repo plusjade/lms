@@ -7,11 +7,6 @@ class LessonsController < ApplicationController
     lessons = course.lessons.map{ |a| a.to_api }
 
     render json: { lessons: lessons }
-
-  rescue CanCan::AccessDenied
-    render json: { lessons: [] }, status: :unauthorized
-  rescue Mongoid::Errors::DocumentNotFound
-    render json: { lessons: [] }, status: :not_found
   end
 
   def show
@@ -21,9 +16,5 @@ class LessonsController < ApplicationController
     authorize! :read, @lesson
 
     render template: "courses/show"
-  rescue CanCan::AccessDenied
-    render text: 'Unauthorized' , status: :unauthorized
-  rescue Mongoid::Errors::DocumentNotFound
-    render text: 'Not Found', status: :not_found
   end
 end

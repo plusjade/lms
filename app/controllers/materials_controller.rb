@@ -1,11 +1,5 @@
 class MaterialsController < ApplicationController
 
-  rescue_from CanCan::AccessDenied do |exception|
-    render nothing: true, status: :unauthorized
-  end
-  rescue_from Mongoid::Errors::DocumentNotFound do |exception|
-    render nothing: true, status: :not_found
-  end
   rescue_from DropboxError do |exception|
     Raven.capture_exception(exception)
     render nothing: true, status: :not_found

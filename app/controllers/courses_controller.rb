@@ -18,11 +18,6 @@ class CoursesController < ApplicationController
     courses = courses.map{ |a| a.to_api }
 
     render json: { courses: courses }
-
-  rescue CanCan::AccessDenied
-    render json: { courses: [] }, status: :unauthorized
-  rescue Mongoid::Errors::DocumentNotFound
-    render json: { courses: [] }, status: :not_found
   end
 
   def show
@@ -30,11 +25,6 @@ class CoursesController < ApplicationController
     @lesson = @course.lessons.gte(date: Date.today).first
 
     authorize! :read, @course
-
-  rescue CanCan::AccessDenied
-    render text: 'Unauthorized' , status: :unauthorized
-  rescue Mongoid::Errors::DocumentNotFound
-    render text: 'Not Found', status: :not_found
   end
 
   def grant_access
