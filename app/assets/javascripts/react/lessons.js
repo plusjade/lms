@@ -74,9 +74,7 @@ var Lessons = React.createClass({
     }
     ,
     toggle : function() {
-        this.props.dropdown = !this.props.dropdown;
-        this.updatePrimaryContent(this.props);
-
+        this.updatePrimaryContent({ dropdown: !this.props.dropdown });
     }
     ,
     updatePrimaryContent : function(data) {
