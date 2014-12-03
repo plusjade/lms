@@ -32,20 +32,19 @@ class CoursesController < ApplicationController
 
     authorize! :join, course
 
-    if course.access_code == params[:access_code]
-      course.students << current_user
-      if course.save
-        redirect_to root_url
-      else
-        render text: 'There was a problem saving!', status: :not_acceptable
-      end
+    if course.student_ids.include?(current_user.id)
+      redirect_to root_url
     else
-      render text: 'Invalid access code', status: :unauthorized
+      if course.access_code == params[:access_code]
+        course.students << current_user
+        if course.save
+          redirect_to root_url
+        else
+          render text: 'There was a problem saving!', status: :not_acceptable
+        end
+      else
+        render text: 'Invalid access code', status: :unauthorized
+      end
     end
-
-  rescue CanCan::AccessDenied
-    render text: 'Unauthorized', status: :unauthorized
-  rescue Mongoid::Errors::DocumentNotFound
-    render text: 'Course not found', status: :not_found
   end
 end

@@ -3,6 +3,6 @@
   - if flash[:notice]
     #notice-wrap
       = flash[:notice]
-  %a.dropbox-login{ href: '/auth/dropbox_oauth2' }
+  %a.dropbox-login{ href: "/auth/dropbox_oauth2#{ params[:goto] ? '?goto=' + params[:goto] : nil }" }
     Login with
     %img{ src: "//s3.amazonaws.com/makeist.com/app/dropbox-logo.png", alt: "Dropbox" }

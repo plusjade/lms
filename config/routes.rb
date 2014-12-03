@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :materials, only: [:show], constraints: { id: /.+/ }
     resources :students
     member do
-      get 'grant_access/:access_code' => 'courses#grant_access'
+      get 'grant_access/:access_code' => 'courses#grant_access', as: :grant_access
     end
   end
 

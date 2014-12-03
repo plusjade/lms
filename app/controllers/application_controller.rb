@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.html do
-        redirect_to root_url, notice: 'Please login first'
+        redirect_to root_url(goto: request.original_fullpath), notice: 'Please login first'
       end
       format.json do
         render json: { error: "unauthorized" }, status: :unauthorized

@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
 
     session[:user_id] = user.id.to_s
 
-    redirect_to root_url
+    redirect_to(custom_destination || root_url)
   end
 
   def destroy
@@ -32,5 +32,13 @@ class SessionsController < ApplicationController
 
   def auth_hash
     request.env['omniauth.auth']
+  end
+
+  def custom_destination
+    if request.env["omniauth.params"] && request.env["omniauth.params"]["goto"]
+      request.env["omniauth.params"]["goto"][0] == '/' ?
+        request.env["omniauth.params"]["goto"] :
+        '/' + request.env["omniauth.params"]["goto"]
+    end
   end
 end

@@ -38,4 +38,8 @@ class Course
   def generate_access_code
     SecureRandom.urlsafe_base64(10)
   end
+
+  def grant_access_path
+    Rails.application.routes.url_helpers.grant_access_course_path(id, access_code)
+  end
 end
