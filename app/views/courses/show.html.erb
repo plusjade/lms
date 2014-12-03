@@ -22,6 +22,11 @@
             }
         }
     });
+    tabs.push({
+        name: 'Members',
+        content: Members,
+        async: '/courses/' + MK.COURSE.id + '/students'
+    });
 
     MK.Nav = React.render(NavTabs(), document.getElementById('NavTabs'));
     MK.Nav.setState({
