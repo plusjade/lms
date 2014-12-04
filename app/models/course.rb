@@ -10,6 +10,7 @@ class Course
   field :slug, type: String, default: -> { normalize_slug }
 
   field :access_code, type: String, default: -> { generate_access_code }
+  field :calendar_embed, type: String
 
   validates_length_of :access_code, minimum: 10
   validates_uniqueness_of :access_code, case_sensitive: true
@@ -27,7 +28,8 @@ class Course
     {
       id: _id.to_s,
       name: name,
-      lessons: lessons.map{ |a| a.to_api }
+      lessons: lessons.map{ |a| a.to_api },
+      calendar_embed: calendar_embed
     }
   end
 

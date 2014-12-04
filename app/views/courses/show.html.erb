@@ -22,6 +22,15 @@
             }
         }
     });
+    if(MK.COURSE.calendar_embed) {
+        tabs.push({
+            name: 'Calendar',
+            content: Calendar,
+            async: function() {
+                return { embed_url: MK.COURSE.calendar_embed }
+            }
+        });
+    }
     tabs.push({
         name: 'Members',
         content: Members,
