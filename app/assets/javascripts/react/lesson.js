@@ -35,6 +35,14 @@ var Lesson = React.createClass({
                         return '/lessons/' + props.lesson.id + '/feedbacks'
                     }
                 });
+                tabs.push({
+                    name: 'Attendance',
+                    content : function() { return Attendance },
+                    async : function(props) {
+                        return '/lessons/' + props.lesson.id + '/attendances'
+                    }
+                });
+
                 break;
         };
 
