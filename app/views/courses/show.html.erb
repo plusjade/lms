@@ -36,6 +36,11 @@
         content: Members,
         async: '/courses/' + MK.COURSE.id + '/students'
     });
+    tabs.push({
+        name: 'Attendance',
+        content: Attendances,
+        async: '/courses/' + MK.COURSE.id + '/attendances'
+    });
 
     MK.Nav = React.render(NavTabs(), document.getElementById('NavTabs'));
     MK.Nav.setState({
