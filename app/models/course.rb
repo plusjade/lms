@@ -5,6 +5,7 @@ class Course
   has_many :lessons
   has_and_belongs_to_many :teachers
   has_and_belongs_to_many :students
+  has_many :attendances
 
   field :name, type: String
   field :slug, type: String, default: -> { normalize_slug }

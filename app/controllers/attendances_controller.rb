@@ -1,4 +1,10 @@
 class AttendancesController < ApplicationController
+  def index
+    course = Course.find(params[:course_id])
+    authorize! :read, course
+
+    render json: Attendance.overview(course)
+  end
 
   # admin
   # /lessons/1/attendances

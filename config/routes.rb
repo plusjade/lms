@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :lessons
+    resources :attendances, only: [:index]
     resources :materials, only: [:show], constraints: { id: /.+/ }
     resources :students
     member do
