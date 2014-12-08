@@ -1,6 +1,8 @@
 var FeedbackData = React.createClass({
     displayName: 'FeedbackData'
     ,
+    mixins: [SortMixin]
+    ,
     getDefaultProps: function() {
         return {
             feedbacks: [],
@@ -94,39 +96,6 @@ var FeedbackData = React.createClass({
             feedbacksSort: event.target.innerHTML,
             feedbacksSortDirection: !this.props.feedbacksSortDirection
         });
-    }
-    ,
-    // return a comparator function based on sorter and direction.
-    comparator : function(sorter, direction) {
-        // handle string sort
-        if(sorter === 'student_name') {
-            if(direction) {
-                return function(a, b) {
-                    if(a[sorter].toLowerCase() < b[sorter].toLowerCase()) return -1;
-                    if(a[sorter].toLowerCase() > b[sorter].toLowerCase()) return 1;
-                    return 0;
-                }
-            }
-            else {
-                return function(a, b) {
-                    if(b[sorter].toLowerCase() < a[sorter].toLowerCase()) return -1;
-                    if(b[sorter].toLowerCase() > a[sorter].toLowerCase()) return 1;
-                    return 0;
-                }
-            }
-        }
-        else {
-            if(direction) {
-                return function(a, b) {
-                    return a[sorter] - b[sorter];
-                }
-            }
-            else {
-                return function(a, b) {
-                    return b[sorter] - a[sorter];
-                }
-            }
-        }
     }
 });
 FeedbackData = React.createFactory(FeedbackData);
