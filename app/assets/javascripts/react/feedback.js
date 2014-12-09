@@ -22,7 +22,12 @@ function autosaveStatusIcon(status) {
         icon.push("There was a problem!");
     }
 
-    return React.DOM.div({ className : classes.join(' ') }, icon);
+    return React.DOM.div({
+                    key: Math.random().toPrecision(4),
+                    className : classes.join(' ')
+                }
+                , icon
+            );
 }
 
 var debouncedUpdate = debounce(function(name, value) {
