@@ -58,7 +58,7 @@ class FeedbacksController < ApplicationController
 
     authorize! :read, feedback
 
-    feedback.set(allowed_feedback)
+    feedback.update_attributes(allowed_feedback)
 
     render json: { status: "ok" }
   end
