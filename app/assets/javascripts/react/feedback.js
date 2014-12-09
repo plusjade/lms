@@ -31,7 +31,7 @@ function autosaveStatusIcon(status) {
 }
 
 var debouncedUpdate = debounce(function(name, value) {
-    this.update(name, value);
+    this.saveOne(name, value);
 }, 350);
 
 var Feedback = React.createClass({
@@ -113,9 +113,7 @@ var Feedback = React.createClass({
     }
     ,
     render: function() {
-        var questions = [],
-            count = 0
-        ;
+        var questions = [], count = 0, button;
         for(var key in this.props.feedback) { count++ }
 
         // hack to only build if the user's feedback has been loaded.
@@ -129,7 +127,7 @@ var Feedback = React.createClass({
 
                     return React.DOM.li({
                             className: ((this.props.feedback[question.name] === i+1) ? 'active' : null)
-                            , onClick : this.update.bind(this, question.name, (i+1))
+                            , onClick : this.saveOne.bind(this, question.name, (i+1))
                         }
                         , React.DOM.div({ className: 'num' }, (i+1).toString())
                         , React.DOM.div(null, q)
@@ -156,43 +154,76 @@ var Feedback = React.createClass({
                                , React.DOM.h4(null, textarea.question, autosave)
                                , React.DOM.textarea({
                                     defaultValue: this.props.feedback[textarea.name]
-                                    , onChange: this.updateTextarea.bind(this, textarea.name)
+                                    , onChange: this.handleTextarea.bind(this, textarea.name)
+                                    , ref: textarea.name
                                 })
                             )
                 );
             }, this);
         }
 
-        return React.DOM.div({ className: 'questions-wrap' }, questions);
+        var autosave;
+        if (this.props.autosave['all']) {
+            autosave = autosaveStatusIcon(this.props.autosave['all']);
+        }
+        button = React.DOM.div({ className: 'submit-wrap' }
+                    , React.DOM.button({ onClick: this.handleSubmit }, 'Save')
+                    , autosave
+                );
+
+        return React.DOM.div({ className: 'questions-wrap' }
+            , questions
+            , button
+        );
     }
     ,
-    updateTextarea : function(name, event) {
+    handleTextarea : function(name, event) {
         debouncedUpdate.call(this, name, event.target.value);
     }
     ,
-    // Update feedback data on the server and notify parent component.
-    update : function(name, value) {
-        this.props.feedback[name] = value;
+    handleSubmit : function(event) {
+        event.preventDefault();
+        var data = {};
+        this.props.textareas.forEach(function(textarea) {
+            data[textarea.name] = this.refs[textarea.name].getDOMNode().value;
+        }, this)
 
-        this.props.updatePrimaryContent({ feedback: this.props.feedback });
-        var data = { authenticity_token: MK.CSRFTOKEN, feedback: {} };
-        data.feedback[name] = this.props.feedback[name];
+        this.save(data);
+    }
+    ,
+    // Save feedback data on the server and notify parent component.
+    save : function(data) {
+        var autosave = {}, count = 0, first, name, payload;
+        var updatePrimaryContent = this.props.updatePrimaryContent;
+        for (var key in data) {
+            this.props.feedback[key] = data[key];
+            if(!first) { first = key };
+            count++;
+        };
+        name = (count > 1) ? 'all' : first ;
+        payload = { authenticity_token: MK.CSRFTOKEN };
+        payload.feedback = data;
 
-        var autosave = {}, self=this;
         $.ajax({
             type : "PUT",
             url: '/feedbacks/' + this.props.feedback.id,
-            data: data,
+            data: payload,
             dataType: "JSON"
         })
         .done(function(rsp) {
             autosave[name] = 'ok';
-            self.props.updatePrimaryContent({ autosave: autosave });
+            updatePrimaryContent({ autosave: autosave });
         })
         .error(function(rsp) {
             autosave[name] = 'error';
-            self.props.updatePrimaryContent({ autosave: autosave });
+            updatePrimaryContent({ autosave: autosave });
         })
+    }
+    ,
+    saveOne : function(name, value) {
+        var data = {};
+        data[name] = value;
+        this.save(data);
     }
 });
 Feedback = React.createFactory(Feedback);
