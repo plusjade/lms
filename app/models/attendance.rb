@@ -63,7 +63,7 @@ class Attendance
       end
 
       node["attended"] = attended
-      node["percent"] = (attended/lessons.count.to_f)*100
+      node["percent"] = percent_format(attended, lessons.count)
 
       student_data << node
     end
@@ -71,7 +71,7 @@ class Attendance
     lessons_data = lessons.each_with_index.map do |a, i|
                     b = a.to_api
                     b["attended"] = lesson_totals[i]
-                    b["percent"] = ((lesson_totals[i]/students.count.to_f)*100).round
+                    b["percent"] = percent_format(lesson_totals[i], students.count)
                     b
                   end
 
@@ -84,9 +84,13 @@ class Attendance
       aggregate: {
         attended: attended,
         total: total,
-        percent: ((attended/total.to_f)*100).round
+        percent: percent_format(attended, total)
       }
     }
+  end
+
+  def self.percent_format(part, whole)
+    ((part/whole.to_f)*100).round(1)
   end
 
   def self.overview_data
