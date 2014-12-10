@@ -77,11 +77,11 @@ var Attendances = React.createClass({
                 , React.DOM.input({ value: a.name, readOnly: true })
                 , (a.avatar ? React.DOM.img({src: a.avatar }) : null)
                 , React.DOM.div({ className: 'summary' }
-                    , React.DOM.div({
+                    , React.DOM.span({
                             className: 'percent'
                         }
                         , (a.percent || 0) + '%')
-                    , React.DOM.div({
+                    , React.DOM.span({
                             className: 'total'
                         }, (a.attended || 0) + '/' + a.total
                     )

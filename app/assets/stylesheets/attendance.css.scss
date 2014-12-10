@@ -21,8 +21,8 @@
 
 .attendences-wrap {
   $avatar-dimension: 70px;
-  $students-width: 200px;
-  $row-height: 143px;
+  $students-width: 300px;
+  $row-height: 123px;
   position: relative;
   .rows-wrap {
     position: absolute;
@@ -48,7 +48,7 @@
       }
     }
     .row {
-      height: 146px; // calculated based on td borders etc
+      height: 126px; // calculated based on td borders etc
       position: relative;
       input {
         display: block;
@@ -63,22 +63,26 @@
         display: inline-block;
         width: $avatar-dimension;
         height: $avatar-dimension;
-        margin: 10px 10px 0 0;
+        margin: 0;
         border-radius: $avatar-dimension;
       }
       .summary {
         position: absolute;
         top: 40px;
-        right: 10px;
-        text-align: center;
+        right: 0;
         font-size: 24px;
         vertical-align: top;
-        width: 100px;
+        width: 180px;
+        span {
+          display: inline-block;
+          width: 50%;
+          font-size: inherit;
+        }
         .percent {
           font-size: inherit;
         }
         .total {
-          font-size: inherit;
+
         }
       }
     }
@@ -120,14 +124,8 @@
                 margin: auto;
                 position: relative;
               }
-              &.off {
-                div {
-                  top: 30px;
-                }
-              }
               &.on {
                 div {
-                  top: -30px;
                   background-image: url('//s3.amazonaws.com/makeist.com/app/circle-check.svg');
                 }
               }
