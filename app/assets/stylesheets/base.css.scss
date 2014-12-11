@@ -1,12 +1,16 @@
 @import "variables";
 
+html { font-size: 62.5%; }
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+body {
   color: $text-color;
   font-family: 'News Cycle', sans-serif;
   font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 400;
   background-color: $fill-color;
 }
@@ -24,8 +28,9 @@ a:active {
   color: $link-color;
 }
 
-p, ul, div {
+p, ul {
   font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 400;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -38,35 +43,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 h1 {
   font-size: 32px;
+  font-size: 3.2rem;
   font-weight: 700;
 }
 h2 {
   font-size: 28px;
+  font-size: 2.8rem;
   font-weight: 700;
   line-height: 23px;
 }
 h3 {
   font-size: 26px;
+  font-size: 2.6rem;
   font-weight: 700;
 }
 h4 {
   font-size: 24px;
+  font-size: 2.4rem;
   font-weight: 700;
 }
 textarea {
   font-size: inherit;
   color: inherit;
 }
-
-blockquote {
-  font-size: 17px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  line-height: 23px;
-}
 pre {
-  font-size: 11px;
+  font-size: inherit;
   font-style: normal;
   font-variant: normal;
   font-weight: 400;
@@ -239,6 +240,9 @@ select.lessons {
     &.active {
       border-bottom: 1px solid $link-color;
     }
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 .tabs-content {
@@ -290,7 +294,16 @@ select.lessons {
   color: #DD2C00;
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: $mobile-breakpoint-width) {
+  h4 {
+    font-size: 1.8rem;
+  }
+  #lessons-dropdown {
+    h3 {
+      font-size: 1.6rem;
+    }
+  }
+
   #heading {
     position: relative;
     width: 100%;

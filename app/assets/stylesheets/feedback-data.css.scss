@@ -58,3 +58,35 @@ $row-fill-color: #FAFAFA;
     }
   }
 }
+
+@media all and (max-width: $mobile-breakpoint-width) {
+  #feedback-data {
+    th {
+      font-size: 12px;
+    }
+    tbody {
+      tr {
+        &.main {
+          td {
+            &:first-child {
+              width: auto;
+            }
+          }
+        }
+        &.essays {
+          td {
+            &.name {
+              display: none;
+            }
+            &:last-child {
+              border-bottom: 1px solid $border-color;
+            }
+          }
+        }
+        td {
+          min-width: 0;
+        }
+      }
+    }
+  }
+}
