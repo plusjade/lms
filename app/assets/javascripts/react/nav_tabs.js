@@ -6,7 +6,7 @@ var NavTabs = React.createClass({
     }
     ,
     render: function() {
-        var tabs = [], content, active;
+        var tabs = [], content, active, contentInner;
         this.state.tabs.forEach(function(d, i) {
             tabs.push(React.DOM.li(
                         {
@@ -20,12 +20,25 @@ var NavTabs = React.createClass({
 
         if(this.state.tabs.length > 0 && this.state.active > -1) {
             active = this.state.tabs[this.state.active];
+
+            if(this.state.loaded) {
+                if(this.state.loaded === 'error') {
+                    contentInner = StatusMessage.error(this.state.content);
+                }
+                else {
+                    contentInner = (active.content ? active.content(this.state.content) : active.name);
+                }
+            }
+            else {
+                contentInner = StatusMessage.loading();
+            }
+
             content = React.DOM.div(
                         {
                             key: active.name + 'cont',
                             className : (active.name.replace(' ', '-').toLowerCase() + ' inner')
                         }
-                        , (active.content ? active.content(this.state.content) : active.name)
+                        , contentInner
                    );
         }
 
@@ -44,24 +57,34 @@ var NavTabs = React.createClass({
     setTab : function(i) {
         if(this.state.tabs[i].async) {
             if(typeof this.state.tabs[i].async === 'function') {
-                var state = {};
-                state.content = this.state.tabs[i].async();
-                state.active = i;
-                this.setState(state);
+                this.setState({
+                    active: i,
+                    content: this.state.tabs[i].async()
+                });
             }
             else {
-                var self = this;
+                var self = this, state = { loaded: false, active: i };
+                this.setState(state);
 
                 $.ajax({
                     url: this.state.tabs[i].async,
                     dataType: "JSON"
                 })
                 .done(function(rsp) {
-                    var state = {};
-                    state.content = rsp;
-                    state.active = i;
-                    self.setState(state);
-                });
+                    self.setState({
+                        loaded: true,
+                        content: rsp
+                    });
+                })
+                .error(function(xhr) {
+                    self.setState({
+                        loaded: 'error',
+                        content: {
+                            status: xhr.status,
+                            error: xhr.statusText
+                        }
+                    });
+                })
             }
         }
         else {

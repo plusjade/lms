@@ -28,9 +28,7 @@ var SubTabs = React.createClass({
     }
     ,
     render: function() {
-        var tabs = [],
-            containers = []
-        ;
+        var content, tabs = [], containers = [];
 
         this.props.tabs.forEach(function(d, i) {
             tabs.push(React.DOM.li(
@@ -45,12 +43,24 @@ var SubTabs = React.createClass({
             var classes = [d.name.replace(' ', '-').toLowerCase(), 'tab'];
             if(this.props.activeTab === i) classes.push('active');
 
+            if(this.props.loaded) {
+                if(this.props.loaded === 'error') {
+                    content = StatusMessage.error(this.props.content);
+                }
+                else {
+                    content = (d.content ? d.content()(this.props) : d.name);
+                }
+            }
+            else {
+                content = StatusMessage.loading();
+            }
+
             containers.push(React.DOM.div(
                         {
                             key: d.name + 'cont',
                             className : classes.join(' ')
                         }
-                        , (d.content ? d.content()(this.props) : d.name)
+                        , content
                    ));
         }, this);
 
@@ -64,6 +74,7 @@ var SubTabs = React.createClass({
     // @param [Integer] i - The tab's index
     setTab : function(i) {
         var updatePrimaryContent = this.props.updatePrimaryContent;
+        updatePrimaryContent({ loaded: false, activeTab: i });
 
         if(this.props.tabs[i].async) {
             $.ajax({
@@ -71,8 +82,17 @@ var SubTabs = React.createClass({
                 dataType: "JSON"
             })
             .done(function(rsp) {
-                rsp.activeTab = i;
+                rsp.loaded = true;
                 updatePrimaryContent(rsp);
+            })
+            .error(function(xhr) {
+                updatePrimaryContent({
+                    loaded: 'error',
+                    content: {
+                        status: xhr.status,
+                        error: xhr.statusText
+                    }
+                });
             });
         }
         else {
