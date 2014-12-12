@@ -1,14 +1,14 @@
 var Attendances = React.createClass({
     displayName: 'Attendances'
     ,
-    mixins: [SortMixin]
+    mixins: [SortMixin, ContentMixin]
     ,
     getDefaultProps: function() {
         return { students: [] };
     }
     ,
     render: function() {
-        var nodes, attended = 0, totals, thead, rows = [], th=[], td=[], totalsRow;
+        var primary, nodes, attended = 0, totals, thead, rows = [], th=[], td=[], totalsRow;
 
         totals = this.createRow(_.extend({
                                     id: '_total', name: 'Total' }
@@ -45,7 +45,7 @@ var Attendances = React.createClass({
         thead = React.DOM.thead(null, React.DOM.tr(null, th));
         totalsRow = React.DOM.tr({ className: 'totals' }, td);
 
-        return React.DOM.div(null
+        primary = React.DOM.div(null
                 , React.DOM.h3(null, 'Attendance Overview')
                 , React.DOM.div({ className: 'attendences-wrap' }
                 , React.DOM.div({ className: 'rows-wrap'}
@@ -67,6 +67,8 @@ var Attendances = React.createClass({
                 )
             )
         );
+
+        return this.wrapContent(primary);
     }
     ,
     createRow : function(a) {

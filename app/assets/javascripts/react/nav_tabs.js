@@ -1,6 +1,8 @@
 var NavTabs = React.createClass({
     displayName: 'NavTabs'
     ,
+    mixins : [ContentMixin]
+    ,
     getInitialState: function() {
         return { active : 0, tabs: [] };
     }
@@ -23,14 +25,17 @@ var NavTabs = React.createClass({
 
             if(this.state.loaded) {
                 if(this.state.loaded === 'error') {
-                    contentInner = StatusMessage.error(this.state.content);
+                    contentInner = this.wrapContent(StatusMessage.error(this.state.content));
                 }
                 else {
-                    contentInner = (active.content ? active.content(this.state.content) : active.name);
+                    contentInner = active.content
+                                    ? active.content(this.state.content)
+                                    : active.name
+                    ;
                 }
             }
             else {
-                contentInner = StatusMessage.loading();
+                contentInner = this.wrapContent(StatusMessage.loading());
             }
 
             content = React.DOM.div(
@@ -42,13 +47,14 @@ var NavTabs = React.createClass({
                    );
         }
 
-
         return React.DOM.div(null
-                , React.DOM.h2({ id: 'heading' }
+                , React.DOM.div({ className: 'primary-navigation' }
+                    , React.DOM.div({ id: 'heading' }
                         , React.DOM.a({ href: '/' }, this.state.courseName)
+                    )
+                    , React.DOM.ul({ className: 'nav-tabs' }, tabs)
                 )
-                , React.DOM.ul({ className: 'nav-tabs' }, tabs)
-                , React.DOM.div({ className: 'primary-content' }, content)
+                , contentInner
             );
     }
     ,

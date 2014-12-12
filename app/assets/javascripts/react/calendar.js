@@ -1,13 +1,15 @@
 var Calendar = React.createClass({
     displayName: 'Calendar'
     ,
+    mixins : [ContentMixin]
+    ,
     getDefaultProps: function() {
         return {};
     }
     ,
     render: function() {
-        console.log(this.props)
-        return React.DOM.div(null
+        var primary;
+        primary = React.DOM.div(null
             , React.DOM.iframe({
                     src: MK.COURSE.calendar_embed,
                     frameBorder: 0,
@@ -18,6 +20,8 @@ var Calendar = React.createClass({
                 }
             )
         );
+
+        return this.wrapContent(primary);
     }
 });
 Calendar = React.createFactory(Calendar);

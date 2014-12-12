@@ -1,6 +1,6 @@
 @import "variables";
 
-#lessons-dropdown {
+#lesson-wrap {
   position: relative;
 
   h3 {
@@ -9,64 +9,33 @@
     svg {
       display: block;
       position: absolute;
-      top: -10px;
-      right: -60px;
-      width: 45px;
-      height: 45px;
+      top: -3px;
+      left: -50px;
+      width: 36px;
+      height: 36px;
+      z-index: 3;
       fill: $link-color;
       cursor: pointer;
+      border-radius: 36px;
+      background-color: #FFF;
+      -webkit-transition: all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+      -moz-transition:    all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+      -o-transition:      all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+      transition:         all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+
       &:hover {
         fill: $link-hover-color;
       }
-      circle {
-        fill: #FFF;
-      }
     }
   }
-  .lessons-list-wrap {
-    position: absolute;
-    top: 40px;
-    left: 0;
-    right: 0;
-    height: 0;
-    overflow: auto;
-    background-color: #FFF;
-    z-index: 11;
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      li {
-        list-style: none;
-        font-size: 16px;
-        padding: 10px 20px;
-        cursor: pointer;
-        color: $link-color;
-        text-decoration: underline;
-        &:hover {
-          background-color: $link-hover-color;
-          color: #FFF;
-          svg {
-            fill: #FFF;
-          }
-        }
-        svg {
-          height: 18px;
-          height: 18px;
-          margin-right: 10px;
-          fill: $success-color;
-        }
+}
+
+.nav-open {
+  #lesson-wrap {
+    h3 {
+      svg {
+        transform: rotate(180deg);
       }
-    }
-  }
-  &.active {
-    .lessons-list-wrap {
-      height: 500px;
-      border: 1px solid $link-color;
-      -webkit-transition: height 250ms;
-      -moz-transition: height 250ms;
-      -o-transition: height 250ms;
-      transition: height 250ms;
     }
   }
 }

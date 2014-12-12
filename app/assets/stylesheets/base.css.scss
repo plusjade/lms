@@ -91,23 +91,20 @@ a.button {
 
 #heading {
   position: fixed;
-  z-index: 5;
   top: 0;
   left: 0;
-  width: 15%;
-  height: 70px;
-  background-color: #efeeeb;
+  width: $primary-navigation-width;
+  height: ($default-padding*2) + 20px;
+  line-height: ($default-padding*2) + 20px;
   overflow: hidden;
-  line-height: 70px;
   margin: 0;
   white-space: nowrap;
   a {
     display: inline-block;
+    padding: 0 $default-padding;
     color: inherit;
-    margin-right: 20px;
-    padding: 0 20px;
     &:hover {
-      background-color: #E0E0E0;
+      color: $link-hover-color;
     }
   }
 
@@ -178,38 +175,91 @@ select.lessons {
   > div {
     height: 100%;
   }
-  .nav-tabs {
-    width: 15%;
+  .primary-navigation {
+    width: $primary-navigation-width;
+    height: 100%;
     position: fixed;
-    margin-top: 70px;
-    padding: 0;
-    list-style: none;
-    z-index: 10;
-
-    li {
-      padding: 20px;
-      cursor: pointer;
-      text-align: left;
-      &:hover {
-        color: $link-hover-color;
-      }
-      &.active {
-        background-color: #FFF;
-        position: relative;
-        left: 1px;
-        border-top: 1px solid $border-color;
-        border-bottom: 1px solid $border-color;
-        font-weight: 700;
+    z-index: 2;
+    background-color: $fill-color;
+    .nav-tabs {
+      margin-top: ($default-padding*2) + 20px;
+      padding: 0;
+      list-style: none;
+      li {
+        padding: 20px $default-padding;
+        cursor: pointer;
+        text-align: left;
+        &:hover {
+          color: $link-hover-color;
+          color: #FFF;
+          background-color: $link-color;
+        }
+        &.active {
+          background-color: #FFF;
+        }
+        &:hover.active {
+          color: inherit;
+        }
       }
     }
   }
 }
 .primary-content {
   position: absolute;
-  width: 85%;
-  left: 15%;
+  width: 100% - $primary-navigation-width;
+  left: $primary-navigation-width;
   min-height: 100%;
   background-color: #FFF;
+
+  -webkit-transition: all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+  -moz-transition:    all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+  -o-transition:      all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+  transition:         all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+}
+
+.navigation {
+  position: fixed;
+  height: 100%;
+  width: 0;
+  left: $primary-navigation-width;
+  background-color: $navigation-background-color;
+  overflow: auto;
+  box-shadow: inset 1px -1px 6px #CCC;
+  -webkit-transition: all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+  -moz-transition:    all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+  -o-transition:      all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+  transition:         all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+
+  ul {
+    list-style: none;
+    margin: $default-padding - 8 0 0 0;
+    padding: 0;
+    min-width: 200px;
+    li {
+      list-style: none;
+      padding: 8px $default-padding;
+      cursor: pointer;
+      color: #8f8f8f;
+      font-size: 15px;
+      &.active {
+        color: inherit;
+        text-decoration: underline;
+      }
+      &:hover {
+        background-color: $link-color;
+        color: #FFF;
+      }
+    }
+  }
+}
+.nav-open {
+  .navigation {
+    width: $navigation-width;
+  }
+  .primary-content {
+    width: 100% - $primary-navigation-width - $navigation-width;
+    left: $primary-navigation-width + $navigation-width;
+  }
 }
 
 .tabs {
@@ -291,16 +341,9 @@ select.lessons {
   h4 {
     font-size: 1.8rem;
   }
-  #lessons-dropdown {
-    h3 {
-      font-size: 1.6rem;
-    }
-  }
-
   #heading {
     position: relative;
     width: 100%;
-    font-size: 16px;
   }
 
   #NavTabs {
@@ -308,32 +351,44 @@ select.lessons {
     > div {
       height: auto;
     }
-    .nav-tabs {
-      width: 100%;
-      margin-top: 0;
+    .primary-navigation {
       position: relative;
-      background-color: $fill-color;
-      border-bottom: 1px solid $border-color;
-      li {
-        text-align: left;
-        text-decoration: underline;
-        &.active {
-          position: relative;
-          left: 0;
-          border: 0;
-          background-color: inherit;
+      width: 100%;
+      .nav-tabs {
+        width: 100%;
+        margin-top: 0;
+        position: relative;
+        li {
+          text-decoration: underline;
+          &.active {
+            font-weight: 700;
+            background-color: inherit;
+          }
         }
       }
     }
-  }
+    .navigation {
+      position: relative;
+      width: 100%;
+      max-height: 0;
+      left: auto;
+    }
+    .primary-content {
+      width: 100%;
+      left: 0;
+      position: relative;
+      min-height: auto;
+    }
 
-  .primary-content {
-    width: 100%;
-    left: 0;
-    position: relative;
-    min-height: auto;
-    .tab {
-      margin-top: 0;
+    .nav-open {
+      .navigation {
+        width: 100%;
+        max-height: 2000px;
+      }
+      .primary-content {
+        width: 100%;
+        left: auto;
+      }
     }
   }
 
