@@ -112,15 +112,6 @@ a.button {
   }
 
 }
-#hd-border {
-  height: 100%;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 15%;
-  z-index: 5;
-  border-left: 1px solid $border-color;
-}
 
 .inner {
   padding: $default-padding;
@@ -311,9 +302,7 @@ select.lessons {
     width: 100%;
     font-size: 16px;
   }
-  #hd-border {
-    display: none;
-  }
+
   #NavTabs {
     height: auto;
     > div {
