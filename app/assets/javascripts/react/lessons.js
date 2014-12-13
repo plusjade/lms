@@ -4,7 +4,7 @@ var Lessons = React.createClass({
     mixins : [ContentMixin]
     ,
     getDefaultProps: function() {
-        return { lessons: [], navOpen: false };
+        return { lessons: [], navOpen: true };
     }
     ,
     render: function() {
