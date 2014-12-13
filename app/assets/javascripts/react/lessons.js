@@ -12,7 +12,11 @@ var Lessons = React.createClass({
 
         if(this.props.lesson) {
             head = React.DOM.h3(null
-                        , 'Lesson ' + this.props.lesson.lesson + ' ' + this.props.lesson.date_human
+                        , React.DOM.a({
+                                href: '/lessons/' + this.props.lesson.id
+                            }
+                            , 'Lesson ' + this.props.lesson.lesson + ' ' + this.props.lesson.date_human
+                        )
                         , React.DOM.svg({
                                 viewBox: '5.0 -10.0 100 120',
                                 onClick : this.toggle
