@@ -39,3 +39,6 @@ gem 'dropbox-sdk', '~> 1.6.4', require: 'dropbox_sdk', git: 'git@github.com:plus
 gem "omniauth"
 gem 'omniauth-dropbox-oauth2'
 gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"
+
+gem 'factory_girl_rails', group: :test
+gem 'forgery', group: :test

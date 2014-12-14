@@ -15,23 +15,6 @@ class Attendance
     self.course = lesson.course
   end
 
-  def self.populate
-    student_first = Student.first
-    student_last = Student.last
-    Lesson.all.each do |lesson|
-      create({
-        student: student_first,
-        lesson: lesson,
-        attended: [true, false].sample,
-      })
-      create({
-        student: student_last,
-        lesson: lesson,
-        attended: [true, false].sample,
-      })
-    end
-  end
-
   def self.overview(course)
     students = course.students.entries
     lessons = course.lessons.where(:date.lte => Date.today).entries
