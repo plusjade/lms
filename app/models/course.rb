@@ -2,7 +2,7 @@ require 'securerandom'
 class Course
   include Mongoid::Document
 
-  has_many :lessons
+  has_many :lessons, dependent: :destroy
   has_and_belongs_to_many :teachers
   has_and_belongs_to_many :students
   has_many :attendances
