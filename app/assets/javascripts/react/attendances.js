@@ -76,8 +76,10 @@ var Attendances = React.createClass({
                     key: a.id,
                     className: 'row'
                 }
-                , React.DOM.input({ value: a.name, readOnly: true })
-                , (a.avatar ? React.DOM.img({src: a.avatar }) : null)
+                , React.DOM.div({ className: 'user' }
+                    , (a.avatar ? React.DOM.img({src: a.avatar }) : null)
+                    , React.DOM.div(null, a.name)
+                )
                 , React.DOM.div({ className: 'summary' }
                     , React.DOM.span({
                             className: 'percent'

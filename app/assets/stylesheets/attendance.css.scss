@@ -20,9 +20,9 @@
 }
 
 .attendences-wrap {
-  $avatar-dimension: 70px;
-  $students-width: 300px;
-  $row-height: 123px;
+  $avatar-dimension: 60px;
+  $students-width: 340px;
+  $row-height: 80px;
   position: relative;
   .rows-wrap {
     position: absolute;
@@ -38,51 +38,51 @@
       border-bottom: 1px solid $border-color;
       span {
         display: inline-block;
-        width: 50%;
         color: $link-color;
         cursor: pointer;
         &:hover {
           color: $link-hover-color;
           text-decoration: underline;
         }
+        &:first-child {
+          width: 210px;
+        }
       }
     }
     .row {
-      height: 126px; // calculated based on td borders etc
+      height: 83px; // calculated based on td borders etc
       position: relative;
-      input {
-        display: block;
-        border: 0;
-        width: 100%;
-        padding: 10px 0;
-        text-align: left;
-        font-size: inherit;
-        color: inherit;
-      }
-      img {
-        display: inline-block;
-        width: $avatar-dimension;
-        height: $avatar-dimension;
-        margin: 0;
-        border-radius: $avatar-dimension;
+
+      .user {
+        height: 80px;
+        width: 200px;
+        position: relative;
+        padding: 0;
+        img {
+          width: 60px;
+          height: 60px;
+          position: absolute;
+          top: 10px;
+          left: 0;
+          border-radius: 60px;
+        }
+        div {
+          position: absolute;
+          left: 60px + ($default-padding/2);
+          top: 27px;
+        }
       }
       .summary {
+        line-height: 80px;
         position: absolute;
-        top: 40px;
+        top: 0;
         right: 0;
-        font-size: 24px;
-        vertical-align: top;
-        width: 180px;
+        width: 130px;
         span {
-          display: inline-block;
-          width: 50%;
-          font-size: inherit;
-        }
-        .percent {
-          font-size: inherit;
-        }
-        .total {
-
+          &:last-child {
+            float: right;
+            margin-right: $default-padding;
+          }
         }
       }
     }
