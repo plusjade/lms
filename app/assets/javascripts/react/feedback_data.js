@@ -43,28 +43,28 @@ var FeedbackData = React.createClass({
                             key: i,
                             className: 'main'
                         }
-                        , React.DOM.td(null, a.student_name)
-                        , React.DOM.td(null, a.comprehension)
-                        , React.DOM.td(null, a.engagement)
-                        , React.DOM.td(null, a.pace)
-                        , React.DOM.td(null, a.quality)
-                   )
-                    , React.DOM.tr({ className: 'essays' }
-                        , React.DOM.td({ className: 'name' }, 'comments')
-                        , React.DOM.td({ colSpan: 4}
-                            , React.DOM.pre(null, a.comments)
+                        , React.DOM.td({ className: 'user' }
+                            , (a.student.avatar ? React.DOM.img({src: a.student.avatar }) : null)
+                            , React.DOM.div(null, a.student.name)
+                        )
+                        , React.DOM.td({ className: 'data' }
+                            , React.DOM.div({ className: 'scale-' + a.comprehension }, a.comprehension)
+                        )
+                        , React.DOM.td({ className: 'data' }
+                            , React.DOM.div({ className: 'scale-' + a.engagement }, a.engagement)
+                        )
+                        , React.DOM.td({ className: 'data' }
+                            , React.DOM.div({ className: 'scale-' + a.pace }, a.pace)
+                        )
+                        , React.DOM.td({ className: 'data' }
+                            , React.DOM.div({ className: 'scale-' + a.quality }, a.quality)
                         )
                     )
                     , React.DOM.tr({ className: 'essays' }
-                        , React.DOM.td({ className: 'name' }, 'learned')
-                        , React.DOM.td({ colSpan: 4}
-                            , React.DOM.pre(null, a.learned)
-                        )
-                    )
-                    , React.DOM.tr({ className: 'essays' }
-                        , React.DOM.td({ className: 'name' }, 'questions')
-                        , React.DOM.td({ colSpan: 4}
-                            , React.DOM.pre(null, a.questions)
+                        , React.DOM.td({ colSpan: 5 }
+                            , this.renderTextResponse(a, 'comments')
+                            , this.renderTextResponse(a, 'learned')
+                            , this.renderTextResponse(a, 'questions')
                         )
                     )
                 ];
@@ -86,6 +86,18 @@ var FeedbackData = React.createClass({
                     , React.DOM.tbody(null, rows)
             )
         );
+    }
+    ,
+    renderTextResponse : function(data, name) {
+        if(data[name] === '') {
+            return null;
+        }
+        else {
+            return React.DOM.div(null
+                    , React.DOM.strong(null, name)
+                    , React.DOM.pre(null, data[name])
+            )
+        }
     }
     ,
     // Sort rows by a given attribute

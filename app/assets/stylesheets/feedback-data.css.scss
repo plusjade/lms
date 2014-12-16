@@ -5,50 +5,72 @@ $row-fill-color: #FAFAFA;
 #feedback-data {
   width: 100%;
   border-collapse: collapse;
-  th, td {
-    padding: 5px;
-  }
   th {
-    text-align: left;
+    padding-bottom: $default-padding/2;
+    text-align: center;
     color: #2a80b9;
     font-weight: normal;
     font-size: 1.1em;
     cursor: pointer;
+    border-bottom: 1px solid $border-color;
     &:hover {
       text-decoration: underline;
       color: #FF3D00;
+    }
+    &:first-child {
+      text-align: left;
     }
   }
   tbody {
     tr {
       &.main {
         td {
-          border: 1px solid $border-color;
-          background: $row-fill-color;
-          &:first-child {
-            width: 150px;
+          &.user {
+            height: 80px;
+            position: relative;
+            padding: 0;
+            img {
+              width: 60px;
+              height: 60px;
+              position: absolute;
+              top: 10px;
+              left: 0;
+              border-radius: 60px;
+            }
+            div {
+              margin-left: 60px + ($default-padding/2);
+            }
+          }
+          &.data {
+            text-align: center;
+            div {
+              margin: auto;
+              width: 30px;
+              height: 30px;
+              line-height: 26px;
+              border-radius: 30px;
+            }
           }
         }
       }
       &.essays {
         td {
-          border-right: 1px solid $border-color;
-          &.name {
-            text-align: right;
-            vertical-align: top;
-            color: #757575;
-          }
-          &:last-child {
-            border-right: 0;
-          }
-          pre {
-            font-family: inherit;
-            font-size: inherit;
-            white-space: pre-wrap;       /* CSS 3 */
-            white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-            white-space: -pre-wrap;      /* Opera 4-6 */
-            white-space: -o-pre-wrap;    /* Opera 7 */
-            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+          div {
+            padding: $default-padding/2 $default-padding;
+
+            strong {
+              display: block;
+            }
+            pre {
+              margin: 0;
+              font-family: inherit;
+              font-size: inherit;
+              white-space: pre-wrap;       /* CSS 3 */
+              white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+              white-space: -pre-wrap;      /* Opera 4-6 */
+              white-space: -o-pre-wrap;    /* Opera 7 */
+              word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            }
           }
         }
       }
@@ -73,20 +95,31 @@ $row-fill-color: #FAFAFA;
             }
           }
         }
-        &.essays {
-          td {
-            &.name {
-              display: none;
-            }
-            &:last-child {
-              border-bottom: 1px solid $border-color;
-            }
-          }
-        }
         td {
           min-width: 0;
         }
       }
     }
   }
+}
+
+.scale-1 {
+  background-color: #EF5350;
+  color: #FFEBEE;
+}
+.scale-2 {
+  background-color:#FFEE58;
+  color: #9E9D24;
+}
+.scale-3 {
+  background-color: #CDDC39;
+  color: #F9FBE7;
+}
+.scale-4 {
+  background-color: #8BC34A;
+  color: #F1F8E9;
+}
+.scale-5 {
+  background-color: #4CAF50;
+  color: #E8F5E9;
 }
