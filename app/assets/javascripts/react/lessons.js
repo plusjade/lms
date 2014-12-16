@@ -46,15 +46,20 @@ var Lessons = React.createClass({
         );
 
         nodes = this.props.lessons.map(function(a, i) {
-            var classes;
+            var classes, active;
             if(this.props.lesson && a.id === this.props.lesson.id) {
                 classes = 'active';
+                active = React.DOM.svg({ viewBox: '5.0 -10.0 90 125' }
+                          , React.DOM.path({ d: 'M79.674,53.719c2.59-2.046,2.59-5.392,0-7.437L22.566,1.053C19.977-0.993,18,0.035,18,3.335v93.331    c0,3.3,1.977,4.326,4.566,2.281L79.674,53.719z' })
+                );
             }
+
             return React.DOM.li({
                         key: a.id,
                         className: classes
                         , onClick: this.loadLesson.bind(this, i)
                     }
+                    , active
                     , React.DOM.span(null, a.lesson + ' - ')
                     , a.date_human
                 )

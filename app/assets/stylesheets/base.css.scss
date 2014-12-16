@@ -236,6 +236,7 @@ select.lessons {
     padding: 0;
     min-width: 200px;
     li {
+      position: relative;
       list-style: none;
       padding: 8px $default-padding;
       cursor: pointer;
@@ -243,11 +244,21 @@ select.lessons {
       font-size: 15px;
       &.active {
         color: inherit;
-        text-decoration: underline;
+        svg {
+          position: absolute;
+          top: 14px;
+          left: 10px;
+          width: 15px;
+          height: 15px;
+          fill: $link-color;
+        }
       }
       &:hover {
         background-color: $link-color;
         color: #FFF;
+        svg {
+          fill: #FFF;
+        }
       }
     }
   }
