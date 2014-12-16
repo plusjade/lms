@@ -20,7 +20,11 @@ class FeedbacksController < ApplicationController
       a.to_api.merge({
         student_name: students_dict[a.student_id.to_s] ?
                         students_dict[a.student_id.to_s].name :
-                        ''
+                        '',
+        student: students_dict[a.student_id.to_s] ?
+                   students_dict[a.student_id.to_s].to_api :
+                   {}
+
       })
     end
 
