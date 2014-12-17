@@ -38,6 +38,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users do
+    member do
+      put 'website' => 'website#sync'
+    end
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

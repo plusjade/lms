@@ -19,11 +19,13 @@ class User
       type: _type,
       name: name,
       email: email,
-      avatar: avatar
+      avatar: avatar,
+      website: Website.endpoint_guess(name)
     }
   end
 
   def dropbox
+    return nil unless token
     @dropbox ||= DropboxClient.new(token)
   end
 
