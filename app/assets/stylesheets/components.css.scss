@@ -1,0 +1,32 @@
+@import "variables";
+
+.submit-wrap {
+  button {
+    padding: 15px 40px;
+    font-size: 22px;
+    color: #FFF;
+    background-color: $link-color;
+    border: 0;
+    cursor: pointer;
+    &:hover {
+      background-color: $link-hover-color;
+    }
+  }
+  .spinner {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 $default-padding/2;
+  }
+  .pending {
+    display: none;
+  }
+  &.disabled {
+    button {
+      background-color: $text-color-light;
+      color: $text-color;
+    }
+    .pending {
+      display: inline;
+    }
+  }
+}

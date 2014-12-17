@@ -1,18 +1,5 @@
 @import "variables";
 
-.submit-wrap {
-  button {
-    padding: 15px 40px;
-    font-size: 22px;
-    color: #FFF;
-    background-color: $link-color;
-    border: 0;
-    cursor: pointer;
-    &:hover {
-      background-color: $link-hover-color;
-    }
-  }
-}
 .questions-wrap {
   .question {
     margin-bottom: 10px;
