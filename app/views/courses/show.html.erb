@@ -46,6 +46,13 @@
         content: Attendances,
         async: '/courses/' + MK.COURSE.id + '/attendances'
     });
+    tabs.push({
+        name: 'My Website',
+        content: Website,
+        async: function() {
+            return { user: MK.USER, loaded: true }
+        }
+    });
 
     MK.Nav = React.render(NavTabs(), document.getElementById('NavTabs'));
     MK.Nav.setState({

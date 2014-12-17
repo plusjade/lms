@@ -1,0 +1,21 @@
+@import "variables";
+
+.website-wrap {
+  .website-link {
+    display: block;
+    margin-bottom: $default-padding;
+  }
+  .info {
+    margin-bottom: $default-padding;
+    .path {
+      background-color: #FFF59D;
+      padding: 3px 6px;
+    }
+  }
+  .submit-wrap {
+    margin-bottom: $default-padding;
+  }
+  .success {
+    color: $success-color;
+  }
+}
