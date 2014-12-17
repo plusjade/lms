@@ -42,3 +42,4 @@ gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"
 
 gem 'factory_girl_rails', group: :test
 gem 'forgery', group: :test
+gem 'aws-sdk'
