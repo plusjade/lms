@@ -1,7 +1,20 @@
 var AsyncLoader = React.createClass({
     displayName: 'AsyncLoader'
     ,
-    mixins : [ContentMixin]
+    propTypes : {
+        content : React.PropTypes.func.isRequired
+        ,
+        async : React.PropTypes.oneOfType([
+                    React.PropTypes.string.isRequired,
+                    React.PropTypes.func.isRequired
+                ])
+        ,
+        updatePayload : React.PropTypes.func.isRequired
+        ,
+        wrapContent : React.PropTypes.func.isRequired
+        ,
+        payload : React.PropTypes.object
+    }
     ,
     getDefaultProps: function() {
         return { };
@@ -18,20 +31,13 @@ var AsyncLoader = React.createClass({
     }
     ,
     render : function() {
-        var primary;
+        var primary, payload;
         if(this.props.payload) {
-            primary = this.props.content
-                        ? this.props.content(
-                            _.extend(
-                                { updatePayload: this.updatePayload }
-                                , this.props.payload
-                            )
-                        )
-                        : this.props.name
-            ;
+            payload = _.extend({ updatePayload: this.props.updatePayload }, this.props.payload);
+            primary = this.props.content(payload);
         }
         else {
-            primary = this.wrapContent(StatusMessage.loading());
+            primary = this.props.wrapContent(StatusMessage.loading());
         }
 
         return primary;
@@ -43,29 +49,25 @@ var AsyncLoader = React.createClass({
         if(!this.props.async) { return };
 
         if(typeof this.props.async === 'function') {
-            this.props.async(this.props.handlePayload);
+            this.props.async(this.props.updatePayload);
         }
         else {
-            var handlePayload = this.props.handlePayload;
+            var updatePayload = this.props.updatePayload;
             $.ajax({
                 url: this.props.async,
                 dataType: "JSON"
             })
             .done(function(rsp) {
-                handlePayload( _.extend({ status: 'success' }, rsp) )
+                updatePayload( _.extend({ status: 'success' }, rsp) )
             })
             .error(function(xhr) {
-                handlePayload({
+                updatePayload({
                     status: xhr.status,
                     status: 'error',
                     error: xhr.statusText
                 });
             })
         }
-    }
-    ,
-    updatePayload : function(data) {
-        this.props.handlePayload(_.extend({}, this.props.payload, data));
     }
 });
 AsyncLoader = React.createFactory(AsyncLoader);

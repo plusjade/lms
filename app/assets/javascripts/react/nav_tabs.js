@@ -32,11 +32,18 @@ var NavTabs = React.createClass({
                     break;
                 default:
                     active = this.props.dict[this.state.active];
-                    primary = AsyncLoader(_.extend({
-                                            key: active.name.replace(' ', '-'),
-                                            handlePayload: this.handlePayload,
-                                            payload: this.state.payload
-                                        }, active)
+                    if(!active.content) active.content = active.name;
+
+                    primary = AsyncLoader(_.extend(
+                                            active
+                                            ,
+                                            {
+                                                key: active.name.replace(' ', '-'),
+                                                updatePayload: this.updatePayload,
+                                                wrapContent: this.wrapContent,
+                                                payload: this.state.payload
+                                            }
+                                        )
                                   );
             }
         }
@@ -52,8 +59,8 @@ var NavTabs = React.createClass({
             );
     }
     ,
-    handlePayload : function(payload) {
-        this.setState({ payload: payload });
+    updatePayload : function(payload) {
+        this.setState({ payload: _.extend({}, this.state.payload, payload) });
     }
     ,
     // Set active tab
