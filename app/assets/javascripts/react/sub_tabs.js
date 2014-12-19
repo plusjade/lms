@@ -6,14 +6,14 @@ var SubTabs = React.createClass({
     ,
     getDefaultProps: function() {
         return {
-            activeTab : 0,
-            tabs: []
+            tabs: [],
+            dict: {}
         };
     }
     ,
     componentWillMount : function() {
         // Autoload the first tab.
-        this.setTab(0);
+        this.setTab('materials');
     }
     ,
     // Note we purposely use '_key' rather than the React-supported 'key'.
@@ -23,25 +23,26 @@ var SubTabs = React.createClass({
     // http://facebook.github.io/react/docs/multiple-components.html#dynamic-children
     componentDidUpdate : function(newProps) {
         if( this.props._key && (this.props._key != newProps._key) ) {
-            this.setTab(0);
+            this.setTab('materials');
         }
     }
     ,
     render: function() {
         var content, tabs = [], containers = [];
 
-        this.props.tabs.forEach(function(d, i) {
+        this.props.tabs.forEach(function(key) {
+            var d = this.props.dict[key];
             tabs.push(React.DOM.li(
                         {
-                            key: d.name,
-                            className: (this.props.activeTab === i ? 'active' : null),
-                            onClick : this.setTab.bind(this, i)
+                            key: key,
+                            className: (this.props.activeTab === key ? 'active' : null),
+                            onClick : this.setTab.bind(this, key)
                         }
                         , d.name
                    ));
 
             var classes = [d.name.replace(' ', '-').toLowerCase(), 'tab'];
-            if(this.props.activeTab === i) classes.push('active');
+            if(this.props.activeTab === key) classes.push('active');
 
             if(this.props.loaded) {
                 if(this.props.loaded === 'error') {
@@ -71,14 +72,14 @@ var SubTabs = React.createClass({
     }
     ,
     // Set viewable Tab
-    // @param [Integer] i - The tab's index
-    setTab : function(i) {
+    // @param [String] key - The tab's key
+    setTab : function(key) {
         var updatePayload = this.props.updatePayload;
-        updatePayload({ loaded: false, activeTab: i });
+        updatePayload({ loaded: false, activeTab: key });
 
-        if(this.props.tabs[i].async) {
+        if(this.props.dict[key].async) {
             $.ajax({
-                url: this.props.tabs[i].async(this.props),
+                url: this.props.dict[key].async(this.props),
                 dataType: "JSON"
             })
             .done(function(rsp) {
@@ -96,7 +97,7 @@ var SubTabs = React.createClass({
             });
         }
         else {
-            updatePayload({ activeTab : i })
+            updatePayload({ activeTab : key })
         }
     }
 });
