@@ -9,18 +9,18 @@ var NavTabs = React.createClass({
     ,
     render: function() {
         var tabs = [], active, primary;
-        this.props.tabs.forEach(function(d, i) {
+        this.props.tabs.forEach(function(key) {
             tabs.push(React.DOM.li(
                         {
-                            key: d.name,
-                            className: (this.state.active === i ? 'active' : null),
-                            onClick : this.setActive.bind(this, i)
+                            key: key,
+                            className: (this.state.active === key ? 'active' : null),
+                            onClick : this.setActive.bind(this, key)
                         }
-                        , d.name
+                        , this.props.dict[key].name
                    ));
         }, this);
 
-        if(this.props.tabs.length > 0 && this.state.active != null) {
+        if(this.props.tabs.length > 0 && this.state.active) {
             var status;
             if(this.state.payload) {
                 status = this.state.payload.status;
@@ -31,7 +31,7 @@ var NavTabs = React.createClass({
                     primary = this.wrapContent(StatusMessage.error(this.state.payload));
                     break;
                 default:
-                    active = this.props.tabs[this.state.active];
+                    active = this.props.dict[this.state.active];
                     primary = AsyncLoader(_.extend({
                                             key: active.name.replace(' ', '-'),
                                             handlePayload: this.handlePayload,
@@ -57,9 +57,9 @@ var NavTabs = React.createClass({
     }
     ,
     // Set active tab
-    // @param [Integer] i - The tab's index
-    setActive : function(i) {
-        this.setState({ active : i });
+    // @param [String] key - The tab's key
+    setActive : function(key) {
+        this.setState({ active : key });
     }
 });
 NavTabs = React.createFactory(NavTabs);

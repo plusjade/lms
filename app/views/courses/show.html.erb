@@ -11,24 +11,27 @@
       email: MK.USER.email
     });
   <%- end %>
-    var lesson, tabs = [];
+    var lesson, tabs = [], dict = {};
   <% if @lesson %>
     lesson = <%= @lesson.to_api.to_json.html_safe %>
   <% end %>
 
-    tabs.push({
-        name: 'Lessons',
-        content: Lessons,
-        async : function(update) {
-            update({
-                status: 'success',
-                lessons: MK.COURSE.lessons,
-                lesson: lesson || MK.COURSE.lessons[0]
-            });
+    dict = {
+        'lessons' : {
+            key: 'lessons',
+            name: 'Lessons',
+            content: Lessons,
+            async : function(update) {
+                update({
+                    status: 'success',
+                    lessons: MK.COURSE.lessons,
+                    lesson: lesson || MK.COURSE.lessons[0]
+                });
+            }
         }
-    });
-    if(MK.COURSE.calendar_embed) {
-        tabs.push({
+        ,
+        'calendar' : {
+            key: 'calendar',
             name: 'Calendar',
             content: Calendar,
             async: function(update) {
@@ -37,31 +40,43 @@
                     embed_url: MK.COURSE.calendar_embed
                 });
             }
-        });
-    }
-    tabs.push({
-        name: 'Members',
-        content: Members,
-        async: '/courses/' + MK.COURSE.id + '/students'
-    });
-    tabs.push({
-        name: 'Attendance',
-        content: Attendances,
-        async: '/courses/' + MK.COURSE.id + '/attendances'
-    });
-    tabs.push({
-        name: 'My Website',
-        content: Website,
-        async: function(update) {
-            update({
-                status: 'success',
-                user: MK.USER
-            });
         }
-    });
+        ,
+        'students' : {
+            key: 'students',
+            name: 'Members',
+            content: Members,
+            async: '/courses/' + MK.COURSE.id + '/students'
+        }
+        ,
+        'attendances' : {
+            key: 'attendances',
+            name: 'Attendance',
+            content: Attendances,
+            async: '/courses/' + MK.COURSE.id + '/attendances'
+        }
+        ,
+        'websites' : {
+            key:'websites',
+            name: 'My Website',
+            content: Website,
+            async: function(update) {
+                update({
+                    status: 'success',
+                    user: MK.USER
+                });
+            }
+        }
+    }
 
-    MK.Nav = React.render(NavTabs({ tabs: tabs, courseName: MK.COURSE.name }), document.getElementById('NavTabs'));
+    tabs.push('lessons');
+    if(MK.COURSE.calendar_embed) {
+        tabs.push('calendar');
+    }
+    tabs = tabs.concat(['students', 'attendances', 'websites']);
 
-    MK.Nav.setState({ active: 0 });
+    MK.Nav = React.render(NavTabs({ tabs: tabs, dict: dict, courseName: MK.COURSE.name }), document.getElementById('NavTabs'));
+
+    MK.Nav.setState({ active: 'lessons' });
 
 </script>
