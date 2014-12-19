@@ -38,7 +38,7 @@ var AsyncLoader = React.createClass({
         if(!this.props.async) { return };
 
         if(typeof this.props.async === 'function') {
-            this.props.handlePayload(_.extend({ status: 'success' }, this.props.async()));
+            this.props.async(this.props.handlePayload);
         }
         else {
             var handlePayload = this.props.handlePayload;

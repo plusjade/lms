@@ -19,20 +19,23 @@
     tabs.push({
         name: 'Lessons',
         content: Lessons,
-        async : function() {
-            return {
+        async : function(update) {
+            update({
                 status: 'success',
                 lessons: MK.COURSE.lessons,
                 lesson: lesson || MK.COURSE.lessons[0]
-            }
+            });
         }
     });
     if(MK.COURSE.calendar_embed) {
         tabs.push({
             name: 'Calendar',
             content: Calendar,
-            async: function() {
-                return { embed_url: MK.COURSE.calendar_embed, status: 'success' }
+            async: function(update) {
+                update({
+                    status: 'success',
+                    embed_url: MK.COURSE.calendar_embed
+                });
             }
         });
     }
@@ -49,8 +52,11 @@
     tabs.push({
         name: 'My Website',
         content: Website,
-        async: function() {
-            return { user: MK.USER, status: 'success' }
+        async: function(update) {
+            update({
+                status: 'success',
+                user: MK.USER
+            });
         }
     });
 
