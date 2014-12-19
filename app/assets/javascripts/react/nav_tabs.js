@@ -23,19 +23,18 @@ var NavTabs = React.createClass({
         if(this.props.tabs.length > 0 && this.state.active > -1) {
             active = this.props.tabs[this.state.active];
 
-            if(this.state.loaded) {
-                if(this.state.loaded === 'error') {
-                    primary = this.wrapContent(StatusMessage.error(this.state.content));
-                }
-                else {
+            switch (this.state.status) {
+                case 'success':
                     primary = active.content
-                                    ? active.content(this.state.content)
-                                    : active.name
+                                ? active.content(this.state.content)
+                                : active.name
                     ;
-                }
-            }
-            else {
-                primary = this.wrapContent(StatusMessage.loading());
+                    break;
+                case 'error':
+                    primary = this.wrapContent(StatusMessage.error(this.state.content));
+                    break;
+                case 'loading':
+                    primary = this.wrapContent(StatusMessage.loading());
             }
         }
 
@@ -61,7 +60,7 @@ var NavTabs = React.createClass({
                 });
             }
             else {
-                var self = this, state = { loaded: false, active: i };
+                var self = this, state = { status: 'loading', active: i };
                 this.setState(state);
 
                 $.ajax({
@@ -70,13 +69,13 @@ var NavTabs = React.createClass({
                 })
                 .done(function(rsp) {
                     self.setState({
-                        loaded: true,
+                        status: 'success',
                         content: rsp
                     });
                 })
                 .error(function(xhr) {
                     self.setState({
-                        loaded: 'error',
+                        status: 'error',
                         content: {
                             status: xhr.status,
                             error: xhr.statusText

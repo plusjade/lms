@@ -21,7 +21,7 @@
         content: Lessons,
         async : function() {
             return {
-                loaded: true,
+                status: 'success',
                 lessons: MK.COURSE.lessons,
                 lesson: lesson || MK.COURSE.lessons[0]
             }
@@ -32,7 +32,7 @@
             name: 'Calendar',
             content: Calendar,
             async: function() {
-                return { embed_url: MK.COURSE.calendar_embed, loaded: true }
+                return { embed_url: MK.COURSE.calendar_embed, status: 'success' }
             }
         });
     }
@@ -50,13 +50,13 @@
         name: 'My Website',
         content: Website,
         async: function() {
-            return { user: MK.USER, loaded: true }
+            return { user: MK.USER, status: 'success' }
         }
     });
 
     MK.Nav = React.render(NavTabs({ tabs: tabs, courseName: MK.COURSE.name }), document.getElementById('NavTabs'));
     MK.Nav.setState({
-        loaded: true,
+        status: 'success',
         content: {
             lessons: MK.COURSE.lessons,
             lesson: lesson || MK.COURSE.lessons[0]
