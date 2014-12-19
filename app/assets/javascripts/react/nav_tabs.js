@@ -8,7 +8,7 @@ var NavTabs = React.createClass({
     }
     ,
     render: function() {
-        var tabs = [], content, active, contentInner;
+        var tabs = [], active, primary;
         this.state.tabs.forEach(function(d, i) {
             tabs.push(React.DOM.li(
                         {
@@ -25,26 +25,18 @@ var NavTabs = React.createClass({
 
             if(this.state.loaded) {
                 if(this.state.loaded === 'error') {
-                    contentInner = this.wrapContent(StatusMessage.error(this.state.content));
+                    primary = this.wrapContent(StatusMessage.error(this.state.content));
                 }
                 else {
-                    contentInner = active.content
+                    primary = active.content
                                     ? active.content(this.state.content)
                                     : active.name
                     ;
                 }
             }
             else {
-                contentInner = this.wrapContent(StatusMessage.loading());
+                primary = this.wrapContent(StatusMessage.loading());
             }
-
-            content = React.DOM.div(
-                        {
-                            key: active.name + 'cont',
-                            className : (active.name.replace(' ', '-').toLowerCase() + ' inner')
-                        }
-                        , contentInner
-                   );
         }
 
         return React.DOM.div(null
@@ -54,7 +46,7 @@ var NavTabs = React.createClass({
                     )
                     , React.DOM.ul({ className: 'nav-tabs' }, tabs)
                 )
-                , contentInner
+                , primary
             );
     }
     ,
