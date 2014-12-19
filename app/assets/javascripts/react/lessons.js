@@ -33,7 +33,7 @@ var Lessons = React.createClass({
             lessonView = Lesson(
                                 _.extend({
                                     _key : this.props.lesson.id,
-                                    updatePrimaryContent: this.updatePrimaryContent
+                                    updatePayload: this.props.updatePayload
                                 }, this.props)
                         );
         }
@@ -72,18 +72,14 @@ var Lessons = React.createClass({
     ,
     loadLesson: function(index) {
         if(this.props.lessons[index]) {
-            this.updatePrimaryContent({
+            this.props.updatePayload({
                 lesson : this.props.lessons[index]
             });
         }
     }
     ,
     toggle : function() {
-        this.updatePrimaryContent({ navOpen: !this.props.navOpen });
-    }
-    ,
-    updatePrimaryContent : function(data) {
-        MK.Nav.setState({ payload : _.extend({}, this.props, data) });
+        this.props.updatePayload({ navOpen: !this.props.navOpen });
     }
 });
 Lessons = React.createFactory(Lessons);

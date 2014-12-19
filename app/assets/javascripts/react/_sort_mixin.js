@@ -3,7 +3,7 @@ var SortMixin = {
     sortHandler : function(event) {
         event.preventDefault();
 
-        this.updatePrimaryContent({
+        this.props.updatePayload({
             sort: event.target.innerHTML,
             sortDirection: !this.props.sortDirection
         });

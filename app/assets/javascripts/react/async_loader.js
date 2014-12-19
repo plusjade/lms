@@ -21,7 +21,12 @@ var AsyncLoader = React.createClass({
         var primary;
         if(this.props.payload) {
             primary = this.props.content
-                        ? this.props.content(this.props.payload)
+                        ? this.props.content(
+                            _.extend(
+                                { updatePayload: this.updatePayload }
+                                , this.props.payload
+                            )
+                        )
                         : this.props.name
             ;
         }
@@ -57,6 +62,10 @@ var AsyncLoader = React.createClass({
                 });
             })
         }
+    }
+    ,
+    updatePayload : function(data) {
+        this.props.handlePayload(_.extend({}, this.props.payload, data));
     }
 });
 AsyncLoader = React.createFactory(AsyncLoader);

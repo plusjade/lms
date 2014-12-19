@@ -65,9 +65,9 @@ var Website = React.createClass({
     }
     ,
     handleSubmit : function() {
-        var updatePrimaryContent = this.updatePrimaryContent;
+        var updatePayload = this.props.updatePayload;
 
-        updatePrimaryContent({ pending: true, content: null });
+        updatePayload({ pending: true, content: null });
 
         $.ajax({
             type : "PUT",
@@ -78,7 +78,7 @@ var Website = React.createClass({
             dataType: "JSON"
         })
         .done(function(rsp) {
-            updatePrimaryContent({
+            updatePayload({
                 pending: false,
                 content: rsp
             });
@@ -92,16 +92,12 @@ var Website = React.createClass({
                 content.error = xhr.responseJSON.error;
             }
 
-            updatePrimaryContent({
+            updatePayload({
                 pending: false,
                 loaded: 'error',
                 content: content
             });
         })
-    }
-    ,
-    updatePrimaryContent : function(data) {
-        MK.Nav.setState({ payload : _.extend({}, this.props, data) });
     }
 });
 Website = React.createFactory(Website);

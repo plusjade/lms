@@ -32,7 +32,7 @@ var Attendance = React.createClass({
     ,
     toggleStudent : function(i) {
         this.props.attendances[i].attended = !this.props.attendances[i].attended;
-        this.props.updatePrimaryContent({ attendances: this.props.attendances });
+        this.props.updatePayload({ attendances: this.props.attendances });
 
         $.ajax({
             type : "PUT",

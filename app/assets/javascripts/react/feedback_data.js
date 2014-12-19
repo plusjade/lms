@@ -104,7 +104,7 @@ var FeedbackData = React.createClass({
     sort : function(event) {
         event.preventDefault();
 
-        this.props.updatePrimaryContent({
+        this.props.updatePayload({
             feedbacksSort: event.target.innerHTML,
             feedbacksSortDirection: !this.props.feedbacksSortDirection
         });

@@ -92,9 +92,5 @@ var Attendances = React.createClass({
                 )
             );
     }
-    ,
-    updatePrimaryContent : function(data) {
-        MK.Nav.setState({ payload : _.extend({}, this.props, data) });
-    }
 });
 Attendances = React.createFactory(Attendances);

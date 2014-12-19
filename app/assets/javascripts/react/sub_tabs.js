@@ -73,8 +73,8 @@ var SubTabs = React.createClass({
     // Set viewable Tab
     // @param [Integer] i - The tab's index
     setTab : function(i) {
-        var updatePrimaryContent = this.props.updatePrimaryContent;
-        updatePrimaryContent({ loaded: false, activeTab: i });
+        var updatePayload = this.props.updatePayload;
+        updatePayload({ loaded: false, activeTab: i });
 
         if(this.props.tabs[i].async) {
             $.ajax({
@@ -83,10 +83,10 @@ var SubTabs = React.createClass({
             })
             .done(function(rsp) {
                 rsp.loaded = true;
-                updatePrimaryContent(rsp);
+                updatePayload(rsp);
             })
             .error(function(xhr) {
-                updatePrimaryContent({
+                updatePayload({
                     loaded: 'error',
                     content: {
                         status: xhr.status,
@@ -96,7 +96,7 @@ var SubTabs = React.createClass({
             });
         }
         else {
-            updatePrimaryContent({ activeTab : i })
+            updatePayload({ activeTab : i })
         }
     }
 });
