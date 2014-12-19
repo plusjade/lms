@@ -101,7 +101,7 @@ var Website = React.createClass({
     }
     ,
     updatePrimaryContent : function(data) {
-        MK.Nav.setState({ content : _.extend({}, this.props, data) });
+        MK.Nav.setState({ payload : _.extend({}, this.props, data) });
     }
 });
 Website = React.createFactory(Website);

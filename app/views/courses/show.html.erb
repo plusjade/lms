@@ -55,11 +55,7 @@
     });
 
     MK.Nav = React.render(NavTabs({ tabs: tabs, courseName: MK.COURSE.name }), document.getElementById('NavTabs'));
-    MK.Nav.setState({
-        status: 'success',
-        content: {
-            lessons: MK.COURSE.lessons,
-            lesson: lesson || MK.COURSE.lessons[0]
-        }
-    });
+
+    MK.Nav.setState({ active: 0 });
+
 </script>

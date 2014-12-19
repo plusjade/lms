@@ -4,7 +4,7 @@ var Attendances = React.createClass({
     mixins: [SortMixin, ContentMixin]
     ,
     getDefaultProps: function() {
-        return { students: [] };
+        return { students: [], lessons: [] };
     }
     ,
     render: function() {
@@ -94,7 +94,7 @@ var Attendances = React.createClass({
     }
     ,
     updatePrimaryContent : function(data) {
-        MK.Nav.setState({ content : _.extend({}, this.props, data) });
+        MK.Nav.setState({ payload : _.extend({}, this.props, data) });
     }
 });
 Attendances = React.createFactory(Attendances);
