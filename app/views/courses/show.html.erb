@@ -54,10 +54,8 @@
         }
     });
 
-    MK.Nav = React.render(NavTabs(), document.getElementById('NavTabs'));
+    MK.Nav = React.render(NavTabs({ tabs: tabs, courseName: MK.COURSE.name }), document.getElementById('NavTabs'));
     MK.Nav.setState({
-        tabs: tabs,
-        courseName: MK.COURSE.name,
         loaded: true,
         content: {
             lessons: MK.COURSE.lessons,

@@ -4,12 +4,12 @@ var NavTabs = React.createClass({
     mixins : [ContentMixin]
     ,
     getInitialState: function() {
-        return { active : 0, tabs: [] };
+        return { active : 0 };
     }
     ,
     render: function() {
         var tabs = [], active, primary;
-        this.state.tabs.forEach(function(d, i) {
+        this.props.tabs.forEach(function(d, i) {
             tabs.push(React.DOM.li(
                         {
                             key: d.name,
@@ -20,8 +20,8 @@ var NavTabs = React.createClass({
                    ));
         }, this);
 
-        if(this.state.tabs.length > 0 && this.state.active > -1) {
-            active = this.state.tabs[this.state.active];
+        if(this.props.tabs.length > 0 && this.state.active > -1) {
+            active = this.props.tabs[this.state.active];
 
             if(this.state.loaded) {
                 if(this.state.loaded === 'error') {
@@ -42,7 +42,7 @@ var NavTabs = React.createClass({
         return React.DOM.div(null
                 , React.DOM.div({ className: 'primary-navigation' }
                     , React.DOM.div({ id: 'heading' }
-                        , React.DOM.a({ href: '/' }, this.state.courseName)
+                        , React.DOM.a({ href: '/' }, this.props.courseName)
                     )
                     , React.DOM.ul({ className: 'nav-tabs' }, tabs)
                 )
@@ -53,11 +53,11 @@ var NavTabs = React.createClass({
     // Set viewable Tab
     // @param [Integer] i - The tab's index
     setTab : function(i) {
-        if(this.state.tabs[i].async) {
-            if(typeof this.state.tabs[i].async === 'function') {
+        if(this.props.tabs[i].async) {
+            if(typeof this.props.tabs[i].async === 'function') {
                 this.setState({
                     active: i,
-                    content: this.state.tabs[i].async()
+                    content: this.props.tabs[i].async()
                 });
             }
             else {
@@ -65,7 +65,7 @@ var NavTabs = React.createClass({
                 this.setState(state);
 
                 $.ajax({
-                    url: this.state.tabs[i].async,
+                    url: this.props.tabs[i].async,
                     dataType: "JSON"
                 })
                 .done(function(rsp) {
