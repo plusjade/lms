@@ -21,31 +21,20 @@ var NavTabs = React.createClass({
         }, this);
 
         if(this.props.tabs.length > 0 && this.state.active) {
-            var status;
-            if(this.state.payload) {
-                status = this.state.payload.status;
-            }
+            active = this.props.dict[this.state.active];
+            if(!active.content) active.content = active.name;
 
-            switch (status) {
-                case 'error':
-                    primary = this.wrapContent(StatusMessage.error(this.state.payload));
-                    break;
-                default:
-                    active = this.props.dict[this.state.active];
-                    if(!active.content) active.content = active.name;
-
-                    primary = AsyncLoader(_.extend(
-                                            active
-                                            ,
-                                            {
-                                                key: active.name.replace(' ', '-'),
-                                                updatePayload: this.updatePayload,
-                                                wrapContent: this.wrapContent,
-                                                payload: this.state.payload
-                                            }
-                                        )
-                                  );
-            }
+            primary = AsyncLoader(_.extend(
+                                    active
+                                    ,
+                                    {
+                                        key: active.name.replace(' ', '-').toLowerCase(),
+                                        updatePayload: this.updatePayload,
+                                        wrapContent: this.wrapContent,
+                                        payload: this.state.payload
+                                    }
+                                )
+                          );
         }
 
         return React.DOM.div(null

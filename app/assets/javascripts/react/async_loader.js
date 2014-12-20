@@ -32,13 +32,21 @@ var AsyncLoader = React.createClass({
     }
     ,
     render : function() {
-        var primary, payload;
-        if(this.props.payload) {
-            payload = _.extend({ updatePayload: this.props.updatePayload }, this.props.payload);
-            primary = this.props.content(payload);
-        }
-        else {
-            primary = this.props.wrapContent(StatusMessage.loading());
+        var primary, payload, status;
+        status = this.props.payload ? this.props.payload.status : 'loading';
+
+        switch (status) {
+            case 'success':
+                payload = _.extend({ updatePayload: this.props.updatePayload }, this.props.payload);
+                primary = this.props.content(payload);
+                break;
+
+            case 'error':
+                primary = this.props.wrapContent(StatusMessage.error(this.props.payload));
+                break;
+
+            default: // loading
+                primary = this.props.wrapContent(StatusMessage.loading());
         }
 
         return primary;
