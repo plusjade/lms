@@ -194,7 +194,7 @@ var Feedback = React.createClass({
     // Save feedback data on the server and notify parent component.
     save : function(data) {
         var autosave = {}, count = 0, first, name, payload;
-        var updatePayload = this.props.updatePayload;
+        var updateResponse = this.props.updateResponse;
         for (var key in data) {
             this.props.feedback[key] = data[key];
             if(!first) { first = key };
@@ -212,11 +212,11 @@ var Feedback = React.createClass({
         })
         .done(function(rsp) {
             autosave[name] = 'ok';
-            updatePayload({ autosave: autosave });
+            updateResponse({ autosave: autosave });
         })
         .error(function(rsp) {
             autosave[name] = 'error';
-            updatePayload({ autosave: autosave });
+            updateResponse({ autosave: autosave });
         })
     }
     ,

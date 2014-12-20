@@ -65,9 +65,9 @@ var Website = React.createClass({
     }
     ,
     handleSubmit : function() {
-        var updatePayload = this.props.updatePayload;
+        var updateResponse = this.props.updateResponse;
 
-        updatePayload({ pending: true, content: null });
+        updateResponse({ pending: true, content: null });
 
         $.ajax({
             type : "PUT",
@@ -78,7 +78,7 @@ var Website = React.createClass({
             dataType: "JSON"
         })
         .done(function(rsp) {
-            updatePayload({
+            updateResponse({
                 pending: false,
                 content: rsp
             });
@@ -92,7 +92,7 @@ var Website = React.createClass({
                 content.error = xhr.responseJSON.error;
             }
 
-            updatePayload({
+            updateResponse({
                 pending: false,
                 loaded: 'error',
                 content: content

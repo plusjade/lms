@@ -28,13 +28,13 @@ var NavTabs = React.createClass({
                                     ,
                                     {
                                         key: active.key,
-                                        handleResponse: this.updatePayload,
-                                        payload: _.extend({ updatePayload: this.updatePayload }, this.state.payload),
+                                        handleResponse: this.handleResponse,
+                                        response: this.state.response,
                                         loading : function() {
                                             return wrapContent(StatusMessage.loading());
                                         },
-                                        error : function(payload) {
-                                            return wrapContent(StatusMessage.error(payload));
+                                        error : function(response) {
+                                            return wrapContent(StatusMessage.error(response));
                                         }
                                     }
                                 )
@@ -52,8 +52,17 @@ var NavTabs = React.createClass({
             );
     }
     ,
-    updatePayload : function(payload) {
-        this.setState({ payload: _.extend({}, this.state.payload, payload) });
+    handleResponse : function(response) {
+        response.updateResponse = this.updateResponse;
+        this.setState({
+            response: response
+        });
+    }
+    ,
+    updateResponse : function(data) {
+        this.setState({
+            response: _.extend({}, this.state.response, data)
+        });
     }
     ,
     // Set active tab

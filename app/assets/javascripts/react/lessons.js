@@ -33,7 +33,7 @@ var Lessons = React.createClass({
             lessonView = Lesson(
                                 _.extend({
                                     _key : this.props.lesson.id,
-                                    updatePayload: this.props.updatePayload
+                                    updateResponse: this.props.updateResponse
                                 }, this.props)
                         );
         }
@@ -72,14 +72,14 @@ var Lessons = React.createClass({
     ,
     loadLesson: function(index) {
         if(this.props.lessons[index]) {
-            this.props.updatePayload({
+            this.props.updateResponse({
                 lesson : this.props.lessons[index]
             });
         }
     }
     ,
     toggle : function() {
-        this.props.updatePayload({ navOpen: !this.props.navOpen });
+        this.props.updateResponse({ navOpen: !this.props.navOpen });
     }
 });
 Lessons = React.createFactory(Lessons);
