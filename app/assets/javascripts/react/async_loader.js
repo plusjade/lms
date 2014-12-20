@@ -26,8 +26,9 @@ var AsyncLoader = React.createClass({
     // When a differently keyed component (page) is displayed, 
     // the existing page is un-mounted and the new one is mounted.
     componentWillMount : function() {
+        var payload = this.props.payload;
         this.props.payload = null;
-        this.fetch();
+        this.fetch(payload);
     }
     ,
     render : function() {
@@ -45,16 +46,18 @@ var AsyncLoader = React.createClass({
     ,
     // Asynchronously fetch the payload.
     // This will populate the 'payload' attribute on the parent component.
-    fetch : function() {
-        if(!this.props.async) { return };
-
+    fetch : function(payload) {
         if(typeof this.props.async === 'function') {
             this.props.async(this.props.updatePayload);
         }
-        else {
+        else if(this.props.endpoint) {
+            var endpoint = typeof this.props.endpoint === 'function'
+                                ? this.props.endpoint(payload)
+                                : this.props.endpoint
+
             var updatePayload = this.props.updatePayload;
             $.ajax({
-                url: this.props.async,
+                url: endpoint,
                 dataType: "JSON"
             })
             .done(function(rsp) {
