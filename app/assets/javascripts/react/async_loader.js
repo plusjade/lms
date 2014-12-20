@@ -11,13 +11,13 @@ var AsyncLoader = React.createClass({
         ,
         updatePayload : React.PropTypes.func.isRequired
         ,
-        wrapContent : React.PropTypes.func.isRequired
+        loading : React.PropTypes.func.isRequired
+        ,
+        error : React.PropTypes.func.isRequired
+        ,
+        wrapContent : React.PropTypes.func
         ,
         payload : React.PropTypes.object
-    }
-    ,
-    getDefaultProps: function() {
-        return { };
     }
     ,
     // payload must be cleared on mount initialization to ensure loading UI is shown.
@@ -42,14 +42,14 @@ var AsyncLoader = React.createClass({
                 break;
 
             case 'error':
-                primary = this.props.wrapContent(StatusMessage.error(this.props.payload));
+                primary = this.props.error(this.props.payload);
                 break;
 
             default: // loading
-                primary = this.props.wrapContent(StatusMessage.loading());
+                primary = this.props.loading(this.props.payload);
         }
 
-        return primary;
+        return this.props.wrapContent ? this.props.wrapContent(primary) : primary;
     }
     ,
     // Asynchronously fetch the payload.

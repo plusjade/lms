@@ -22,16 +22,20 @@ var NavTabs = React.createClass({
 
         if(this.props.tabs.length > 0 && this.state.active) {
             active = this.props.dict[this.state.active];
-            if(!active.content) active.content = active.name;
-
+            var wrapContent = this.wrapContent;
             primary = AsyncLoader(_.extend(
                                     active
                                     ,
                                     {
-                                        key: active.name.replace(' ', '-').toLowerCase(),
+                                        key: active.key,
                                         updatePayload: this.updatePayload,
-                                        wrapContent: this.wrapContent,
-                                        payload: this.state.payload
+                                        payload: this.state.payload,
+                                        loading : function() {
+                                            return wrapContent(StatusMessage.loading());
+                                        },
+                                        error : function(payload) {
+                                            return wrapContent(StatusMessage.error(payload));
+                                        }
                                     }
                                 )
                           );
