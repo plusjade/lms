@@ -28,8 +28,8 @@ var NavTabs = React.createClass({
                                     ,
                                     {
                                         key: active.key,
-                                        updatePayload: this.updatePayload,
-                                        payload: this.state.payload,
+                                        handleResponse: this.updatePayload,
+                                        payload: _.extend({ updatePayload: this.updatePayload }, this.state.payload),
                                         loading : function() {
                                             return wrapContent(StatusMessage.loading());
                                         },

@@ -9,7 +9,7 @@ var AsyncLoader = React.createClass({
                     React.PropTypes.func.isRequired
                 ])
         ,
-        updatePayload : React.PropTypes.func.isRequired
+        handleResponse : React.PropTypes.func.isRequired
         ,
         loading : React.PropTypes.func.isRequired
         ,
@@ -37,8 +37,7 @@ var AsyncLoader = React.createClass({
 
         switch (status) {
             case 'success':
-                payload = _.extend({ updatePayload: this.props.updatePayload }, this.props.payload);
-                primary = this.props.content(payload);
+                primary = this.props.content(this.props.payload);
                 break;
 
             case 'error':
@@ -56,23 +55,23 @@ var AsyncLoader = React.createClass({
     // This will populate the 'payload' attribute on the parent component.
     fetch : function(payload) {
         if(typeof this.props.async === 'function') {
-            this.props.async(this.props.updatePayload);
+            this.props.async(this.props.handleResponse);
         }
         else if(this.props.endpoint) {
             var endpoint = typeof this.props.endpoint === 'function'
                                 ? this.props.endpoint(payload)
                                 : this.props.endpoint
 
-            var updatePayload = this.props.updatePayload;
+            var handleResponse = this.props.handleResponse;
             $.ajax({
                 url: endpoint,
                 dataType: "JSON"
             })
             .done(function(rsp) {
-                updatePayload( _.extend({ status: 'success' }, rsp) )
+                handleResponse(_.extend({ status: 'success' }, rsp));
             })
             .error(function(xhr) {
-                updatePayload({
+                handleResponse({
                     status: xhr.status,
                     status: 'error',
                     error: xhr.statusText
