@@ -1,82 +1,22 @@
 <div id="NavTabs"></div>
 <script>
-    window.MK = {
-        COURSE : <%= @course.to_api.to_json.html_safe %>,
-        USER : <%= current_user.to_api.to_json.html_safe %>,
-        CSRFTOKEN : '<%= form_authenticity_token %>'
-    };
+    var nav
+        , user = <%= current_user.to_api.to_json.html_safe %>
+        , course = <%= @course.to_api.to_json.html_safe %>
+        , lesson = <%= @lesson ? @lesson.to_api.to_json.html_safe : 'null' %>
+    ;
+    window.MK = { CSRFTOKEN : '<%= form_authenticity_token %>' };
   <%- if Rails.env.production? %>
-    analytics.identify(MK.USER.id, {
-      name: MK.USER.name,
-      email: MK.USER.email
-    });
+    analytics.identify(user.id, { name: user.name, email: user.email });
   <%- end %>
-    var lesson, tabs = [], dict = {};
-  <% if @lesson %>
-    lesson = <%= @lesson.to_api.to_json.html_safe %>
-  <% end %>
 
-    dict = {
-        'lessons' : {
-            key: 'lessons',
-            name: 'Lessons',
-            content: Lessons,
-            async : function(update) {
-                update({
-                    status: 'success',
-                    lessons: MK.COURSE.lessons,
-                    lesson: lesson || MK.COURSE.lessons[0]
-                });
-            }
-        }
-        ,
-        'calendar' : {
-            key: 'calendar',
-            name: 'Calendar',
-            content: Calendar,
-            async: function(update) {
-                update({
-                    status: 'success',
-                    embed_url: MK.COURSE.calendar_embed
-                });
-            }
-        }
-        ,
-        'students' : {
-            key: 'students',
-            name: 'Members',
-            content: Members,
-            endpoint: '/courses/' + MK.COURSE.id + '/students'
-        }
-        ,
-        'attendances' : {
-            key: 'attendances',
-            name: 'Attendance',
-            content: Attendances,
-            endpoint: '/courses/' + MK.COURSE.id + '/attendances'
-        }
-        ,
-        'websites' : {
-            key:'websites',
-            name: 'My Website',
-            content: Website,
-            async: function(update) {
-                update({
-                    status: 'success',
-                    user: MK.USER
-                });
-            }
-        }
-    }
-
-    tabs.push('lessons');
-    if(MK.COURSE.calendar_embed) {
-        tabs.push('calendar');
-    }
-    tabs = tabs.concat(['students', 'attendances', 'websites']);
-
-    MK.Nav = React.render(NavTabs({ tabs: tabs, dict: dict, courseName: MK.COURSE.name }), document.getElementById('NavTabs'));
-
-    MK.Nav.setState({ active: 'lessons' });
-
+    nav = React.render(NavTabs({
+                                user: user,
+                                course: course,
+                                lesson: lesson || course.lessons[0],
+                                CSRFTOKEN : '<%= form_authenticity_token %>'
+                            }), document.getElementById('NavTabs'));
+    nav.setState({
+        active: 'lessons'
+    });
 </script>

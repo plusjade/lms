@@ -29,7 +29,7 @@ var Lesson = React.createClass({
                 name: 'My Feedback',
                 content : function() { return Feedback },
                 endpoint : function(props) {
-                    return '/students/' + MK.USER.id + '/lessons/' + props.lesson.id + '/feedback'
+                    return '/students/' + props.user.id + '/lessons/' + props.lesson.id + '/feedback'
                 }
             }
             ,
@@ -54,7 +54,7 @@ var Lesson = React.createClass({
 
         tabs.push('materials');
 
-        switch(MK.USER.type) {
+        switch(this.props.user.type) {
             case 'Student':
                 tabs.push('feedback');
                 break;
@@ -85,15 +85,16 @@ var Lesson = React.createClass({
                    ));
         }, this);
 
-        if(this.props.payload) {
+        if(this.props.response) {
             var active = _dict[this.props.active];
             content = AsyncLoader(_.extend(
                                     active
                                     ,
                                     {
                                         key: active.key + '-sub',
+                                        props: this.props,
                                         handleResponse: this.handleNestedResponse,
-                                        response: _.extend(this.props, this.props.payload),
+                                        response: this.props.response,
                                         loading : StatusMessage.loading,
                                         error : StatusMessage.error
                                     }
@@ -108,7 +109,7 @@ var Lesson = React.createClass({
     }
     ,
     handleNestedResponse : function(response) {
-        this.props.updateResponse({ payload : response, response : response });
+        this.props.updateResponse({ response : response });
     }
     ,
     updateResponse : function(data) {
@@ -121,7 +122,7 @@ var Lesson = React.createClass({
     // @param [String] key - The tab's key
     setActive : function(key) {
         this.props.updateResponse({
-            payload: {
+            response: {
                 status: 'loading'
             },
             active: key

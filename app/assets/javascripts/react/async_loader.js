@@ -26,9 +26,8 @@ var AsyncLoader = React.createClass({
     // When a differently keyed component (page) is displayed, 
     // the existing page is un-mounted and the new one is mounted.
     componentWillMount : function() {
-        var response = this.props.response;
         this.props.response = null;
-        this.fetch(response);
+        this.fetch();
     }
     ,
     componentWillReceiveProps : function(nextProps) {
@@ -38,30 +37,33 @@ var AsyncLoader = React.createClass({
     }
     ,
     render : function() {
-        var primary, status;
+        var primary, status, response;
         status = this.props.response ? this.props.response.status : 'loading';
-
+        response = this.props.props ?
+                        _.extend({}, this.props.props, this.props.response)
+                        : this.props.response
+        ;
         switch (status) {
             case 'success':
-                primary = this.props.content(this.props.response);
+                primary = this.props.content(response);
                 // Hack to determine distinguish valid React components.
                 // Consider removing later.
                 var test = this.props.content();
                 if(test._isReactElement) {
-                    primary = this.props.content(this.props.response);
+                    primary = this.props.content(response);
                 }
                 else {
                     // assume the content is a function that returns a react element.
-                    primary = this.props.content()(this.props.response);
+                    primary = this.props.content()(response);
                 }
                 break;
 
             case 'error':
-                primary = this.props.error(this.props.response);
+                primary = this.props.error(response);
                 break;
 
             default: // loading
-                primary = this.props.loading(this.props.response);
+                primary = this.props.loading(response);
         }
 
         return this.props.wrapContent ? this.props.wrapContent(primary) : primary;
@@ -69,13 +71,13 @@ var AsyncLoader = React.createClass({
     ,
     // Asynchronously fetch the response.
     // This will populate the 'response' attribute on the parent component.
-    fetch : function(response) {
+    fetch : function() {
         if(typeof this.props.async === 'function') {
-            this.props.async(this.props.handleResponse);
+            this.props.async(this.props.handleResponse, this.props.props);
         }
         else if(this.props.endpoint) {
             var endpoint = typeof this.props.endpoint === 'function'
-                                ? this.props.endpoint(response)
+                                ? this.props.endpoint(this.props.props)
                                 : this.props.endpoint
 
             var handleResponse = this.props.handleResponse;
