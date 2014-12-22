@@ -8,27 +8,23 @@ var Lessons = React.createClass({
     }
     ,
     render: function() {
-        var navigation, primary, nodes, lessonView, head;
+        var navigation, primary, nodes, toggler, lessonView;
+
+        toggler = React.DOM.svg({
+                        className: 'navToggler',
+                        viewBox: '5.0 -10.0 100 120',
+                        onClick : this.toggle
+                    }
+                    , React.DOM.polygon({
+                        points: '53.75,10 93.375,50 53,90 53,70 73.75,50 53.875,30'
+                    })
+                    , React.DOM.polygon({
+                        points: '18.75,10 58.375,50 18,90 18,70 38.75,50 18.875,30'
+                    })
+                )
+        ;
 
         if(this.props.lesson) {
-            head = React.DOM.h3(null
-                        , React.DOM.a({
-                                href: '/lessons/' + this.props.lesson.id
-                            }
-                            , 'Lesson ' + this.props.lesson.lesson + ' ' + this.props.lesson.date_human
-                        )
-                        , React.DOM.svg({
-                                viewBox: '5.0 -10.0 100 120',
-                                onClick : this.toggle
-                            }
-                            , React.DOM.polygon({
-                                points: '53.75,10 93.375,50 53,90 53,70 73.75,50 53.875,30'
-                            })
-                            , React.DOM.polygon({
-                                points: '18.75,10 58.375,50 18,90 18,70 38.75,50 18.875,30'
-                            })
-                        )
-            );
             lessonView = Lesson(_.extend({
                                     key : this.props.lesson.id
                                 }, this.props) // this.props is the parent's async response
@@ -38,7 +34,7 @@ var Lessons = React.createClass({
         primary = React.DOM.div({
                     id: 'lesson-wrap',
                 }
-                , head
+                , toggler
                 , lessonView
         );
 

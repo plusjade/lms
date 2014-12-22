@@ -12,7 +12,15 @@ var Lesson = React.createClass({
     }
     ,
     render: function() {
-        var tabs = [], dict = [];
+        var head, tabs = [], dict = [];
+
+        head = React.DOM.h3(null
+                    , React.DOM.a({
+                            href: '/lessons/' + this.props.lesson.id
+                        }
+                        , 'Lesson ' + this.props.lesson.lesson + ' ' + this.props.lesson.date_human
+                    )
+        );
 
         dict = {
             'materials' : {
@@ -63,8 +71,8 @@ var Lesson = React.createClass({
                 break;
         };
 
-
         return React.DOM.div(null
+                        , head
                         , this.renderTabs(tabs, dict)
                 );
     }
