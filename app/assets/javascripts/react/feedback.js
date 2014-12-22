@@ -201,7 +201,7 @@ var Feedback = React.createClass({
             count++;
         };
         name = (count > 1) ? 'all' : first ;
-        payload = { authenticity_token: MK.CSRFTOKEN };
+        payload = { authenticity_token: this.props.CSRFTOKEN };
         payload.feedback = data;
 
         $.ajax({

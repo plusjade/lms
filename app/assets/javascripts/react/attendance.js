@@ -39,7 +39,7 @@ var Attendance = React.createClass({
             url: '/attendances/' + this.props.attendances[i].id ,
             data: {
                 attended : this.props.attendances[i].attended,
-                authenticity_token: MK.CSRFTOKEN
+                authenticity_token: this.props.CSRFTOKEN
             },
             dataType: "JSON"
         })

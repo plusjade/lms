@@ -5,7 +5,6 @@
         , course = <%= @course.to_api.to_json.html_safe %>
         , lesson = <%= @lesson ? @lesson.to_api.to_json.html_safe : 'null' %>
     ;
-    window.MK = { CSRFTOKEN : '<%= form_authenticity_token %>' };
   <%- if Rails.env.production? %>
     analytics.identify(user.id, { name: user.name, email: user.email });
   <%- end %>

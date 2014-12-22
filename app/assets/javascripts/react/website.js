@@ -73,7 +73,7 @@ var Website = React.createClass({
             type : "PUT",
             url: "/users/" + this.props.user.id + "/website",
             data: {
-                authenticity_token: MK.CSRFTOKEN
+                authenticity_token: this.props.CSRFTOKEN
             },
             dataType: "JSON"
         })
