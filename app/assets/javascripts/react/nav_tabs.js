@@ -68,7 +68,7 @@ var NavTabs = React.createClass({
     // Set active tab
     // @param [String] key - The tab's key
     setActive : function(key) {
-        this.setState({ active : key });
+        this.setState({ active : key, response: null });
     }
 });
 NavTabs = React.createFactory(NavTabs);

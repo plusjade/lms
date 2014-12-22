@@ -31,6 +31,12 @@ var AsyncLoader = React.createClass({
         this.fetch(response);
     }
     ,
+    componentWillReceiveProps : function(nextProps) {
+        if(!nextProps.response) {
+            this.fetch();
+        }
+    }
+    ,
     render : function() {
         var primary, status;
         status = this.props.response ? this.props.response.status : 'loading';
