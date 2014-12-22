@@ -1,6 +1,6 @@
 <div id="NavTabs"></div>
 <script>
-    var nav
+    var gateway
         , user = <%= current_user.to_api.to_json.html_safe %>
         , course = <%= @course.to_api.to_json.html_safe %>
         , lesson = <%= @lesson ? @lesson.to_api.to_json.html_safe : 'null' %>
@@ -9,13 +9,13 @@
     analytics.identify(user.id, { name: user.name, email: user.email });
   <%- end %>
 
-    nav = React.render(NavTabs({
+    gateway = React.render(Gateway({
                                 user: user,
                                 course: course,
                                 lesson: lesson || course.lessons[0],
                                 CSRFTOKEN : '<%= form_authenticity_token %>'
                             }), document.getElementById('NavTabs'));
-    nav.setState({
+    gateway.setState({
         active: 'lessons'
     });
 </script>
