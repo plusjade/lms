@@ -44,6 +44,16 @@ var AsyncLoader = React.createClass({
         switch (status) {
             case 'success':
                 primary = this.props.content(this.props.response);
+                // Hack to determine distinguish valid React components.
+                // Consider removing later.
+                var test = this.props.content();
+                if(test._isReactElement) {
+                    primary = this.props.content(this.props.response);
+                }
+                else {
+                    // assume the content is a function that returns a react element.
+                    primary = this.props.content()(this.props.response);
+                }
                 break;
 
             case 'error':

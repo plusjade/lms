@@ -29,12 +29,9 @@ var Lessons = React.createClass({
                             })
                         )
             );
-
-            lessonView = Lesson(
-                                _.extend({
-                                    _key : this.props.lesson.id,
-                                    updateResponse: this.props.updateResponse
-                                }, this.props)
+            lessonView = Lesson(_.extend({
+                                    key : this.props.lesson.id
+                                }, this.props) // this.props is the parent's async response
                         );
         }
 
