@@ -1,5 +1,13 @@
 class WebsiteController < ApplicationController
-  respond_to :json
+
+  def index
+    @course = Course.find(params[:id])
+    @lesson = @course.lessons.gte(date: Date.today).first
+
+    authorize! :read, @course
+
+    render template: "courses/show"
+  end
 
   def sync
     user = User.find(params[:id])

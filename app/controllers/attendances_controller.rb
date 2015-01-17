@@ -1,9 +1,21 @@
 class AttendancesController < ApplicationController
   def index
-    course = Course.find(params[:course_id])
-    authorize! :read, course
+    respond_to do |format|
+      format.html do
+        @course = Course.find(params[:course_id])
+        @lesson = @course.lessons.gte(date: Date.today).first
 
-    render json: Attendance.overview(course)
+        authorize! :read, @course
+
+        render template: "courses/show"
+      end
+      format.json do
+        course = Course.find(params[:course_id])
+        authorize! :read, course
+
+        render json: Attendance.overview(course)
+      end
+    end
   end
 
   # admin

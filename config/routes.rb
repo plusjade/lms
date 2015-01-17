@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :students
     member do
       get 'grant_access/:access_code' => 'courses#grant_access', as: :grant_access
+      get 'website' => 'website#index'
+      get 'calendar' => 'website#index'
     end
   end
 
