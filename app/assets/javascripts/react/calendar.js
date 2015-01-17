@@ -11,7 +11,7 @@ var Calendar = React.createClass({
         var primary;
         primary = React.DOM.div(null
             , React.DOM.iframe({
-                    src: MK.COURSE.calendar_embed,
+                    src: this.props.course.calendar_embed,
                     frameBorder: 0,
                     scrolling: 'no',
                     seamless: true,
