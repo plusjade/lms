@@ -16,7 +16,7 @@ var Tabs = React.createClass({
         if(this.props.course.calendar_embed) {
             tabList.push('calendar');
         }
-        tabList.push('students', 'attendances', 'websites');
+        tabList.push('students', 'attendances', 'website');
 
         tabList.forEach(function(key) {
             tabs.push(React.DOM.li(

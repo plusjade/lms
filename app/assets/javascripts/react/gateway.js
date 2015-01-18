@@ -55,8 +55,8 @@ var Gateway = React.createClass({
             }
         }
         ,
-        'websites' : {
-            key:'websites',
+        'website' : {
+            key:'website',
             name: 'My Website',
             content: function() { return Website },
             async: function(update, props) {
