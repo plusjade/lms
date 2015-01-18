@@ -9,9 +9,11 @@
   <% if Rails.env.production? %>
     <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.12.1/react.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
   <% else %>
     <%= javascript_include_tag '_dev/jquery.1.11.1.js' %>
     <%= javascript_include_tag '_dev/react.0.12.0.js' %>
+    <script src="/assets/_dev/underscore-min.js"></script>
   <% end %>
   <%= javascript_include_tag 'application' %>
 <% if Rails.env.production? %>
