@@ -23,7 +23,7 @@ var Tabs = React.createClass({
                         {
                             key: key,
                             className: (this.props.active === key ? 'active' : null)
-                            , onClick : this.setActive.bind(this, key)
+                            , onClick : this.navigate.bind(this, key)
                         }
                         , this.props.tabNames[key]
                    ));
@@ -38,8 +38,9 @@ var Tabs = React.createClass({
         ;
     }
     ,
-    setActive : function(key) {
-        this.props.setActive(key);
+    navigate : function(key) {
+        var url = this.props.course.url + '/' + key;
+        this.props.router.setRoute(url);
     }
 });
 Tabs = React.createFactory(Tabs);

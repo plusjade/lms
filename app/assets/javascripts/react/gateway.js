@@ -7,6 +7,33 @@ var Gateway = React.createClass({
         CSRFTOKEN : React.PropTypes.string.isRequired
     }
     ,
+    componentDidMount : function() {
+        // Setup routing
+        this.props.router.on(
+            'courses/:id', this.setLesson.bind(null, null)
+        );
+        this.props.router.on(
+            'courses/:id/lessons', this.setLesson.bind(null, null)
+        );
+        this.props.router.on(
+            'courses/:id/students', this.setActive.bind(null, 'students')
+        );
+        this.props.router.on(
+            'courses/:id/attendances', this.setActive.bind(null, 'attendances')
+        );
+        this.props.router.on(
+            'courses/:id/calendar', this.setActive.bind(null, 'calendar')
+        );
+        this.props.router.on(
+            'courses/:id/website', this.setActive.bind(null, 'website')
+        );
+        this.props.router.on(
+            'lessons/:id', this.setLesson
+        );
+
+        this.props.router.init();
+    }
+    ,
     getInitialState : function() {
         return {}
     }
@@ -19,8 +46,7 @@ var Gateway = React.createClass({
             async : function(update, props) {
                 update({
                     status: 'success',
-                    lessons: props.course.lessons,
-                    lesson: props.lesson || props.course.lessons[0]
+                    lessons: props.course.lessons
                 });
             }
         }
@@ -78,7 +104,6 @@ var Gateway = React.createClass({
                 _.extend(
                     { 
                         active: this.state.active,
-                        setActive : this.setActive,
                         tabNames: tabNames
                     },
                     this.props
@@ -90,6 +115,7 @@ var Gateway = React.createClass({
                     _.extend(
                         {},
                         this.props,
+                        _.omit(this.state, 'active'),
                         {
                             tab : this.TabsDictionary[this.state.active],
                             response : this.state.response,
@@ -120,6 +146,18 @@ var Gateway = React.createClass({
     // @param [String] key - The tab's key
     setActive : function(key) {
         this.setState({ active : key, response: null });
+    }
+    ,
+    // Set a particular lesson
+    setLesson : function(id) {
+        var lesson = id
+                    ? _.findWhere(this.props.course.lessons, { id: id })
+                    : this.props.bootStrappedLesson
+
+        this.setState({
+            active: 'lessons',
+            lesson: lesson
+        });
     }
 });
 Gateway = React.createFactory(Gateway);

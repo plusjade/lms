@@ -1,21 +1,19 @@
 <div id="NavTabs"></div>
 <script>
-    var gateway
+    var router = new Router().configure({ html5history: true, strict: false })
         , user = <%= current_user.to_api.to_json.html_safe %>
         , course = <%= @course.to_api.to_json.html_safe %>
-        , lesson = <%= @lesson ? @lesson.to_api.to_json.html_safe : 'null' %>
+        , lesson = <%= @lesson ? @lesson.to_api.to_json.html_safe : 'course.lessons[0]' %>
     ;
   <%- if Rails.env.production? %>
     analytics.identify(user.id, { name: user.name, email: user.email });
   <%- end %>
 
-    gateway = React.render(Gateway({
-                                user: user,
-                                course: course,
-                                lesson: lesson || course.lessons[0],
-                                CSRFTOKEN : '<%= form_authenticity_token %>'
-                            }), document.getElementById('NavTabs'));
-    gateway.setState({
-        active: 'lessons'
-    });
+    React.render(Gateway({
+                    user: user,
+                    course: course,
+                    bootStrappedLesson: lesson,
+                    CSRFTOKEN : '<%= form_authenticity_token %>',
+                    router: router
+                }), document.getElementById('NavTabs'));
 </script>

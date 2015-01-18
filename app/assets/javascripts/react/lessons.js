@@ -65,9 +65,7 @@ var Lessons = React.createClass({
     ,
     loadLesson: function(index) {
         if(this.props.lessons[index]) {
-            this.props.updateResponse({
-                lesson : this.props.lessons[index]
-            });
+            this.props.router.setRoute(this.props.lessons[index].url);
         }
     }
     ,
