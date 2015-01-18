@@ -17,7 +17,8 @@ class Lesson
       title: title,
       lesson: lesson,
       date: date,
-      date_human: date_human
+      date_human: date_human,
+      url: Rails.application.routes.url_helpers.lesson_path(_id)
     }
   end
 

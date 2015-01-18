@@ -20,7 +20,8 @@ class User
       name: name,
       email: email,
       avatar: avatar,
-      website: Website.endpoint_guess(name)
+      website: Website.endpoint_guess(name),
+      url: Rails.application.routes.url_helpers.user_path(_id)
     }
   end
 

@@ -42,7 +42,7 @@ var Gateway = React.createClass({
             name: 'Members',
             content: function() { return Members },
             endpoint: function(props) {
-                return '/courses/' + props.course.id + '/students'
+                return props.course.url + '/students'
             }
         }
         ,
@@ -51,7 +51,7 @@ var Gateway = React.createClass({
             name: 'Attendance',
             content: function() { return Attendances },
             endpoint: function(props) {
-                return '/courses/' + props.course.id + '/attendances'
+                return props.course.url + '/attendances'
             }
         }
         ,

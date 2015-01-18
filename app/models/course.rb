@@ -30,7 +30,8 @@ class Course
       id: _id.to_s,
       name: name,
       lessons: lessons.map{ |a| a.to_api },
-      calendar_embed: calendar_embed
+      calendar_embed: calendar_embed,
+      url: Rails.application.routes.url_helpers.course_path(_id)
     }
   end
 
