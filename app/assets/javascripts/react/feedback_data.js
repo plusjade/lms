@@ -48,16 +48,16 @@ var FeedbackData = React.createClass({
                             , React.DOM.div(null, a.student.name)
                         )
                         , React.DOM.td({ className: 'data' }
-                            , React.DOM.div({ className: 'scale-' + a.comprehension }, a.comprehension)
+                            , React.DOM.div({ className: 'scale-' + a.comprehension, 'data-ot': this.toolTipTextFor('comprehension', a.comprehension) }, a.comprehension)
                         )
                         , React.DOM.td({ className: 'data' }
-                            , React.DOM.div({ className: 'scale-' + a.engagement }, a.engagement)
+                            , React.DOM.div({ className: 'scale-' + a.engagement, 'data-ot': this.toolTipTextFor('engagement', a.engagement) }, a.engagement)
                         )
                         , React.DOM.td({ className: 'data' }
-                            , React.DOM.div({ className: 'scale-pace-' + a.pace }, a.pace)
+                            , React.DOM.div({ className: 'scale-pace-' + a.pace, 'data-ot': this.toolTipTextFor('pace', a.pace) }, a.pace)
                         )
                         , React.DOM.td({ className: 'data' }
-                            , React.DOM.div({ className: 'scale-' + a.quality }, a.quality)
+                            , React.DOM.div({ className: 'scale-' + a.quality, 'data-ot': this.toolTipTextFor('quality', a.quality) }, a.quality)
                         )
                     )
                     , React.DOM.tr({ className: 'essays' }
@@ -108,6 +108,18 @@ var FeedbackData = React.createClass({
             feedbacksSort: event.target.innerHTML,
             feedbacksSortDirection: !this.props.feedbacksSortDirection
         });
+    },
+
+    componentDidMount: function() {
+        Opentip.findElements();
+    },
+
+    toolTipTextFor : function(category, score) {
+        var questions = Feedback()._store.props.questions;
+        var questionTexts = _.find(questions, function (question) {
+            return question['name'] == category;
+        });
+        return questionTexts['data'][score-1];
     }
 });
 FeedbackData = React.createFactory(FeedbackData);
