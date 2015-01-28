@@ -54,7 +54,7 @@ var FeedbackData = React.createClass({
                             , React.DOM.div({ className: 'scale-' + a.engagement }, a.engagement)
                         )
                         , React.DOM.td({ className: 'data' }
-                            , React.DOM.div({ className: 'scale-' + a.pace }, a.pace)
+                            , React.DOM.div({ className: 'scale-pace-' + a.pace }, a.pace)
                         )
                         , React.DOM.td({ className: 'data' }
                             , React.DOM.div({ className: 'scale-' + a.quality }, a.quality)
