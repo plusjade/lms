@@ -17,10 +17,10 @@ var FeedbackData = React.createClass({
         thead = React.DOM.thead(null
                     , React.DOM.tr(null
                         , React.DOM.th({ onClick: this.sort }, 'student_name')
-                        , React.DOM.th({ onClick: this.sort }, 'comprehension')
-                        , React.DOM.th({ onClick: this.sort }, 'engagement')
-                        , React.DOM.th({ onClick: this.sort }, 'pace')
-                        , React.DOM.th({ onClick: this.sort }, 'quality')
+                        , React.DOM.th({ onClick: this.sort, 'data-ot': this.toolTipTextForHeader('comprehension') }, 'comprehension')
+                        , React.DOM.th({ onClick: this.sort, 'data-ot': this.toolTipTextForHeader('engagement') }, 'engagement')
+                        , React.DOM.th({ onClick: this.sort, 'data-ot': this.toolTipTextForHeader('pace') }, 'pace')
+                        , React.DOM.th({ onClick: this.sort, 'data-ot': this.toolTipTextForHeader('quality') }, 'quality')
                     )
                 );
 
@@ -115,11 +115,21 @@ var FeedbackData = React.createClass({
     },
 
     toolTipTextFor : function(category, score) {
+        var questionData = this.questionDataForCategory(category);
+        return questionData['data'][score-1];
+    },
+
+    toolTipTextForHeader: function(category) {
+        var questionData = this.questionDataForCategory(category);
+        return questionData['question'];
+    },
+
+    questionDataForCategory: function(category) {
         var questions = Feedback()._store.props.questions;
-        var questionTexts = _.find(questions, function (question) {
+        var questionData = _.find(questions, function (question) {
             return question['name'] == category;
         });
-        return questionTexts['data'][score-1];
+        return questionData;
     }
 });
 FeedbackData = React.createFactory(FeedbackData);
