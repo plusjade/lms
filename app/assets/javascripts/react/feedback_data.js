@@ -17,10 +17,10 @@ var FeedbackData = React.createClass({
         thead = React.DOM.thead(null
                     , React.DOM.tr(null
                         , React.DOM.th({ onClick: this.sort }, 'student_name')
-                        , React.DOM.th({ onClick: this.sort }, 'comprehension')
-                        , React.DOM.th({ onClick: this.sort }, 'engagement')
-                        , React.DOM.th({ onClick: this.sort }, 'pace')
-                        , React.DOM.th({ onClick: this.sort }, 'quality')
+                        , React.DOM.th({ onClick: this.sort, 'data-ot': this.toolTipTextForHeader('comprehension') }, 'comprehension')
+                        , React.DOM.th({ onClick: this.sort, 'data-ot': this.toolTipTextForHeader('engagement') }, 'engagement')
+                        , React.DOM.th({ onClick: this.sort, 'data-ot': this.toolTipTextForHeader('pace') }, 'pace')
+                        , React.DOM.th({ onClick: this.sort, 'data-ot': this.toolTipTextForHeader('quality') }, 'quality')
                     )
                 );
 
@@ -48,16 +48,16 @@ var FeedbackData = React.createClass({
                             , React.DOM.div(null, a.student.name)
                         )
                         , React.DOM.td({ className: 'data' }
-                            , React.DOM.div({ className: 'scale-' + a.comprehension }, a.comprehension)
+                            , React.DOM.div({ className: 'scale-' + a.comprehension, 'data-ot': this.toolTipTextFor('comprehension', a.comprehension) }, a.comprehension)
                         )
                         , React.DOM.td({ className: 'data' }
-                            , React.DOM.div({ className: 'scale-' + a.engagement }, a.engagement)
+                            , React.DOM.div({ className: 'scale-' + a.engagement, 'data-ot': this.toolTipTextFor('engagement', a.engagement) }, a.engagement)
                         )
                         , React.DOM.td({ className: 'data' }
-                            , React.DOM.div({ className: 'scale-' + a.pace }, a.pace)
+                            , React.DOM.div({ className: 'scale-pace-' + a.pace, 'data-ot': this.toolTipTextFor('pace', a.pace) }, a.pace)
                         )
                         , React.DOM.td({ className: 'data' }
-                            , React.DOM.div({ className: 'scale-' + a.quality }, a.quality)
+                            , React.DOM.div({ className: 'scale-' + a.quality, 'data-ot': this.toolTipTextFor('quality', a.quality) }, a.quality)
                         )
                     )
                     , React.DOM.tr({ className: 'essays' }
@@ -108,6 +108,28 @@ var FeedbackData = React.createClass({
             feedbacksSort: event.target.innerHTML,
             feedbacksSortDirection: !this.props.feedbacksSortDirection
         });
+    },
+
+    componentDidMount: function() {
+        Opentip.findElements();
+    },
+
+    toolTipTextFor : function(category, score) {
+        var questionData = this.questionDataForCategory(category);
+        return questionData['data'][score-1];
+    },
+
+    toolTipTextForHeader: function(category) {
+        var questionData = this.questionDataForCategory(category);
+        return questionData['question'];
+    },
+
+    questionDataForCategory: function(category) {
+        var questions = Feedback()._store.props.questions;
+        var questionData = _.find(questions, function (question) {
+            return question['name'] == category;
+        });
+        return questionData;
     }
 });
 FeedbackData = React.createFactory(FeedbackData);
