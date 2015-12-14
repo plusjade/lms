@@ -1,13 +1,7 @@
-class Attendance
-  include Mongoid::Document
-
-  belongs_to :student
+class Attendance < ActiveRecord::Base
+  belongs_to :student, foreign_key: :user_id
   belongs_to :lesson
   belongs_to :course
-
-  field :attended, type: Boolean, default: false
-  field :excused, type: Boolean, default: false
-  field :reason, type: String
 
   before_create :denormalize
 
@@ -17,12 +11,16 @@ class Attendance
 
   def self.overview(course)
     students = course.students.entries
-    lessons = course.lessons.where(:date.lte => Date.today).entries
+    lessons = course.lessons.where("date <= ?", Time.now).entries
     lesson_totals = Array.new(lessons.count, 0)
 
     data = {}
-    where(course: course).overview_data["results"].each do |d|
-      data[d["_id"].to_s] = d["value"]["data"]
+    course.attendances.select(:user_id, :lesson_id, :attended).map do |a|
+      if !data[a.user_id.to_s]
+        data[a.user_id.to_s] = {}
+      end
+
+      data[a.user_id.to_s][a.lesson_id.to_s] = a.attended
     end
 
     student_data = []
@@ -74,32 +72,5 @@ class Attendance
 
   def self.percent_format(part, whole)
     ((part/whole.to_f)*100).round(1)
-  end
-
-  def self.overview_data
-    map = %Q{
-      function() {
-        var payload = {};
-        payload[this.lesson_id.valueOf()] = this.attended;
-
-        emit(this.student_id.valueOf(), { "data" : payload })
-      }
-    }
-
-    reduce = %Q{
-      function(key, values) {
-        var reduced = { "data": {} };
-        for (var i in values) {
-          var datum = values[i];
-          for (var token in datum.data) {
-            reduced.data[token] = datum.data[token];
-          }
-        }
-
-        return reduced;
-      }
-    }
-
-    map_reduce(map, reduce).out(inline: 1)
   end
 end

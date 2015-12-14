@@ -2,7 +2,7 @@ class WebsiteController < ApplicationController
 
   def index
     @course = Course.find(params[:id])
-    @lesson = @course.lessons.gte(date: Date.today).first
+    @lesson = @course.lessons.where("date >= ?", Time.now).first
 
     authorize! :read, @course
 

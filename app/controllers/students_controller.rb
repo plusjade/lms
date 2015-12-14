@@ -3,7 +3,7 @@ class StudentsController < ApplicationController
     respond_to do |format|
       format.html do
         @course = Course.find(params[:course_id].to_s)
-        @lesson = @course.lessons.gte(date: Date.today).first
+        @lesson = @course.lessons.where("date >= ?", Time.now).first
 
         authorize! :read, @course
 

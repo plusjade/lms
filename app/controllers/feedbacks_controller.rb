@@ -13,16 +13,17 @@ class FeedbacksController < ApplicationController
     end
     total_members = students.count
 
-    feedbacks = Feedback.where(lesson: lesson).entries
-    student_ids = feedbacks.map { |a| a.student_id }
+    feedbacks = Feedback.where(lesson: lesson)
+    student_ids = feedbacks.pluck(:user_id)
 
     feedbacks = feedbacks.map do |a|
+      student_id = a.user_id.to_s
       a.to_api.merge({
-        student_name: students_dict[a.student_id.to_s] ?
-                        students_dict[a.student_id.to_s].name :
+        student_name: students_dict[student_id] ?
+                        students_dict[student_id].name :
                         '',
-        student: students_dict[a.student_id.to_s] ?
-                   students_dict[a.student_id.to_s].to_api :
+        student: students_dict[student_id] ?
+                   students_dict[student_id].to_api :
                    {}
 
       })
@@ -43,7 +44,7 @@ class FeedbacksController < ApplicationController
   end
 
   def show
-    data = { student_id: params[:student_id], lesson_id: params[:id] }
+    data = { user_id: params[:student_id], lesson_id: params[:id] }
     feedback = Feedback.where(data).first
 
     if feedback

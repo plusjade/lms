@@ -15,7 +15,6 @@ gem 'jbuilder', '~> 2.0'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
-gem 'thin',        group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -31,8 +30,7 @@ gem 'thin',        group: :development
 
 gem 'haml-rails'
 gem 'quiet_assets'
-gem 'mongoid', '~> 4', github: 'mongoid/mongoid'
-gem 'bson_ext'
+gem "pg"
 
 gem 'cancancan', '~> 1.9'
 gem 'dropbox-sdk', '~> 1.6.4', require: 'dropbox_sdk', git: 'git@github.com:plusjade/dropbox-sdk-ruby.git'

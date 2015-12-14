@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  rescue_from Mongoid::Errors::DocumentNotFound do |exception|
+  rescue_from ActiveRecord::RecordNotFound do |exception|
     respond_to do |format|
       format.html do
         render template: "home/not_found", layout: false, status: :not_found

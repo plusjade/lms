@@ -1,23 +1,13 @@
-class Feedback
-  include Mongoid::Document
-  belongs_to :student
+class Feedback < ActiveRecord::Base
+  belongs_to :student, foreign_key: :user_id
   belongs_to :lesson
-
-  field :comprehension, type: Integer
-  field :engagement, type: Integer
-  field :quality, type: Integer
-  field :pace, type: Integer
-
-  field :learned, type: String
-  field :comments, type: String
-  field :questions, type: String
 
   validates_presence_of :student
   validates_presence_of :lesson
 
   def to_api
     {
-      id: _id.to_s,
+      id: id.to_s,
       comments: comments,
       comprehension: comprehension,
       learned: learned,
@@ -25,7 +15,7 @@ class Feedback
       quality: quality,
       engagement: engagement,
       questions: questions,
-      student_id: student_id.to_s
+      student_id: user_id.to_s
     }
   end
 

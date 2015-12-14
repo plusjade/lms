@@ -3,7 +3,7 @@ class AttendancesController < ApplicationController
     respond_to do |format|
       format.html do
         @course = Course.find(params[:course_id])
-        @lesson = @course.lessons.gte(date: Date.today).first
+        @lesson = @course.lessons.where("date >= ?", Time.now).first
 
         authorize! :read, @course
 
@@ -29,7 +29,7 @@ class AttendancesController < ApplicationController
     attendances = Attendance.where(lesson: lesson).entries
     attendances_student_dict = {}
     attendances.each do |a|
-      attendances_student_dict[a.student_id.to_s] = a
+      attendances_student_dict[a.user_id.to_s] = a
     end
 
     data = students.map do |student|

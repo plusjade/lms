@@ -1,27 +1,16 @@
 require 'digest'
-class User
-  include Mongoid::Document
-  include Mongoid::Timestamps
-
-  field :name, type: String
-  field :email, type: String
-  field :avatar, type: String, default: -> { default_avatar }
-
-  field :uid, type: String
-  field :provider, type: String
-  field :token, type: String
-
+class User < ActiveRecord::Base
   validates_uniqueness_of :uid
 
   def to_api
     {
-      id: _id.to_s,
-      type: _type,
+      id: id.to_s,
+      type: type,
       name: name,
       email: email,
       avatar: avatar,
       website: Website.endpoint_guess(name),
-      url: Rails.application.routes.url_helpers.user_path(_id)
+      url: Rails.application.routes.url_helpers.user_path(id)
     }
   end
 
