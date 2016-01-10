@@ -56,3 +56,5 @@ group :development do
   gem 'capistrano-bundler' # for capistrano/bundler
   gem 'capistrano-rails'
 end
+
+gem 'responders', '~> 2.0'
