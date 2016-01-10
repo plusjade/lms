@@ -14,7 +14,6 @@ body {
   font-weight: 400;
   background-color: $fill-color;
 }
-
 a:link {
   color: $link-color;
 }
@@ -27,7 +26,6 @@ a:hover {
 a:active {
   color: $link-color;
 }
-
 p, ul {
   font-size: 16px;
   font-size: 1.6rem;
@@ -53,16 +51,19 @@ h2 {
   line-height: 2.8rem;
 }
 h3 {
-  font-size: 26px;
-  font-size: 2.6rem;
-  line-height: 26px;
-  line-height: 2.6rem;
-}
-h4 {
   font-size: 24px;
   font-size: 2.4rem;
   line-height: 24px;
   line-height: 2.4rem;
+}
+h4 {
+  font-size: 20px;
+  font-size: 2.0rem;
+  line-height: 20px;
+  line-height: 2.0rem;
+  @media all and (max-width: $mobile-breakpoint-width) {
+    font-size: 1.8rem;
+  }
 }
 textarea {
   font-size: inherit;
@@ -88,54 +89,8 @@ a.button {
     background-color: $link-color;
   }
 }
-
-#heading {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: $primary-navigation-width;
-  height: ($default-padding*2) + 20px;
-  line-height: ($default-padding*2) + 20px;
-  overflow: hidden;
-  margin: 0;
-  white-space: nowrap;
-  a {
-    display: inline-block;
-    padding: 0 $default-padding;
-    color: inherit;
-    &:hover {
-      color: $link-hover-color;
-    }
-  }
-
-}
-
 .inner {
   padding: $default-padding;
-}
-
-#new_student {
-  font-size: 30px;
-  input, button {
-    font-size: inherit;
-    line-height: 50px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  button {
-    border: 1px solid #33691E;
-    background-color: #558B2F;
-    color: #FFF;
-  }
-}
-
-.courses-wrap {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  h4 {
-    margin: 0 0 20px 0;
-  }
 }
 select.lessons {
   float: right;
@@ -144,279 +99,40 @@ select.lessons {
     font-size: 40px;
   }
 }
-
-.lessons-wrap {
-  list-style: none;
-  margin-left: 20px;
-  padding: 0;
-  li {
-    a {
-      display: block;
-      font-size: 22px;
-      font-weight: 700;
-      line-height: 1.6em;
-      span {
-        display: inline-block;
-        min-width: 150px;
-      }
-      &:hover {
-        span {
-          text-decoration: underline;
-        }
-      }
-
-    }
-  }
-}
-
-
-#NavTabs {
+#world {
   height: 100%;
   > div {
     height: 100%;
   }
-  .primary-navigation {
-    width: $primary-navigation-width;
-    height: 100%;
-    position: fixed;
-    z-index: 2;
-    background-color: $fill-color;
-    .nav-tabs {
-      margin-top: ($default-padding*2) + 20px;
-      padding: 0;
-      list-style: none;
-      li {
-        padding: 20px $default-padding;
-        cursor: pointer;
-        text-align: left;
-        &:hover {
-          color: $link-hover-color;
-          color: #FFF;
-          background-color: $link-color;
-        }
-        &.active {
-          background-color: #FFF;
-        }
-        &:hover.active {
-          color: inherit;
-        }
-      }
-    }
-  }
-}
-.primary-content {
-  position: absolute;
-  width: 100% - $primary-navigation-width;
-  left: $primary-navigation-width;
-  min-height: 100%;
-  background-color: #FFF;
-
-  -webkit-transition: all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
-  -moz-transition:    all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
-  -o-transition:      all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
-  transition:         all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
-}
-
-.navigation {
-  position: fixed;
-  height: 100%;
-  width: 0;
-  left: $primary-navigation-width;
-  background-color: $navigation-background-color;
-  overflow: auto;
-  box-shadow: inset 0 -1px 6px #CCC;
-  -webkit-transition: all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
-  -moz-transition:    all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
-  -o-transition:      all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
-  transition:         all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
-
-  ul {
-    list-style: none;
-    margin: $default-padding - 8 0 0 0;
-    padding: 0;
-    min-width: 200px;
-    li {
-      position: relative;
-      list-style: none;
-      padding: 8px $default-padding;
-      cursor: pointer;
-      color: #8f8f8f;
-      font-size: 15px;
-      &.active {
-        color: inherit;
-        svg {
-          position: absolute;
-          top: 14px;
-          left: 10px;
-          width: 15px;
-          height: 15px;
-          fill: $link-color;
-        }
-      }
-      &:hover {
-        background-color: $link-color;
-        color: #FFF;
-        svg {
-          fill: #FFF;
-        }
-      }
-    }
-  }
-}
-.nav-open {
-  .navigation {
-    width: $navigation-width;
-  }
-  .primary-content {
-    width: 100% - $primary-navigation-width - $navigation-width;
-    left: $primary-navigation-width + $navigation-width;
-  }
-}
-
-.tabs {
-  list-style: none;
-  margin: 0 0 $default-padding 0;
-  padding: 0;
-  border-bottom: 1px solid $border-color;
-  li {
-    position: relative;
-    top: 1px;
-    display: inline-block;
-    list-style: none;
-    padding: 15px 0;
-    margin-right: 40px;
-    color: $link-color;
-    cursor: pointer;
-    &:hover {
-      color: $link-hover-color;
-      border-bottom: 1px solid $link-hover-color;
-    }
-    &.active {
-      border-bottom: 1px solid $link-color;
-    }
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-}
-.tabs-content {
-  min-height: 100%;
-  background-color: #FFF;
-  .tab {
-    display: none;
-    &.active {
-      display: block !important;
-    }
-  }
-}
-
-#login-screen {
-  position: relative;
-  top: 100px;
-  h1 {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-  }
-  .dropbox-login {
-    display: block;
-    width: 500px;
-    margin: 50px auto 0 auto;
-    line-height: 125px;
-    min-height: 125px;
-    text-align: center;
-    text-decoration: none;
-    color: #007ee5;
-    font-size: 26px;
-    font-weight: 700;
-    background-color: #FFF;
-    border: 1px solid $border-color;
-
-    &:hover {
-      border: 1px solid #007ee5;
-    }
-    img {
-      vertical-align: middle;
-    }
-  }
-}
-
-#notice-wrap {
-  margin-top: 50px;
-  font-size: 26px;
-  text-align: center;
-  color: #DD2C00;
-}
-
-@media all and (max-width: $mobile-breakpoint-width) {
-  h4 {
-    font-size: 1.8rem;
-  }
-  #heading {
-    position: relative;
-    width: 100%;
-  }
-
-  #NavTabs {
+  @media all and (max-width: $mobile-breakpoint-width) {
     height: auto;
     > div {
       height: auto;
     }
-    .primary-navigation {
-      position: relative;
+  }
+}
+.primary-content {
+  @media all and (max-width: $mobile-breakpoint-width) {
+    width: 100%;
+    left: 0;
+    position: relative;
+    min-height: auto;
+  }
+}
+.nav-open {
+  .navigation-content {
+    width: $navigation-width;
+    @media all and (max-width: $mobile-breakpoint-width) {
       width: 100%;
-      .nav-tabs {
-        width: 100%;
-        margin-top: 0;
-        position: relative;
-        li {
-          text-decoration: underline;
-          &.active {
-            font-weight: 700;
-            background-color: inherit;
-          }
-        }
-      }
-    }
-    .navigation {
-      position: relative;
-      width: 100%;
-      max-height: 0;
-      left: auto;
-    }
-    .primary-content {
-      width: 100%;
-      left: 0;
-      position: relative;
-      min-height: auto;
-    }
-
-    .nav-open {
-      .navigation {
-        width: 100%;
-        max-height: 2000px;
-      }
-      .primary-content {
-        width: 100%;
-        left: auto;
-      }
+      max-height: 2000px;
     }
   }
-
-  #login-screen {
-    top: 50px;
-    .dropbox-login {
+  .primary-content {
+    width: 100% - $primary-navigation-width - $navigation-width;
+    left: $primary-navigation-width + $navigation-width;
+    @media all and (max-width: $mobile-breakpoint-width) {
       width: 100%;
-      border: 0;
-      &:hover {
-        border-left: 0;
-        border-right: 0;
-      }
-      img {
-        display: block;
-        margin: auto;
-        height: auto;
-      }
+      left: auto;
     }
   }
 }

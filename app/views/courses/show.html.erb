@@ -1,4 +1,4 @@
-<div id="NavTabs"></div>
+<div id="world"></div>
 <script>
     var router = new Router().configure({ html5history: true, strict: false })
         , user = <%= current_user.to_api.to_json.html_safe %>
@@ -15,5 +15,5 @@
                     bootStrappedLesson: lesson,
                     CSRFTOKEN : '<%= form_authenticity_token %>',
                     router: router
-                }), document.getElementById('NavTabs'));
+                }), document.getElementById('world'));
 </script>

@@ -18,7 +18,7 @@ class Lesson < ActiveRecord::Base
 
   def date_human
     date ?
-      date.strftime("%A, %B %d, %Y") :
+      date.strftime("%a %b %d, %Y") :
       nil
   end
 end

@@ -1,0 +1,58 @@
+@import "variables";
+
+.navigation-content {
+  position: fixed;
+  height: 100%;
+  width: 0;
+  left: $primary-navigation-width;
+  background-color: $navigation-background-color;
+  overflow: auto;
+  box-shadow: inset 0 -1px 6px #CCC;
+  -webkit-transition: all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+  -moz-transition:    all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+  -o-transition:      all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+  transition:         all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+
+  ul {
+    list-style: none;
+    margin: ($default-padding - 8 +50) 0 0 0;
+    padding: 0;
+    min-width: 200px;
+    li {
+      position: relative;
+      list-style: none;
+      padding: 8px $default-padding;
+      cursor: pointer;
+      color: #8f8f8f;
+      font-size: 15px;
+      sup {
+        float: right;
+      }
+      &.active {
+        color: inherit;
+        background-color: #FFF;
+        svg {
+          position: absolute;
+          top: 10px;
+          left: 12px;
+          width: 8px;
+          height: 15px;
+          fill: $link-color;
+        }
+      }
+      &:hover {
+        background-color: $link-color;
+        color: #FFF;
+        svg {
+          fill: #FFF;
+        }
+      }
+    }
+  }
+  @media all and (max-width: $mobile-breakpoint-width) {
+    position: relative;
+    width: 100%;
+    max-height: 0;
+    left: auto;
+  }
+}
