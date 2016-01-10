@@ -29,7 +29,7 @@
           = content[:content]
         .keywords.slide><
           = content[:keywords]
-        .quiz.slide><
+        #quiz-wrap.quiz.slide><
           = content[:quiz]
         .lab.slide><
           = content[:lab]
@@ -58,6 +58,8 @@
 
   :javascript
     var user = #{current_user ? current_user.to_api.to_json.html_safe : {}}
+    var concept = #{MultiJson.encode(@concept.to_api).html_safe};
+    ReactDOM.render(React.createElement(Quiz, {user: user, concept: concept}), document.getElementById("quiz-wrap"))
     var login = ReactDOM.render(React.createElement(Login, {user: user}), document.getElementById("login-wrap"))
     function gapiLoaded() {
       login.setState({loaded: true})

@@ -8,6 +8,7 @@ class PagesController < ApplicationController
   end
 
   def show
+    @concept = Concept.find_by_slug(params[:id])
     render params[:id]
   end
 end

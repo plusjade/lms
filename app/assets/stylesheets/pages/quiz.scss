@@ -1,0 +1,73 @@
+@import "../variables";
+@import "bourbon";
+$success-color: #4CAF50;
+
+.quiz-rcp {
+  .complete {
+    max-height: 0;
+    line-height: 100px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #FFF;
+    border-radius: 5px;
+    background-color: $success-color;
+    @include transition(all 0.5s ease-in-out);
+    a {
+      color: inherit;
+    }
+    &.on {
+      max-height: 500px;
+    }
+  }
+  .rcp-question {
+    max-height: 0;
+    overflow: hidden;
+    margin-bottom: 20px;
+    @include transition(all 0.5s ease-in-out);
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li {
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 1px solid #E1F5FE;
+        margin: 0 10px 5px 10px;
+        font-size: 14px;
+        &:hover {
+          background-color: $link-hover-color;
+          border-color: $link-hover-color;
+          color: #FFF;
+        }
+        &.miss {
+          background-color: $error-color;
+          border-color: $error-color;
+          color: #FFF;
+          @include animation(shakeHorizontal .5s 1);
+        }
+        &.answer {
+          background-color: $success-color;
+          border-color: $success-color;
+          color: #FFF;
+        }
+      }
+    }
+    &.active {
+      max-height: 500px;
+    }
+    &.correct {
+      max-height: 500px;
+    }
+  }
+}
+
+@include keyframes(shakeHorizontal) {
+  0% {   @include transform(translate(0px, 0px) rotate(0deg)); }
+  20% {  @include transform(translate(-6px, 0px) rotate(0deg)); }
+  40% {  @include transform(translate(4px, 0px) rotate(0deg)); }
+  60% {  @include transform(translate(-2px, 0px) rotate(0deg)); }
+  80% {  @include transform(translate(1px, 0px) rotate(0deg)); }
+  100% { @include transform(translate(0px, 0px) rotate(0deg)); }
+}
