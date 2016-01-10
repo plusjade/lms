@@ -70,6 +70,7 @@
       link = <a href="#" onClick={@sign_in}>Sign in with Google</a>
 
     <ul>
-      <li>{@state.user.email}</li>
+      <li><a href="/pages">Dashboard</a></li>
+      <li>{@state.user.name}</li>
       <li>{link}</li>
     </ul>
