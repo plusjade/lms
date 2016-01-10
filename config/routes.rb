@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'logout' => "sessions#destroy"
 
 
+  resources :pages, only: [:index, :show]
+
   resources :teachers do
     resources :courses
   end

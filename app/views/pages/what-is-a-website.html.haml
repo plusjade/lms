@@ -1,0 +1,69 @@
+- content_for :heading, "What is a website?"
+- content_for :next_page do
+  %a{href: page_path("internet")} What is the Internet?
+
+- content_for :content do
+  %p.first
+    A website is a collection of web documents.
+    A web document is a text document that contains information in the same way Word, PowerPoint, and Excel files are text documents that contain information.
+  %p Did you know even an image file is a text document?
+  %p This text tells an image viewer program such as Photos how to draw the image on a computer screen for a human to see it.
+  %p In the same way, web documents contain information and code that represent how the information should look to a human viewer.
+  %p
+    Since websites are <em>collections</em> of documents, folders,
+    just like the folders on your personal computer,
+    can be used to organize these documents:
+
+  %p Simple websites work by allowing people to access the entire folder of web documents. The structure of the website is a direct reflection of the structure of the folder.
+  %p
+    Wait up, if a web document is like a Word or Excel file, what's the big deal, why don't I just create Word documents?
+  %p
+    Web documents are made to live on the Internet and be universally accessible.
+    Web documents can contain interactions that anyone with Internet access can use.
+  %p
+    Well, damn! What is the Internet? Where do these folders and documents exist? How do people interact with these documents?
+
+- content_for :keywords do
+  %dl
+    %dt website, site
+    %dd A collection of web documents
+    %dt web document, web-page, webpage
+    %dd Websites can simply point to folders and files on a computer.
+    %dt file
+    %dd Websites can simply point to folders and files on a computer.
+    %dt folder
+
+- content_for :quiz do
+  %ol
+    %li Quiz 1
+    %li Quiz 2
+    %li Quiz 3
+    %li Quiz 4
+    %li Quiz 5
+
+- content_for :extra do
+  %a{href: "http://www.coffeecup.com/help/articles/what-is-a-website/"}
+    http://www.coffeecup.com/help/articles/what-is-a-website/
+  %h4.heading Why is the web-browser awesome?
+  %p A web-browser is the first major software program to be installed on nearly all forms of computing devices such as Windows PC, Macbook, iPhone, Android, Windows Phone, Ipad, Kindle, Smart Tv. This means that any website you build is instantly available on all these platforms without any action by the user.
+  %p In contrast, a mobile app built for iPhone needs to be installed by the user. An iPhone mobile app does not work on any other platform, it only works for iPhone. This means you’d need to build a separate app for every device you want to support.
+  %p This has mostly always been true. Excel for Windows does not work on Mac. Each is an entirely separate program. To view or edit an excel file on your phone, you need to install a program that works on your particular phone.
+  %p The web browser provides a “common platform” that allows anyone to publish content on. This content is in turn instantly available to nearly every internet-enabled device!
+
+- content_for :problem_solution do
+  %p
+    %strong
+      I want to share information with the world, across the Internet,
+      but whatever software program I choose to create the information on my computer with
+      requires the viewer to have that same software program in order to view it.
+  %p
+    Implement a standard ruleset to build text-based documents in a way that is both human readable without any software,
+    as well as universally supported by a basic free and open software concept.
+
+
+
+
+
+
+
+

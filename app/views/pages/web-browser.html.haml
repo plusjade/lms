@@ -1,0 +1,30 @@
+- content_for :heading, "What is a web browser?"
+- content_for :next_page do
+  %a{href: page_path("websites-on-the-internet")} How to get my website on the Internet?
+
+- content_for :content do
+  %p.first
+    A
+    %a{href: page_path("web-browser")} web browser
+    enables humans to create, view and edit
+    = succeed '.' do
+      %a{href: page_path("web-browser")} web documents
+  %p
+    A web browser is a software program. It runs on your computer just like Photoshop, Excel, Word and iTunes.
+  %p Web browsers are pre-installed on all modern personal computing devices such as desktops, laptops, smart-phones, tablets, and even smart-tvs.
+  %p Think of a web-browser in the same way you might use Excel to create, view, and edit spreadsheet documents.
+  %p Open a web document using a web-browser and you get a human friendly view of the document:
+  %p Web browsers connect to the Internet and allow you to send requests for web documents to other computers across the world.
+  %p
+    BOSS! &hellip;
+  %p
+    So a web browser connects with the Internet, receives web documents, which are files inside folders, and presents them in a human friendly way.
+    The Internet is group of interconnected computers.
+    So if i wanted to make my web documents, my website, publicly available on the Internet, how do I do that?
+
+- content_for :extra do
+  %h4 The web browser is awesome
+  %p A web-browser is the first major software program to be installed on nearly all forms of computing devices such as Windows PC, Macbook, iPhone, Android, Windows Phone, Ipad, Kindle, Smart Tv. This means that any website you build is instantly available on all these platforms without any action by the user.
+  %p In contrast, a mobile app built for iPhone needs to be installed by the user. An iPhone mobile app does not work on any other platform, it only works for iPhone. This means you’d need to build a separate app for every device you want to support.
+  %p This has mostly always been true. Excel for Windows does not work on Mac. Each is an entirely separate program. To view or edit an excel file on your phone, you need to install a program that works on your particular phone.
+  %p The web browser provides a “common platform” that allows anyone to publish content on. This content is in turn instantly available to nearly every internet-enabled device!

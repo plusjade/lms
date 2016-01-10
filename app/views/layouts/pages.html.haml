@@ -1,0 +1,82 @@
+!!! 5
+%head
+  %title= yield :heading
+  %meta{name: "viewport", content:"width=device-width, initial-scale=1.0"}
+  %meta{name: "google-signin-client_id", content: "#{$sesames["google"]["key"]}.apps.googleusercontent.com"}
+  = csrf_meta_tags
+  = stylesheet_link_tag "pages", media: "all"
+  %link{href: "//fonts.googleapis.com/css?family=Open+Sans:600,300italic,300,700,800,400", rel: "stylesheet", type: "text/css"}
+- sections = %i(content keywords quiz lab extra)
+- content = {}
+- sections.each do |section|
+  - content[section] = yield section
+%body
+  #login-wrap
+  #navigator-wrap
+    .navigator
+      %ul.nav
+        - sections.each do |section|
+          - klass = section == :content ? "active" : nil
+          - klass = section == :extra ? "inactive" : nil
+          %li
+            %a{href: "##{section}", class: klass}= section
+  %header
+    %h2= yield :heading
+  .wrap.active
+    .view
+      .unit
+        .content.slide><
+          = content[:content]
+        .keywords.slide><
+          = content[:keywords]
+        .quiz.slide><
+          = content[:quiz]
+        .lab.slide><
+          = content[:lab]
+        .extra.slide><
+          = content[:extra]
+  %footer
+  - next_page = yield :next_page
+  - if next_page.present?
+    #next
+      %ul.nav.yellow
+        %li= yield :next_page
+    #next-mid
+      = yield :next_page
+
+  - if Rails.env.production?
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.12.1/react.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+  - else
+    = javascript_include_tag "_dev/jquery.1.11.1.js"
+    <script src="/assets/_dev/underscore-min.js"></script>
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.0/jquery.waypoints.js"}
+
+  = javascript_include_tag "pages"
+
+  :coffee
+    $("#navigator-wrap").on "click", "a", (e) ->
+      e.preventDefault()
+      $(e.delegateTarget).find("a").removeClass("active")
+      node = $(this)
+      node.addClass("active")
+      index = node.parent().index()
+      if window.scrollY == 0
+        $(".wrap.active").find(".unit").css("left", -(index*600))
+      else
+        $("html, body").animate({ scrollTop: "0" }, 300, ->
+          $(".wrap.active").find(".unit").css("left", -(index*600))
+        )
+
+    waypoints = $('.wrap.active').waypoint({
+      offset: 'bottom-in-view'
+      handler: (direction) ->
+        $("#next-mid").toggleClass("on", direction == "down")
+        #$("#next").toggleClass("on", direction == "down")
+    })
+    setTimeout (->
+      $("#navigator-wrap").addClass("on")
+    ), 300
+
+

@@ -1,0 +1,28 @@
+- content_for :heading, "Websites on the Internet"
+- content_for :next_page do
+  %a{href: page_path("how-to-make-a-website")} How to make a website
+
+- content_for :content do
+  %p.first
+    /Websites that are accessible on the public Internet are
+    To put your website on the Internet or <em>host</em> your website, you just need to place those files on a computer
+    that is setup to accept public Internet connections.  These computers are called
+    %strong web servers
+    because they serve web content.
+    A server is just a computer. It contains files in its filesystem just like the files and folders on your personal computer.
+  %p
+    Companies will rent you space on their web servers to host your website.
+    These are known as website hosting providers.
+  %p We'll use Amazon.
+  %p
+    Nice!!!!!
+  %p
+    I have my website online, but it doesn't do anything and it looks like a text file from 1964.
+  %p
+    How do I add code to make it display better?
+- content_for :lab do
+  %ul
+    %li Set up static server
+    %li Create document hosted online
+    %li text document, picture
+    %li Horray! We can publish our website on the Internet!
