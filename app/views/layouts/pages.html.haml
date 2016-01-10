@@ -52,9 +52,16 @@
     = javascript_include_tag "_dev/jquery.1.11.1.js"
     <script src="/assets/_dev/underscore-min.js"></script>
     %script{src: "https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.0/jquery.waypoints.js"}
+  <script src="https://apis.google.com/js/platform.js?onload=gapiLoaded" async defer></script>
 
   = javascript_include_tag "pages"
 
+  :javascript
+    var user = #{current_user ? current_user.to_api.to_json.html_safe : {}}
+    var login = ReactDOM.render(React.createElement(Login, {user: user}), document.getElementById("login-wrap"))
+    function gapiLoaded() {
+      login.setState({loaded: true})
+    }
   :coffee
     $("#navigator-wrap").on "click", "a", (e) ->
       e.preventDefault()

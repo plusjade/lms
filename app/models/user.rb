@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_from_omniauth(auth)
+    auth = HashWithIndifferentAccess.new(auth)
     where({
         provider: auth['provider'],
         uid: auth['uid'].to_s
@@ -43,6 +44,15 @@ class User < ActiveRecord::Base
          u.name = auth['info']['name'] || ""
          u.email = auth['info']['email'] || ""
       end
+    end
+  end
+
+  def self.create_from_google!(auth)
+    create! do |u|
+      u.provider = "google"
+      u.uid = auth["sub"]
+      u.name = auth["name"]
+      u.email = auth["email"]
     end
   end
 end

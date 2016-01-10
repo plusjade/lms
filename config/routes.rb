@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get '/auth/:provider/callback', to: 'sessions#create'
   get 'logout' => "sessions#destroy"
+  post "google_auth_client", to: "sessions#google_auth_client"
 
 
   resources :pages, only: [:index, :show]
