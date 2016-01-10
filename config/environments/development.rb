@@ -31,4 +31,9 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # React
+  # We need TestUtils, and that's only available in the development/unminified version.
+  # See http://facebook.github.io/react/docs/addons.html
+  config.react.variant = :development
 end
