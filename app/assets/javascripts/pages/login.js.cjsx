@@ -60,8 +60,9 @@
 
   sign_out: (e) ->
     e.preventDefault()
-    @state.auth2.signOut()
     @appSignOut()
+    if @state.auth2
+      @state.auth2.signOut()
 
   render: ->
     if @state.user.email
