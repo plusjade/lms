@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "home#index"
+  root "pages#home"
 
   get '/auth/:provider/callback', to: 'sessions#create'
   get 'logout' => "sessions#destroy"

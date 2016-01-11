@@ -11,4 +11,8 @@ class PagesController < ApplicationController
     @concept = Concept.find_by_slug(params[:id])
     render params[:id]
   end
+
+  def home
+    render "home/home"
+  end
 end

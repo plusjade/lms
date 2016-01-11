@@ -6,20 +6,22 @@
   = csrf_meta_tags
   = stylesheet_link_tag "pages", media: "all"
   %link{href: "//fonts.googleapis.com/css?family=Open+Sans:600,300italic,300,700,800,400", rel: "stylesheet", type: "text/css"}
+
 - sections = %i(content keywords quiz lab extra)
 - content = {}
 - sections.each do |section|
   - content[section] = yield section
 %body
   #login-wrap
-  #navigator-wrap
-    .navigator
-      %ul.nav
-        - sections.each do |section|
-          - klass = section == :content ? "active" : nil
-          - klass = section == :extra ? "inactive" : nil
-          %li
-            %a{href: "##{section}", class: klass}= section
+  - if @concept
+    #navigator-wrap
+      .navigator
+        %ul.nav
+          - sections.each do |section|
+            - klass = section == :content ? "active" : nil
+            - klass = section == :extra ? "inactive" : nil
+            %li
+              %a{href: "##{section}", class: klass}= section
   %header
     %h2= yield :heading
   .wrap.active
@@ -58,8 +60,10 @@
 
   :javascript
     var user = #{current_user ? current_user.to_api.to_json.html_safe : {}}
-    var concept = #{MultiJson.encode(@concept.to_api).html_safe};
-    ReactDOM.render(React.createElement(Quiz, {user: user, concept: concept}), document.getElementById("quiz-wrap"))
+    var concept = #{@concept ? MultiJson.encode(@concept.to_api).html_safe : {}};
+    if(!_.isEmpty(concept)) {
+      ReactDOM.render(React.createElement(Quiz, {user: user, concept: concept}), document.getElementById("quiz-wrap"));
+    }
     var login = ReactDOM.render(React.createElement(Login, {user: user}), document.getElementById("login-wrap"))
     function gapiLoaded() {
       login.setState({loaded: true})
