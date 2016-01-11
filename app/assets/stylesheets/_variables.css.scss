@@ -14,3 +14,6 @@ $default-padding: 30px;
 $success-color: #33691E;
 $error-color: #DD2C00;
 $mobile-breakpoint-width: 700px;
+$phone-media-query: "(max-width: 767px)";
+$tablet-media-query: "(max-width: 900px)";
+$non-phone-media-query: "(min-width: 767px)";

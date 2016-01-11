@@ -166,12 +166,18 @@ header {
     padding: 0 20px;
     margin: auto;
     box-sizing: border-box;
+    @media #{$phone-media-query} {
+      width: 100%;
+    }
   }
 }
 .wrap {
   $slideWidth: 600px;
   .view {
     width: $slideWidth;
+    @media #{$phone-media-query} {
+      width: 100%;
+    }
     margin: auto;
     overflow: hidden;
     .unit {
@@ -180,12 +186,19 @@ header {
       position: relative;
       left: 0;
       @include transition(all 0.5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+      @media #{$phone-media-query} {
+        width: 100%;
+      }
       .slide {
         display: inline-block;
         box-sizing: border-box;
         width: $slideWidth;
         padding: 0 20px;
         vertical-align: top;
+        @media #{$phone-media-query} {
+          width: 100%;
+          box-sizing: border-box;
+        }
         &:nth-child(odd) {
           _background: #CCC;
         }
