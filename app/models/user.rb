@@ -9,9 +9,13 @@ class User < ActiveRecord::Base
       name: name,
       email: email,
       avatar: avatar,
-      website: Website.endpoint_guess(name),
+      website: website_endpoint,
       url: Rails.application.routes.url_helpers.user_path(id)
     }
+  end
+
+  def website_endpoint
+    Website.endpoint_guess(name)
   end
 
   def dropbox

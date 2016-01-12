@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'logout' => "sessions#destroy"
   post "google_auth_client", to: "sessions#google_auth_client"
   post "questions/:id", to: "questions#check"
+  get "/website" => "pages#website"
+  post "/website" => "pages#website_add"
 
   resources :pages, only: [:index, :show]
 

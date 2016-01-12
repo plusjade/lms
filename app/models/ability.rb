@@ -7,6 +7,7 @@ class Ability
       can :manage, :all
       cannot :join, Course # cannot join as student
     when Student
+      can :create, :website
       can :read, Lesson do |lesson|
         user.course_ids.include?(lesson.course_id)
       end

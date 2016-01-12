@@ -1,0 +1,16 @@
+- content_for :heading, "Website"
+- content_for :content do
+  :scss
+    h3 {margin-top: 40px; margin-bottom: 30px;}
+    h3.first { margin-top: 0;}
+
+  %h3.first Purpose
+  %p
+    %a{href: current_user.website_endpoint, target: "_blank"}= current_user.website_endpoint
+  %p
+  = form_tag("/website", multipart: true, method: :post) do
+    = file_field_tag "document"
+    %br
+    .submit-wrap
+      %button{type: "submit"} Add file
+

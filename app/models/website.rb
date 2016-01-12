@@ -3,7 +3,7 @@ require 'aws/route_53'
 
 # Todo: bucket_names should be unique to avoid overwriting other sites.
 class Website
-  BucketNamespace = 'fewd-24-'
+  BucketNamespace = 'carrot-'
 
   def initialize(dropbox, bucket_name)
     @bucket_name = self.class.format_bucket_name(bucket_name)
@@ -18,7 +18,7 @@ class Website
     @dropbox_folder = 'website'
   end
 
-  def sync
+  def sync(io=nil)
     s3 = AWS::S3.new
     bucket = s3.buckets[@bucket_name]
 
@@ -46,7 +46,31 @@ class Website
     bucket.website_configuration = website_config
 
     puts "Syncing Files:"
+    write_file(bucket, io) if io
+    #added_files = files_from_dropbox
+    # Turn off deleting for now
+    # (bucket_files - added_files).each do |key|
+    #   obj = bucket.objects[key]
+    #   obj.delete
+    #   puts "  DEL: #{ obj.inspect }"
+    # end
 
+    location = bucket.location_constraint || 'us-east-1'
+    endpoint = "http://#{ @bucket_name }.s3-website-#{ location }.amazonaws.com"
+
+    puts "Website published to:"
+    puts "  #{ endpoint }"
+    endpoint
+  end
+
+  def write_file(bucket, io)
+    path = File.basename(io.original_filename)
+    mime_type = MIME::Types.type_for(File.basename(io.path))[0].to_s
+    obj = bucket.objects[path].write(io.read, content_type: mime_type)
+    obj.key
+  end
+
+  def files_from_dropbox
     added_files = []
     get_files(@dropbox_folder).each do |file|
       content = @dropbox.get_file(file['path'])
@@ -56,19 +80,7 @@ class Website
 
       puts "  ADD: #{ obj.inspect }"
     end
-
-    (bucket_files - added_files).each do |key|
-      obj = bucket.objects[key]
-      obj.delete
-      puts "  DEL: #{ obj.inspect }"
-    end
-
-    location = bucket.location_constraint || 'us-east-1'
-    endpoint = "http://#{ @bucket_name }.s3-website-#{ location }.amazonaws.com"
-
-    puts "Website published to:"
-    puts "  #{ endpoint }"
-    endpoint
+    added_files
   end
 
   def self.format_bucket_name(name)

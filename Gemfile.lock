@@ -264,6 +264,7 @@ DEPENDENCIES
   forgery
   haml-rails
   jbuilder (~> 2.0)
+  mime-types
   multi_json
   omniauth
   omniauth-dropbox-oauth2
