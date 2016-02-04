@@ -7,6 +7,13 @@
   %p
     %a{href: current_user.website_endpoint, target: "_blank"}= current_user.website_endpoint
   %p
+  %p
+    %ul
+    = @website.bucket.objects.each do |o|
+      %li
+        %a{href: "#{current_user.website_endpoint}/#{o.key}", target: "_blank", style: "font-size: 14px;"}
+          = "#{current_user.website_endpoint}/#{o.key}"
+
   = form_tag("/website", multipart: true, method: :post) do
     = file_field_tag "document"
     %br

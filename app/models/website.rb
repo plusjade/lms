@@ -18,6 +18,13 @@ class Website
     @dropbox_folder = 'website'
   end
 
+  def bucket
+    @bucket ||= begin
+      s3 = AWS::S3.new
+      s3.buckets[@bucket_name]
+    end
+  end
+
   def sync(io=nil)
     s3 = AWS::S3.new
     bucket = s3.buckets[@bucket_name]

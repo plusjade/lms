@@ -17,6 +17,7 @@ class PagesController < ApplicationController
   end
 
   def website
+    @website = Website.new(current_user.dropbox, current_user.name)
     authorize! :create, :website
     render "home/website"
   end
