@@ -48,6 +48,8 @@ gem 'aws-sdk'
 gem "rest-client"
 gem "multi_json"
 gem 'bourbon'
+gem 'griddler'
+gem 'griddler-sendgrid'
 
 group :development do
   gem 'better_errors'
